@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: ['./src/index.js', './src/scss/index.scss'],
   output: {
-    path: path.resolve(__dirname, '../backend/public'),
+    path: path.resolve(__dirname, './public'),
     filename: 'js/index.js',
     publicPath: '/',
     assetModuleFilename: 'assets/[name][ext]',

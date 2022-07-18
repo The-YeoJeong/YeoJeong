@@ -114,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = "<section class=\"top3-container\">\r\n  <span>인기많은 게시글</span>\r\n  <div>좋아요</div>\r\n  <button class=\"testBtn\">test</button>\r\n</section>\r\n";
+var code = "<section class=\"top3-container\">\r\n  <span>인기많은 게시글</span>\r\n  <div>좋아효</div>\r\n  <button class=\"testBtn\">test</button>\r\n</section>\r\n";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
