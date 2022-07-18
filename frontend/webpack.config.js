@@ -60,7 +60,7 @@ module.exports = {
     open: true,
     port: 'auto',
     proxy: {
-      '/': 'http://localhost:8080',
+      '/': 'http://localhost:80',
     },
   },
   devtool: 'source-map',
