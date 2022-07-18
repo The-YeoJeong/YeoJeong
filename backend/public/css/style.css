@@ -1,0 +1,10 @@
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/scss/index.scss ***!
+  \**************************************************************************************************************/
+.top3-container {
+  width: 200px;
+  height: 300px;
+  background-color: green;
+}
+
+/*# sourceMappingURL=style.css.map*/
