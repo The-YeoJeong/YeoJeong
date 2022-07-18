@@ -1,0 +1,30 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: yeojeong
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://cluv-2.cdvey5izwfml.ap-northeast-2.rds.amazonaws.com:3306/it1869??useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
+    username: it1869
+    password: it1869
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
