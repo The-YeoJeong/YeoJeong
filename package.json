@@ -1,5 +1,5 @@
 {
-  "name": "develog",
+  "name": "yeojeong",
   "version": "1.0.0",
   "scripts": {
     "frontend": "cd frontend && npm start",
