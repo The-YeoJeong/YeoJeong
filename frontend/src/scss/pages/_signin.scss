@@ -1,0 +1,36 @@
+@use '../utils' as *;
+
+.signin-title {
+  text-align: center;
+  font-size: rem(30px);
+  margin: rem(10px) 0;
+}
+
+.singin-wrapper {
+  background-color: yellow;
+  padding: rem(20px);
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-form {
+  width: rem(500px);
+  height: rem(500px);
+  // background: red;
+  border: 2px solid black;
+  margin: auto;
+}
+
+.input-box {
+  &__input {
+    border: 2px solid $main;
+    padding: 5px;
+    width: rem(200px);
+    margin-bottom: rem(10px);
+  }
+}
+
+.sign-buttons {
+  justify-content: space-between;
+  display: flex;
+}

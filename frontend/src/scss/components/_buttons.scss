@@ -1,0 +1,9 @@
+@use '../utils' as *;
+
+.button {
+  border-radius: 3px;
+  background: $main;
+  color: white;
+  border-width: 0px;
+  padding: rem(7px) rem(20px);
+}
