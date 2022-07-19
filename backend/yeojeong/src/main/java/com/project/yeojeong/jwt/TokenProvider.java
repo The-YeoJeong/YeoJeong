@@ -34,7 +34,7 @@ public class TokenProvider implements InitializingBean {
             @Value("${jwt.secret}") String secret,
             @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
-        this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000; // Token 만료시간
+        this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000; // Token 만료시간 (3600 * 1000 : 1시간)
     }
     // InitializingBean implements해서 afterPropertiesSet() overide한 이유는
     // 빈이 생성이되고 의존성 주입을 받은 후에 TokenProvider에서 주입받은 secret값을 Base64 Decode해서 key변수에 할당
