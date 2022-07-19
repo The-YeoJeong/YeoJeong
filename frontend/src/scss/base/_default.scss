@@ -23,3 +23,13 @@ body {
 .a11yHidden {
   @include a11yHidden();
 }
+
+  body {
+  font-size: 16px;
+  text-align: center;
+}
+
+i {
+  font-size: 3rem;
+  color: #ff5544;
+}

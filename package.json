@@ -1,5 +1,5 @@
 {
-  "name": "develog",
+  "name": "yeojeong",
   "version": "1.0.0",
   "scripts": {
     "frontend": "cd frontend && npm start",
@@ -7,15 +7,18 @@
     "build": "cd frontend && npm run build"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "axios": "^0.27.2",
     "concurrently": "^7.0.0"
   },
   "devDependencies": {
+    "file-loader": "^6.2.0",
     "html-loader": "^4.1.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
+    "url-loader": "^4.1.1",
     "webpack": "^5.73.0"
   }
 }

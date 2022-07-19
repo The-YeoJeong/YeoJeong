@@ -13,9 +13,12 @@
         <p class="signin-title">로그인</p>
         <div class="singin-wrapper">
           <div class="input-box">
+            <i class="fa-solid fa-user"></i>
             <input placeholder="아이디" id="id" class="input-box__input" type="text" autocomplete="off" />
           </div>
           <div class="input-box">
+            <i class="fa-solid fa-lock"></i>
+            바
             <input placeholder="비밀번호" id="password" class="input-box__input" type="password" autocomplete="off" />
             <span class="error-message hidden passwordVal">로그인 정보가 없습니다.</span>
           </div>
@@ -23,6 +26,12 @@
             <button type="submit" class="button" disabled>로그인</button>
             <button type="button" class="button">회원가입</button>
           </div>
+        </div>
+        <p class="signin-title__social">소셜 로그인</p>
+        <div class="social">
+          <div class="social__login naver"></div>
+          <div class="social__login kakao"></div>
+          <div class="social__login google"></div>
         </div>
       </form>
     </section>
