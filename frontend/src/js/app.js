@@ -1,8 +1,8 @@
 import Main from './main';
-import Signin from './SignIn';
+import SignIn from './signIn';
 // import Mypage from './mypage';
 // import MypageEdit from './mypageEdit';
-// import Signup from './signup';
+import SignUp from './signUp';
 // import Develog from './develog';
 // import Search from './search';
 // import Detail from './detail';
@@ -11,16 +11,15 @@ import NotFound from './notFound';
 
 const routes = [
   // { path: '/', component: Main },
-  //   { path: '/callback', component: Main },
-  //   { path: '/search', component: Search },
-  //   { path: '/develog', component: Develog },
-  //   { path: '/detail', component: Detail },
-  //   { path: '/write', component: Write },
-  //   { path: '/mypage', component: Mypage },
-  //   { path: '/mypageEdit', component: MypageEdit },
-  //for check
-  { path: '/', component: Signin },
-  //   { path: '/signup', component: Signup },
+  // { path: '/callback', component: Main },
+  // { path: '/search', component: Search },
+  // { path: '/develog', component: Develog },
+  // { path: '/detail', component: Detail },
+  // { path: '/write', component: Write },
+  // { path: '/mypage', component: Mypage },
+  // { path: '/mypageEdit', component: MypageEdit },
+  // { path: '/signin', component: SignIn },
+  { path: '/', component: SignUp },
 ];
 
 const router = () => {
