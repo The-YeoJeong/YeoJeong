@@ -43,6 +43,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	// for json object
 	implementation group: 'com.google.code.gson', name: 'gson'
+	// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+
 
 }
 

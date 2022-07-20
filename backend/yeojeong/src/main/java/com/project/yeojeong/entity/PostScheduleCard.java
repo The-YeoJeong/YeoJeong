@@ -26,7 +26,15 @@ public class PostScheduleCard {
 
     private String postSchedulecardPlaceName;
 
-    private String getPostSchedulecardPlaceAddress;
+    private String postSchedulecardPlaceAddress;
 
-    private String getPostSchedulecardPlaceContent;
+    private String postSchedulecardPlaceContent;
+
+    public void updatePostDateCard(String postSchedulecardPlaceName,
+                                   String postSchedulecardPlaceAddress,
+                                   String postSchedulecardPlaceContent){
+        this.postSchedulecardPlaceName = postSchedulecardPlaceName;
+        this.postSchedulecardPlaceAddress = postSchedulecardPlaceAddress;
+        this.postSchedulecardPlaceContent = postSchedulecardPlaceContent;
+    }
 }

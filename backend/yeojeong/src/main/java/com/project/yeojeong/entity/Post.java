@@ -29,26 +29,23 @@ public class Post {
     @JoinColumn(name = "member_no")
     private Member member;
 
+    @Column(nullable = false, length = 40)
     private String postTitle;
 
+    @Column(nullable = false)
     private Date postStartDate;
 
+    @Column(nullable = false)
     private Date postEndDate;
 
+    @Column(nullable = true)
     private String postContent;
 
+    @Column(nullable = false)
     private int postHeartCnt;
 
-    private int postOnlyme;
-
-    @OneToMany(mappedBy = "travel_post_datecard", cascade = CascadeType.ALL
-            , orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<PostDateCard> postDateCards = new ArrayList<>();
-
-    public void addPostDateCard(PostDateCard postDateCard){
-        postDateCards.add(postDateCard);
-        //postDateCard.setPostNo(postNo);
-    }
+    @Column(nullable = false)
+    private boolean postOnlyme;
 
     public static Post createPost(PostFormDto postFormDto, Member member) {
         Post post = new Post();
@@ -57,13 +54,6 @@ public class Post {
         post.setPostEndDate(postFormDto.getPostEndDate());
         post.setPostContent(postFormDto.getPostContent());
         post.setPostOnlyme(postFormDto.getPostOnlyMe());
-
-        //일자카드 리스트
-        //List<PostDateCard> postDateCardList = postFormDto.getPostDateCard();
-        //for(PostDateCard postDateCard : postDateCardDtoList) {
-        //    postDateCard.setPostDatecardTitle(postFormDto.getPostDateCard().get().getPostDateCardTitle());
-        //}
-
         return post;
     }
 }

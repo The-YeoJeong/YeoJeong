@@ -25,13 +25,18 @@ public class PostDateCard {
     @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "post_no")
-    private Post postNo;
+    private Post post;
 
+    @Column(nullable = false, length = 40)
     private String postDatecardTitle;
 
-    public static PostDateCard createPostDateCard(PostFormDto postFormDto, Post post) {
-        PostDateCard postDateCard = new PostDateCard();
-        postDateCard.setPostNo(post);
-        postDateCard.setPostDatecardTitle(postFormDto.getPostDateCard().);
+    public void updatePostDateCard(String postDatecardTitle){
+        this.postDatecardTitle = postDatecardTitle;
     }
+
+//    public static PostDateCard createPostDateCard(PostFormDto postFormDto, Post post) {
+//        PostDateCard postDateCard = new PostDateCard();
+//        postDateCard.setPostNo(post);
+//        postDateCard.setPostDatecardTitle(postFormDto.getPostDateCard().get(0).getPostDateCardTitle());
+//    }
 }

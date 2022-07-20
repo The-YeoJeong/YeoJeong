@@ -1,7 +1,8 @@
 package com.project.yeojeong.repository;
 
 import com.project.yeojeong.entity.Post;
+import com.project.yeojeong.entity.PostDateCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostDateCardRepository extends JpaRepository<PostDateCard, Long> {
 }
