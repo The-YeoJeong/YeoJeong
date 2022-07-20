@@ -12,7 +12,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Member {
+public class Member extends BaseEntity{
     @Id
     @Column(name = "member_no", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

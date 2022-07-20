@@ -14,10 +14,10 @@ CREATE TABLE IF NOT EXISTS it1869.member (
     member_pw char(60) not null,
     member_nickname varchar(20) unique key not null,
     member_oauth_key varchar(65) unique key null,
-    created_time datetime,
-    updated_time datetime,
-    created_by int,
-    updated_by int,
+    created_time datetime not null,
+    updated_time datetime not null,
+    created_by varchar(10) not null,
+    updated_by varchar(10) not null,
     PRIMARY KEY (`member_no`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
