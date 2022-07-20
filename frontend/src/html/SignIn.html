@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signin</title>
+  </head>
+  <body>
+    <fieldset>
+      <legend class="a11yHidden">signin form</legend>
+      <form class="signin-form">
+        <p class="signin-title">로그인</p>
+        <div class="singin-wrapper">
+          <div class="input-box">
+            <i class="fas fa-user"></i>
+            <input placeholder="아이디" id="id" class="input-box__input" type="text" autocomplete="off" />
+          </div>
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input placeholder="비밀번호" id="password" class="input-box__input" type="password" autocomplete="off" />
+          </div>
+          <span class="error-msg hidden passwordVal" style="font-size: small; margin-bottom: 10px;">로그인 정보가 없습니다.</span>
+          <div class="sign-buttons">
+            <button type="submit" class="button" disabled>로그인</button>
+            <button type="button" class="button">회원가입</button>
+          </div>
+        </div>
+        <p class="signin-title__social">소셜 로그인</p>
+        <div class="social">
+          <div class="social__login naver"></div>
+          <div class="social__login kakao"></div>
+          <div class="social__login google"></div>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>

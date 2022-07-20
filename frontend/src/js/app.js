@@ -1,6 +1,5 @@
-
 import Main from './main';
-// import Signin from './signin';
+import Signin from './SignIn';
 // import Mypage from './mypage';
 // import MypageEdit from './mypageEdit';
 // import Signup from './signup';
@@ -11,16 +10,17 @@ import Main from './main';
 import NotFound from './notFound';
 
 const routes = [
-  { path: '/', component: Main },
-//   { path: '/callback', component: Main },
-//   { path: '/search', component: Search },
-//   { path: '/develog', component: Develog },
-//   { path: '/detail', component: Detail },
-//   { path: '/write', component: Write },
-//   { path: '/mypage', component: Mypage },
-//   { path: '/mypageEdit', component: MypageEdit },
-//   { path: '/signin', component: Signin },
-//   { path: '/signup', component: Signup },
+  // { path: '/', component: Main },
+  //   { path: '/callback', component: Main },
+  //   { path: '/search', component: Search },
+  //   { path: '/develog', component: Develog },
+  //   { path: '/detail', component: Detail },
+  //   { path: '/write', component: Write },
+  //   { path: '/mypage', component: Mypage },
+  //   { path: '/mypageEdit', component: MypageEdit },
+  //for check
+  { path: '/', component: Signin },
+  //   { path: '/signup', component: Signup },
 ];
 
 const router = () => {
