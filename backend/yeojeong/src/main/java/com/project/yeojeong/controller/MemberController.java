@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/member")
@@ -37,7 +39,7 @@ public class MemberController {
 
     // login해서 token 반환(client로 보냄) 이 token을 다시 서버에 요청과 같이 보내서 서비스 수행
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
+    public ResponseEntity<Map> authorize(@Valid @RequestBody LoginDto loginDto) {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getMemberId(), loginDto.getMemberPw());
         // authenticationToken을 이용해 Authentication 객체를 생성하려고 authenticate method가 실행이 될때
@@ -53,8 +55,13 @@ public class MemberController {
         // jwt를 response header에 넣어줌
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
-        // TokenDto통해 ResponseBody에도 넣어서 return
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        Map<String, Object> body = new HashMap<>();
+        body.put("jwt", jwt);
+        body.put("memberNickName", authentication.getName());
+
+
+        // Map 형태로 jwt, memberNickName response
+        return new ResponseEntity<>(body, httpHeaders, HttpStatus.OK);
     }
 
     // 회원 가입
