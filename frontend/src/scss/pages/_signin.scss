@@ -1,0 +1,82 @@
+@use '../utils' as *;
+
+.signin-title {
+  text-align: center;
+  font-size: rem(30px);
+  margin: rem(10px) 0;
+
+  &__social {
+    font-size: rem(20px);
+    text-align: center;
+  }
+}
+
+.singin-wrapper {
+  padding: rem(20px) rem(50px);
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-form {
+  width: rem(400px);
+  height: rem(450px);
+  border: 2px solid black;
+  margin: auto;
+}
+
+.input-box {
+  &__input {
+    border: 2px solid $main;
+    padding: 5px;
+    width: 100%;
+    height: rem(40px);
+    margin-bottom: rem(10px);
+  }
+}
+
+  body {
+  font-size: 16px;
+  text-align: center;
+}
+
+i {
+  font-size: 3rem;
+  color: #ff5544;
+}
+
+.sign-buttons {
+  justify-content: space-between;
+  display: flex;
+}
+
+.social {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-evenly;
+  width: rem(300px);
+  margin: auto;
+  margin-top: rem(30px);
+
+  &__login {
+    border-radius: 100%;
+    height: rem(60px);
+    width: rem(60px);
+  }
+
+  .naver {
+    background-image: url('../assets/naver.png');
+    background-size: cover;
+  }
+
+  .kakao {
+    background-image: url('../assets/kakao.png');
+    background-size: cover;
+  }
+
+  .google {
+    background-image: url('../assets/google.png');
+    background-size: cover;
+    border: 1px solid black;
+  }
+}
