@@ -28,9 +28,9 @@ public class MemberService {
     // 회원가입
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
-        if (memberRepository.getByMemberId(memberDto.getMemberId()) != null) {
-            throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
-        }
+//        if (memberRepository.getByMemberId(memberDto.getMemberId()) != null) {
+//            throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
+//        }
 
         // 권한 정보를 만듦
         Authority authority = Authority.builder()

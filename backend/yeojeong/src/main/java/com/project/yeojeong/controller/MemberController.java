@@ -5,6 +5,7 @@ import com.project.yeojeong.dto.MemberDto;
 import com.project.yeojeong.dto.TokenDto;
 import com.project.yeojeong.jwt.JwtFilter;
 import com.project.yeojeong.jwt.TokenProvider;
+import com.project.yeojeong.repository.MemberRepository;
 import com.project.yeojeong.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +32,13 @@ public class MemberController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public MemberController(MemberService memberService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    private final MemberRepository memberRepository;
+
+    public MemberController(MemberService memberService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, MemberRepository memberRepository) {
         this.memberService = memberService;
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.memberRepository = memberRepository;
     }
 
     // login해서 token 반환(client로 보냄) 이 token을 다시 서버에 요청과 같이 보내서 서비스 수행
@@ -75,5 +79,12 @@ public class MemberController {
     @GetMapping("/get/me")
     public ResponseEntity<MemberDto> getMyUserInfo(HttpServletRequest request, Principal principal) {
         return ResponseEntity.ok(memberService.getMyUserWithAuthorities());
+    }
+
+    // test용
+    // 자신의 정보 가져오기
+    @DeleteMapping("/get/me/delete")
+    public void userDelete(HttpServletRequest request, Principal principal) {
+        memberRepository.deleteById(memberRepository.getByMemberId(principal.getName()).getMemberNo());
     }
 }
