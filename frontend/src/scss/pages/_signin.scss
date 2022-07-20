@@ -25,12 +25,16 @@
 }
 
 .input-box {
+  border: 2px solid $main;
+  padding: 5px;
+  width: 100%;
+  height: rem(40px);
+  margin-bottom: rem(10px);
+  display: flex;
   &__input {
-    border: 2px solid $main;
-    padding: 5px;
+    border-width: 0;
+    height: 100%;
     width: 100%;
-    height: rem(40px);
-    margin-bottom: rem(10px);
   }
 }
 
@@ -39,9 +43,13 @@
   text-align: center;
 }
 
-i {
-  font-size: 3rem;
-  color: #ff5544;
+.icon-wrapper {
+  margin-right: rem(30px);
+}
+
+.fa-user,
+.fa-lock {
+  margin: rem(5px) rem(10px) 0 rem(5px);
 }
 
 .sign-buttons {
@@ -57,6 +65,7 @@ i {
   width: rem(300px);
   margin: auto;
   margin-top: rem(30px);
+  cursor: pointer;
 
   &__login {
     border-radius: 100%;
