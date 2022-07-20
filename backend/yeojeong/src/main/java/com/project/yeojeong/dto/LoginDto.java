@@ -13,10 +13,8 @@ import javax.validation.constraints.Size;
 public class LoginDto {
 
     @NotNull
-    @Size(min = 3, max = 50)
-    private String userid;
+    private String memberId;
 
     @NotNull
-    @Size(min = 3, max = 100)
-    private String password;
+    private String memberPw;
 }

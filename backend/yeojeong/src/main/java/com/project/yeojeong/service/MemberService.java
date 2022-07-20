@@ -1,10 +1,10 @@
 package com.project.yeojeong.service;
 
-import com.project.yeojeong.dto.UserDto;
+import com.project.yeojeong.dto.MemberDto;
 import com.project.yeojeong.entity.Authority;
-import com.project.yeojeong.entity.User;
+import com.project.yeojeong.entity.Member;
 import com.project.yeojeong.exception.DuplicateMemberException;
-import com.project.yeojeong.repository.UserRepository;
+import com.project.yeojeong.repository.MemberRepository;
 import com.project.yeojeong.util.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,20 +15,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 @Service
-public class UserService {
-    private final UserRepository userRepository;
+public class MemberService {
+    private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    private final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(MemberService.class);
 
-    public UserService(UserRepository userRepository , PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+        this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     // 회원가입
     @Transactional
-    public UserDto signup(UserDto userDto) {
-        if (userRepository.findById(userDto.getUserid()).orElse(null) != null) {
+    public MemberDto signup(MemberDto memberDto) {
+        if (memberRepository.getByMemberId(memberDto.getMemberId()) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
@@ -38,19 +38,20 @@ public class UserService {
                 .build();
 
         // 권한정보도 넣어서 User 정보를 만듦
-        User user = User.builder()
-                .userid(userDto.getUserid())
-                .password(passwordEncoder.encode(userDto.getPassword()))
+        Member member = Member.builder()
+                .memberId(memberDto.getMemberId())
+                .memberNickname(memberDto.getMemberNickname())
+                .memberPw(passwordEncoder.encode(memberDto.getMemberPw()))
                 .authorities(Collections.singleton(authority))
                 .build();
-        return UserDto.from(userRepository.save(user));
+        return MemberDto.from(memberRepository.save(member));
     }
 
 
     // SecurityContext에 저장된 username의 정보만 가져옴옴
    @Transactional(readOnly = true)
-    public UserDto getMyUserWithAuthorities() {
-       return UserDto.from(SecurityUtil.getCurrentUserid().flatMap(userRepository::findOneWithAuthoritiesByUserid).orElse(null));
+    public MemberDto getMyUserWithAuthorities() {
+       return MemberDto.from(SecurityUtil.getCurrentUserid().flatMap(memberRepository::findOneWithAuthoritiesByMemberId).orElse(null));
     }
 
 }
