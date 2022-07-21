@@ -18,9 +18,8 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     Member getByMemberId(String memberId);
 
-//    void deleteByMemberId(String memberId);
-//
-////    DELETE FROM [테이블] WHERE [조건]
-//    @Query(value = "DELETE m from member m where m.member_id = :memberId", nativeQuery = true)
-//    void deleteByMemberIdTest(String memberId);
+    Member getByMemberNickname(String memberNickname);
+
+
+
 }

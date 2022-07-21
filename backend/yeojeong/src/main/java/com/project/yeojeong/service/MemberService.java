@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.Collections;
 
 @Service
@@ -49,9 +50,29 @@ public class MemberService {
 
 
     // SecurityContext에 저장된 username의 정보만 가져옴옴
-   @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public MemberDto getMyUserWithAuthorities() {
-       return MemberDto.from(SecurityUtil.getCurrentUserid().flatMap(memberRepository::findOneWithAuthoritiesByMemberId).orElse(null));
+        return MemberDto.from(SecurityUtil.getCurrentUserid().flatMap(memberRepository::findOneWithAuthoritiesByMemberId).orElse(null));
+    }
+
+    @Transactional(readOnly = true)
+    public Member memberIdDuplicateCheckService(String memberId) {
+        return memberRepository.getByMemberId(memberId);
+    }
+
+    @Transactional(readOnly = true)
+    public Member memberNickNameDuplicateCheckService(String memberNickname) {
+        return memberRepository.getByMemberNickname(memberNickname);
+    }
+
+    @Transactional(readOnly = true)
+    public Boolean memberWithdraw(Principal principal) {
+        try {
+            memberRepository.deleteById(memberRepository.getByMemberId(principal.getName()).getMemberNo());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }
