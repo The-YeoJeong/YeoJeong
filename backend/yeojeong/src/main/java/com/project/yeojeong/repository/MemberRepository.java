@@ -20,6 +20,8 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     Member getByMemberNickname(String memberNickname);
 
+    Member getByMemberOauthKey(String id);
+
 
 
 }

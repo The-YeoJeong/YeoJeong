@@ -75,4 +75,10 @@ public class MemberService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public Member oAuthDuplicateCheckService(String id) {
+        return memberRepository.getByMemberOauthKey(id);
+    }
+
+
 }
