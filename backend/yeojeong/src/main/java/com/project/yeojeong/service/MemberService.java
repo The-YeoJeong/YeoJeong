@@ -80,5 +80,11 @@ public class MemberService {
         return memberRepository.getByMemberOauthKey(id);
     }
 
+    // 유저 정보 리턴
+    @Transactional(readOnly = true)
+    public Member getMember(String id) {
+        return memberRepository.getByMemberOauthKey(id);
+    }
+
 
 }

@@ -69,10 +69,9 @@ public class OAuthService{
     }
 
     // Access Token으로 사용자 정보 조회
-    public String createKakaoUser(String token) throws Exception {
-
+    public String createKakaoUser(String token) {
         String reqURL = "https://kapi.kakao.com/v2/user/me";
-        // 유저 고유 식별자 값 2350334700
+
         String id = "";
         //access_token을 이용하여 사용자 정보 조회
         try {
@@ -111,7 +110,4 @@ public class OAuthService{
 
         return "K" + id;
     }
-
-
-
 }
