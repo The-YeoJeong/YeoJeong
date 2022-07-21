@@ -14,8 +14,5 @@ public class PostDateCardDto {
     private int postDatecardNo;
     private String postDateCardTitle;
     private List<PostScheduleCardDto> postScheduleCard;
-//    private static ModelMapper modelMapper = new ModelMapper();
-//    public static PostDateCardDto of(PostDateCard postDateCard){
-//        return modelMapper.map(postDateCard, PostDateCardDto.class);
-  //  }
+
 }

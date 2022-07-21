@@ -30,13 +30,5 @@ public class PostFormDto {
     public void addPostCardDto(PostDateCardDto dateCardDto){
         postDateCard.add(dateCardDto);
     }
-//    private static ModelMapper modelMapper = new ModelMapper();
-//    public Post createPost(){
-//        return modelMapper.map(this, Post.class);
-//    }
-//    public static PostFormDto of(Post post){
-//        return modelMapper.map(post,PostFormDto.class);
-//    }
-
 
 }
