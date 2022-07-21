@@ -7,6 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.PatchMapping;
 
 public interface PostDateCardRepository extends JpaRepository<PostDateCard, Integer> {
-//    @Query("delete from postDatecard d where d.postNo = :postNo")
     Integer deleteAllByPost(Post post);
 }
