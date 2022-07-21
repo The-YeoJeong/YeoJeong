@@ -113,6 +113,15 @@ public class MemberController {
         }
     }
 
-
+    // 소셜 로그인(클라에서 서버로 access token전달)
+//    @PostMapping("/oauth/token")
+//    public ResponseEntity<MemberDto> socialLogin(@Valid @RequestBody String oAuthToken) {
+//        // 1. 카카오 서버로 access token
+//        // 2. 카카오 서버로 부터 사용자 정보 가져오기(고유 식별자값, 닉네임 ,,,)
+//        // 3. 고유 식별자가 DB에 있는 지 check
+//        //     3-1. 없다면 201(추가 회원가입 진행)
+//        //     3-2. 있다면 200(로그인 성공)
+//        return ResponseEntity.ok(memberService.signup(memberDto));
+//    }
 
 }
