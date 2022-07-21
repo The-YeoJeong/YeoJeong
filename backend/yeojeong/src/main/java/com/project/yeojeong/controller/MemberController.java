@@ -16,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,10 +82,37 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMyUserWithAuthorities());
     }
 
-    // test용
-    // 자신의 정보 가져오기
-    @DeleteMapping("/get/me/delete")
-    public void userDelete(HttpServletRequest request, Principal principal) {
-        memberRepository.deleteById(memberRepository.getByMemberId(principal.getName()).getMemberNo());
+
+    // 회원 탈퇴
+    @DeleteMapping("/delete")
+    public ResponseEntity memberDelete(Principal principal) {
+        if (memberService.memberWithdraw(principal)) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
+
+    // id 중복확인
+    @GetMapping(value = "/new/idCheck/{memberId}")
+    public ResponseEntity memberIdDuplicateCheck(@PathVariable("memberId") String memberId) {
+        if (memberService.memberIdDuplicateCheckService(memberId) == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // nick 중복확인
+    @GetMapping(value = "/new/nickCheck/{memberNickName}")
+    public ResponseEntity memberNickNameDuplicateCheck(@PathVariable("memberNickName") String memberNickName) {
+        if (memberService.memberNickNameDuplicateCheckService(memberNickName) == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
 }
