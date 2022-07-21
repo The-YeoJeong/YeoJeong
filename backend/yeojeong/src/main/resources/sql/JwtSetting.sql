@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS `traveler`.`authority` (
+
   `authority_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`authority_name`))
 ENGINE = InnoDB
@@ -26,6 +27,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `it1869`.`user_authority`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `traveler`.`member_authority` (
+
   `member_no` int NOT NULL,
   `authority_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`member_no`, `authority_name`),
