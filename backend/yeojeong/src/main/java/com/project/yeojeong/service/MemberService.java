@@ -65,7 +65,7 @@ public class MemberService {
         return memberRepository.getByMemberNickname(memberNickname);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Boolean memberWithdraw(Principal principal) {
         try {
             memberRepository.deleteById(memberRepository.getByMemberId(principal.getName()).getMemberNo());

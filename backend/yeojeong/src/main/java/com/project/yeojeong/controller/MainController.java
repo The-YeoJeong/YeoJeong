@@ -11,18 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class MainController {
 
-//    @GetMapping(value = "/test")
-//    @ResponseBody // @Controller를 가지고 있지만, 텍스트를 반환하고 싶을 때 사용
-//    public TestDto main(){
-//        TestDto testDto = new TestDto();
-//
-//        testDto.setTitle("yeojeong testTitle");
-//        testDto.setContent("yeojeong testContent");
-//
-//        return testDto;
-//    }
-
-    @GetMapping(value = "/test")
+    @GetMapping(value = "/")
     @ResponseBody // @Controller를 가지고 있지만, 텍스트를 반환하고 싶을 때 사용
     public String main(){
         JsonObject obj =new JsonObject();
@@ -38,4 +27,15 @@ public class MainController {
 
         return obj.toString();
     }
+//    @GetMapping(value = "/test")
+//    @ResponseBody // @Controller를 가지고 있지만, 텍스트를 반환하고 싶을 때 사용
+//    public TestDto main(){
+//        TestDto testDto = new TestDto();
+//
+//        testDto.setTitle("yeojeong testTitle");
+//        testDto.setContent("yeojeong testContent");
+//
+//        return testDto;
+//    }
+
 }
