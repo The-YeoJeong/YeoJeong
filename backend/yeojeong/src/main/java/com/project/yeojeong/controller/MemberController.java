@@ -47,6 +47,7 @@ public class MemberController {
     public ResponseEntity<Map> authorize(@Valid @RequestBody LoginDto loginDto) {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getMemberId(), loginDto.getMemberPw());
+
         // authenticationToken을 이용해 Authentication 객체를 생성하려고 authenticate method가 실행이 될때
         // CustomUserDetailsService.loadUserByUsername method 실행
         // 실행한 결과값으로 authentication 객체를 생성하고 SecurityContext에 저장
