@@ -5,6 +5,7 @@ import com.project.yeojeong.dto.MemberDto;
 import com.project.yeojeong.dto.TokenDto;
 import com.project.yeojeong.jwt.JwtFilter;
 import com.project.yeojeong.jwt.TokenProvider;
+import com.project.yeojeong.repository.MemberRepository;
 import com.project.yeojeong.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,10 +33,13 @@ public class MemberController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public MemberController(MemberService memberService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+    private final MemberRepository memberRepository;
+
+    public MemberController(MemberService memberService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, MemberRepository memberRepository) {
         this.memberService = memberService;
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.memberRepository = memberRepository;
     }
 
     // login해서 token 반환(client로 보냄) 이 token을 다시 서버에 요청과 같이 보내서 서비스 수행
@@ -76,4 +81,38 @@ public class MemberController {
     public ResponseEntity<MemberDto> getMyUserInfo(HttpServletRequest request, Principal principal) {
         return ResponseEntity.ok(memberService.getMyUserWithAuthorities());
     }
+
+
+    // 회원 탈퇴
+    @DeleteMapping("/delete")
+    public ResponseEntity memberDelete(Principal principal) {
+        if (memberService.memberWithdraw(principal)) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // id 중복확인
+    @GetMapping(value = "/new/idCheck/{memberId}")
+    public ResponseEntity memberIdDuplicateCheck(@PathVariable("memberId") String memberId) {
+        if (memberService.memberIdDuplicateCheckService(memberId) == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // nick 중복확인
+    @GetMapping(value = "/new/nickCheck/{memberNickName}")
+    public ResponseEntity memberNickNameDuplicateCheck(@PathVariable("memberNickName") String memberNickName) {
+        if (memberService.memberNickNameDuplicateCheckService(memberNickName) == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
 }

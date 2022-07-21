@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Post {
+public class Post extends BaseEntity{
     @Id
     @Column(name = "post_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +30,10 @@ public class Post {
     private String postTitle;
 
     @Column(nullable = false)
-    private Date postStartDate;
+    private Date postStartdate;
 
     @Column(nullable = false)
-    private Date postEndDate;
+    private Date postEnddate;
 
     @Column(nullable = true)
     private String postContent;
@@ -47,8 +47,9 @@ public class Post {
     public static Post createPost(PostFormDto postFormDto, Member member) {
         Post post = new Post();
         post.setMember(member);
-        post.setPostStartDate(postFormDto.getPostStartDate());
-        post.setPostEndDate(postFormDto.getPostEndDate());
+        post.setPostTitle(postFormDto.getPostTitle());
+        post.setPostStartdate(postFormDto.getPostStartDate());
+        post.setPostEnddate(postFormDto.getPostEndDate());
         post.setPostContent(postFormDto.getPostContent());
         post.setPostOnlyme(postFormDto.getPostOnlyMe());
         return post;

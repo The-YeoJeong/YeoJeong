@@ -2,6 +2,7 @@ package com.project.yeojeong.repository;
 import com.project.yeojeong.entity.Member;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
@@ -14,5 +15,11 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     //    Optional<User> findOneByUserid(String userid);
     @EntityGraph(attributePaths = "authorities") // EntityGraph annotation은 쿼리가 수행될때 Lazy조회가 아니고 Eager조회로 authorities 정보를 같이 가져옴
     Optional<Member> findOneWithAuthoritiesByMemberId(String memberId);
+
     Member getByMemberId(String memberId);
+
+    Member getByMemberNickname(String memberNickname);
+
+
+
 }

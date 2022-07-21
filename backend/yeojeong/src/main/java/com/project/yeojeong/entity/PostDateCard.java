@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class PostDateCard {
+public class PostDateCard extends BaseEntity{
     @Id
     @Column(name = "post_datecard_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

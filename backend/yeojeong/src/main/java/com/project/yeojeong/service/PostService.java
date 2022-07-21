@@ -1,14 +1,8 @@
 package com.project.yeojeong.service;
 
 import com.project.yeojeong.dto.PostFormDto;
-import com.project.yeojeong.entity.Member;
-import com.project.yeojeong.entity.Post;
-import com.project.yeojeong.entity.PostDateCard;
-import com.project.yeojeong.entity.PostScheduleCard;
-import com.project.yeojeong.repository.MemberRepository;
-import com.project.yeojeong.repository.PostDateCardRepository;
-import com.project.yeojeong.repository.PostRepository;
-import com.project.yeojeong.repository.PostScheduleCardRepository;
+import com.project.yeojeong.entity.*;
+import com.project.yeojeong.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,13 +17,22 @@ public class PostService {
     private final PostRepository postRepository;
     private final PostDateCardRepository postDateCardRepository;
     private final PostScheduleCardRepository postScheduleCardRepository;
-
+    private final PostRegionRepository postRegionRepository;
+    private final RegionRepository regionRepository;
     //글 작성
     public int postnew(PostFormDto postFormDto, Principal principal) {
         Member member = memberRepository.getByMemberId(principal.getName());
         //전체 글 저장
         Post post = Post.createPost(postFormDto, member);
-        postRepository.save(post);
+        int postNo = postRepository.save(post).getPostNo();
+        //글 해당 지역 저장
+        for (int i=0;i<postFormDto.getPostRegionName().size();i++) {
+            PostRegion postRegion = new PostRegion();
+            postRegion.setPost(post);
+            Region region = regionRepository.getByRegionName(postFormDto.getPostRegionName().get(i));
+            postRegion.setRegion(region);
+            postRegionRepository.save(postRegion);
+        }
 
         //일자 카드 저장
         for (int i=0;i<postFormDto.getPostDateCard().size();i++){
@@ -43,10 +46,10 @@ public class PostService {
                 postScheduleCard.setPostDatecard(postDateCard);
                 postScheduleCard.setPostSchedulecardPlaceName(postFormDto.getPostDateCard().get(i).getPostScheduleCard().get(j).getPlaceName());
                 postScheduleCard.setPostSchedulecardPlaceAddress(postFormDto.getPostDateCard().get(i).getPostScheduleCard().get(j).getPlaceAddress());
-                postScheduleCard.setPostSchedulecardPlaceContent(postFormDto.getPostDateCard().get(i).getPostScheduleCard().get(j).getPlaceContent());
+                postScheduleCard.setPostSchedulecardContent(postFormDto.getPostDateCard().get(i).getPostScheduleCard().get(j).getPlaceContent());
                 postScheduleCardRepository.save(postScheduleCard);
             }
         }
-        return post.getPostNo();
+        return postNo;
     }
 }

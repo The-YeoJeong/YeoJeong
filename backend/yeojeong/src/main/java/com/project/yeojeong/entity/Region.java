@@ -13,9 +13,9 @@ import javax.persistence.*;
 @ToString
 public class Region {
     @Id
-    @Column(name = "region_no")
+    @Column(name = "region_no", length = 2)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int region_no;
-
-    private String region_name;
+    private String regionNo;
+    @Column(nullable = false, length = 4)
+    private String regionName;
 }

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class PostScheduleCard {
+public class PostScheduleCard extends BaseEntity{
     @Id
     @Column(name = "post_schedulecard_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,17 +24,20 @@ public class PostScheduleCard {
     @JoinColumn(name = "post_datecard_no")
     private PostDateCard postDatecard;
 
+    @Column(nullable = false, length = 30)
     private String postSchedulecardPlaceName;
 
+    @Column(nullable = false, length = 100)
     private String postSchedulecardPlaceAddress;
 
-    private String postSchedulecardPlaceContent;
+    @Column(nullable = false, length = 200)
+    private String postSchedulecardContent;
 
     public void updatePostDateCard(String postSchedulecardPlaceName,
                                    String postSchedulecardPlaceAddress,
-                                   String postSchedulecardPlaceContent){
+                                   String postSchedulecardContent){
         this.postSchedulecardPlaceName = postSchedulecardPlaceName;
         this.postSchedulecardPlaceAddress = postSchedulecardPlaceAddress;
-        this.postSchedulecardPlaceContent = postSchedulecardPlaceContent;
+        this.postSchedulecardContent = postSchedulecardContent;
     }
 }

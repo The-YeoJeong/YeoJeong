@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class PostRegion {
+public class PostRegion extends BaseEntity{
     @Id
     @Column(name = "post_region_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
