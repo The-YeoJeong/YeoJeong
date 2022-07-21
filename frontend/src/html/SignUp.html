@@ -6,49 +6,75 @@
       <div class="signup-input-form">
         <div class="info-title">아이디</div>
         <div class="input-wrapper">
-          <input placeholder="아이디" id="id" class="input-box" type="text" autocomplete="off" />
+          <input
+            placeholder="10자리 이내의 영어로 입력해주세요."
+            id="id"
+            class="input-box"
+            type="text"
+            autocomplete="off"
+          />
           <button type="button" class="button dupl_id">중복확인</button>
-          <span class="error-msg hidden" style="font-size: small; margin-bottom: 10px"
+          <span class="error-msg duplId hidden" style="font-size: small; margin-bottom: 10px"
             >이미 존재하는 아이디입니다.</span
           >
-          <span class="valid-msg hidden" style="font-size: small; margin-bottom: 10px">사용 가능합니다.</span>
+          <span class="error-msg idVal hidden" style="font-size: small; margin-bottom: 10px"
+            >10자리 이내의 영어로 입력해주세요.</span
+          >
+          <span class="valid-msg idVal hidden" style="font-size: small; margin-bottom: 10px">사용 가능합니다.</span>
         </div>
       </div>
       <div class="signup-input-form">
         <div class="info-title">비밀번호</div>
         <div class="input-wrapper">
           <input
-            placeholder="6~10자리의 영어, 특수문자를 포함해주세요."
+            placeholder="6~10자리의 영어, 숫자, 특수문자를 포함해주세요."
             id="password"
             class="input-box"
             type="text"
             autocomplete="off"
           />
-          <span class="error-msg hidden" style="font-size: small; margin-bottom: 10px"
-            >6~10자리의 영어, 특수문자를 포함해주세요.</span
+          <span class="error-msg pwdVal hidden" style="font-size: small; margin-bottom: 10px"
+            >6~10자리의 영어, 숫자, 특수문자를 포함해주세요.</span
           >
-          <span class="valid-msg hidden" style="font-size: small; margin-bottom: 10px">사용 가능합니다.</span>
+          <span class="valid-msg pwdVal hidden" style="font-size: small; margin-bottom: 10px">사용 가능합니다.</span>
         </div>
       </div>
       <div class="signup-input-form">
         <div class="info-title">비밀번호 확인</div>
         <div class="input-wrapper">
-          <input placeholder="비밀번호 확인" id="password" class="input-box" type="text" autocomplete="off" />
-          <span class="error-msg hidden" style="font-size: small; margin-bottom: 10px"
+          <input
+            placeholder="비밀번호 확인을 해주세요."
+            id="passwordConfirm"
+            class="input-box"
+            type="text"
+            autocomplete="off"
+          />
+          <span class="error-msg pwdChk hidden" style="font-size: small; margin-bottom: 10px"
             >비밀번호가 일치하지 않습니다.</span
           >
-          <span class="valid-msg hidden" style="font-size: small; margin-bottom: 10px">비밀번호가 일치합니다.</span>
+          <span class="valid-msg pwdChk hidden" style="font-size: small; margin-bottom: 10px"
+            >비밀번호가 일치합니다.</span
+          >
         </div>
       </div>
       <div class="signup-input-form">
         <div class="info-title">닉네임</div>
         <div class="input-wrapper">
-          <input placeholder="닉네임" id="nickname" class="input-box" type="text" autocomplete="off" />
+          <input
+            placeholder="10자 이내의 닉네임을 입력해주세요."
+            id="nickname"
+            class="input-box"
+            type="text"
+            autocomplete="off"
+          />
           <button type="button" class="button dupl_nick">중복확인</button>
-          <span class="error-msg hidden" style="font-size: small; margin-bottom: 10px"
+          <span class="check-msg duplNick hidden" style="font-size: small; margin-bottom: 10px"
             >이미 존재하는 닉네임입니다.</span
           >
-          <span class="valid-msg hidden" style="font-size: small; margin-bottom: 10px">사용 가능합니다.</span>
+          <span class="error-msg nick hidden" style="font-size: small; margin-bottom: 10px"
+            >10자 이내의 닉네임을 입력해주세요.</span
+          >
+          <span class="valid-msg nick hidden" style="font-size: small; margin-bottom: 10px">사용 가능합니다.</span>
         </div>
       </div>
     </div>

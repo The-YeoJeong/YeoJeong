@@ -91,7 +91,6 @@ i {
 
 .signup-form {
   width: rem(600px);
-  height: rem(450px);
   border: 1px solid black;
   margin: auto;
 }
@@ -129,9 +128,11 @@ i {
 .signup-button {
   display: flex;
   margin: auto;
+  margin-bottom: rem(15px);
 }
 
-.error-msg {
+.error-msg,
+.check-msg {
   color: red;
 }
 
@@ -146,7 +147,7 @@ i {
   right: 0;
   align-self: center;
   justify-content: center;
-  top: 15%;
+  top: 10%;
   margin-right: 5px;
   padding: rem(5px) rem(10px) !important;
 }
