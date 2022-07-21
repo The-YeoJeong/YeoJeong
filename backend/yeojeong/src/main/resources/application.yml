@@ -16,9 +16,9 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://cluv-2.cdvey5izwfml.ap-northeast-2.rds.amazonaws.com:3306/it1869??useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
-    username: it1869
-    password: it1869
+    url: jdbc:mariadb://cluv-2.cdvey5izwfml.ap-northeast-2.rds.amazonaws.com:3306/traveler??useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
+    username: it1870
+    password: it1870
 
 logging:
   level:
