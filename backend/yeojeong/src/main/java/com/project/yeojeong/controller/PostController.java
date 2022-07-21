@@ -28,8 +28,17 @@ public class PostController {
 
     //글 작성
     @PostMapping(value = "/new")
-    public @ResponseBody ResponseEntity postNew(@Valid @RequestBody PostFormDto postDto, Principal principal) throws ParseException {
-        int postNo = postService.postnew(postDto, principal);
+    public @ResponseBody ResponseEntity postNew(@Valid @RequestBody PostFormDto postFormDto, Principal principal) {
+        int postNo = postService.postnew(postFormDto, principal);
+        System.out.println("글 번호"+postNo);
+        return new ResponseEntity<>(postNo,HttpStatus.OK);
+    }
+
+    //글 수정
+    @PatchMapping(value = "/edit/{postNo}")
+    public @ResponseBody ResponseEntity postEdit(@Valid @RequestBody PostFormDto postFormDto, Principal principal) {
+        System.out.println("12345"+postFormDto.getPostNo());
+        int postNo = postService.postedit(postFormDto, principal);
         System.out.println("글 번호"+postNo);
         return new ResponseEntity<>(postNo,HttpStatus.OK);
     }
