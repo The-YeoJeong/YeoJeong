@@ -54,4 +54,12 @@ public class Post extends BaseEntity{
         post.setPostOnlyme(postFormDto.getPostOnlyMe());
         return post;
     }
+
+    public void updatePost(PostFormDto postDto) {
+        this.postTitle = postDto.getPostTitle();
+        this.postStartdate = postDto.getPostStartDate();
+        this.postEnddate = postDto.getPostEndDate();
+        this.postContent = postDto.getPostContent();
+        this.postOnlyme = postDto.getPostOnlyMe();
+    }
 }

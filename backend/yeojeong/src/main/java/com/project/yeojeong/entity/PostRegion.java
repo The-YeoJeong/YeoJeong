@@ -28,4 +28,5 @@ public class PostRegion extends BaseEntity{
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "region_no")
     private Region region;
+
 }

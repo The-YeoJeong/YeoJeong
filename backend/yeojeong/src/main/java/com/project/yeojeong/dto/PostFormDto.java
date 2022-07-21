@@ -1,11 +1,7 @@
 package com.project.yeojeong.dto;
 
-import com.project.yeojeong.entity.Member;
-import com.project.yeojeong.entity.Post;
-import com.project.yeojeong.entity.PostDateCard;
 import lombok.Getter;
 import lombok.Setter;
-import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.Date;
