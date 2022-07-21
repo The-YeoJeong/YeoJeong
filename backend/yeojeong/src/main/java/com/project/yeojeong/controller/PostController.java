@@ -52,9 +52,13 @@ public class PostController {
         postScheduleCards.get(0).setPlaceName("카페");
         postScheduleCards.get(0).setPlaceAddress("광주 어쩌고 1층");
         postScheduleCards.get(0).setPlaceContent("아아 먹어야지");
-
         postDateCardDto.get(0).setPostScheduleCard(postScheduleCards);
+
+        postDto.setPostDateCard(postDateCardDto);
+
         int postNo = postService.postnew(postDto, principal);
+        System.out.println("dkdkdkdk"+postDto.getPostContent());
+        System.out.println("글 번호"+postNo);
         return new ResponseEntity<>(postNo,HttpStatus.OK);
     }
 }

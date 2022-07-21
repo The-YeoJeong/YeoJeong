@@ -26,6 +26,10 @@ public class PostFormDto {
     }
     private List<String> postRegionName = new ArrayList<>();
     private List<PostDateCardDto> postDateCard = new ArrayList<>();
+
+    public void addPostCardDto(PostDateCardDto dateCardDto){
+        postDateCard.add(dateCardDto);
+    }
 //    private static ModelMapper modelMapper = new ModelMapper();
 //    public Post createPost(){
 //        return modelMapper.map(this, Post.class);

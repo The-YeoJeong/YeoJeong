@@ -1,6 +1,5 @@
 package com.project.yeojeong.entity;
 
-import com.project.yeojeong.dto.PostDateCardDto;
 import com.project.yeojeong.dto.PostFormDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,9 +8,7 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "travel_post")
