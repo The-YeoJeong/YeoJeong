@@ -3,12 +3,10 @@ package com.project.yeojeong.service;
 import com.project.yeojeong.dto.PostFormDto;
 import com.project.yeojeong.entity.*;
 import com.project.yeojeong.repository.*;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
 
 @Service
@@ -56,14 +54,14 @@ public class PostService {
     }
 
     @Transactional
-    public int postedit(PostFormDto postFormDto, Principal principal) {
+    public int postedit(int postNo, PostFormDto postFormDto) {
         //해당 글 찾기
-        Post post = postRepository.findById(postFormDto.getPostNo())
-                .orElseThrow(EntityNotFoundException::new);
+        Post post = postRepository.getReferenceById(postNo);
+
         //글 업데이트
         post.updatePost(postFormDto);
 
-        int postNo = post.getPostNo();
+        int postNoResult = post.getPostNo();
         //해당 글 지역 찾아 삭제
         postRegionRepository.deleteAllByPost(post);
         //지역 업데이트
@@ -94,6 +92,15 @@ public class PostService {
             }
         }
 
-        return postNo;
+        return postNoResult;
     }
+
+//    public PostFormDto postdetail(int postNo) {
+//        PostFormDto postFormDto = new PostFormDto();
+//        Post post = postRepository.getReferenceById(postNo);
+//        postFormDto.setPostNo(postNo);
+//        postFormDto.setMemberNickName(post.getMember().getMemberNickname());
+//        postFormDto.setPostTitle(post.getPostTitle());
+//        postFormDto.set
+//    }
 }

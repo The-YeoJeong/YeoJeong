@@ -12,7 +12,9 @@ import java.util.List;
 public class PostFormDto {
     private int postNo;
     private int memberId;
+    private String memberNickName;
     private String postTitle;
+    private Date createdTime;
     private Date postStartDate;
     private Date postEndDate;
     private String postContent;
