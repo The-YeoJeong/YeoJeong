@@ -1,6 +1,5 @@
 package com.project.yeojeong.repository;
 
-import com.project.yeojeong.entity.PostRegion;
 import com.project.yeojeong.entity.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 

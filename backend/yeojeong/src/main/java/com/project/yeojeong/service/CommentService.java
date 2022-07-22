@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -21,11 +20,17 @@ public class CommentService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+
     public int commentnew(CommentFormDto commentFormDto, Principal principal) {
         Member member = memberRepository.getByMemberId(principal.getName());
         Post post = postRepository.getReferenceById(commentFormDto.getPostNo());
         Comment comment = Comment.createComment(commentFormDto, member, post);
         int commentNo = commentRepository.save(comment).getCommentNo();
         return commentNo;
+    }
+
+    public void commentEdit(int commentNo, CommentFormDto commentFormDto) {
+        Comment comment = commentRepository.getReferenceById(commentNo);
+        comment.updateComment(commentFormDto);
     }
 }
