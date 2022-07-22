@@ -2,7 +2,6 @@ package com.project.yeojeong.controller;
 
 import com.project.yeojeong.dto.LoginDto;
 import com.project.yeojeong.dto.MemberDto;
-import com.project.yeojeong.dto.TokenDto;
 import com.project.yeojeong.jwt.JwtFilter;
 import com.project.yeojeong.jwt.TokenProvider;
 import com.project.yeojeong.repository.MemberRepository;
@@ -16,7 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,15 +63,19 @@ public class MemberController {
         body.put("jwt", jwt);
         body.put("memberNickName", authentication.getName());
 
-
         // Map 형태로 jwt, memberNickName response
         return new ResponseEntity<>(body, httpHeaders, HttpStatus.OK);
     }
 
     // 회원 가입
     @PostMapping("/new")
-    public ResponseEntity<MemberDto> signup(@Valid @RequestBody MemberDto memberDto) {
-        return ResponseEntity.ok(memberService.signup(memberDto));
+    public ResponseEntity signup(@Valid @RequestBody MemberDto memberDto) {
+        try {
+            memberService.signup(memberDto);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // test용
@@ -97,7 +99,7 @@ public class MemberController {
     // id 중복확인
     @GetMapping(value = "/new/idCheck/{memberId}")
     public ResponseEntity memberIdDuplicateCheck(@PathVariable("memberId") String memberId) {
-        if (memberService.memberIdDuplicateCheckService(memberId) == null) {
+        if (memberService.memberIdDuplicateCheck(memberId) == null) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -107,25 +109,13 @@ public class MemberController {
     // nick 중복확인
     @GetMapping(value = "/new/nickCheck/{memberNickName}")
     public ResponseEntity memberNickNameDuplicateCheck(@PathVariable("memberNickName") String memberNickName) {
-        if (memberService.memberNickNameDuplicateCheckService(memberNickName) == null) {
+        if (memberService.memberNickNameDuplicateCheck(memberNickName) == null) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    // 소셜 로그인(클라에서 서버로 access token전달)
-    @PostMapping("/oauth/token")
-    public ResponseEntity socialLogin(@Valid @RequestBody String oAuthToken) {
-        // 1. 카카오 서버로 access token
-        // 2. 카카오 서버로 부터 사용자 정보 가져오기(고유 식별자값, 닉네임 ,,,)
-        // 3. 고유 식별자가 DB에 있는 지 check
-        //     3-1. 없다면 201(추가 회원가입 진행)
-        //     3-2. 있다면 200(로그인 성공)
 
-
-        // 201
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
 
 }

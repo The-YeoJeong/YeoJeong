@@ -22,7 +22,6 @@ public class MemberDto {
     private String memberId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @NotNull
     private String memberPw;
 
     private String memberNickname;
