@@ -2,7 +2,6 @@ package com.project.yeojeong.controller;
 
 import com.project.yeojeong.dto.LoginDto;
 import com.project.yeojeong.dto.MemberDto;
-import com.project.yeojeong.dto.TokenDto;
 import com.project.yeojeong.jwt.JwtFilter;
 import com.project.yeojeong.jwt.TokenProvider;
 import com.project.yeojeong.repository.MemberRepository;
@@ -16,7 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +45,7 @@ public class MemberController {
     public ResponseEntity<Map> authorize(@Valid @RequestBody LoginDto loginDto) {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getMemberId(), loginDto.getMemberPw());
+
         // authenticationToken을 이용해 Authentication 객체를 생성하려고 authenticate method가 실행이 될때
         // CustomUserDetailsService.loadUserByUsername method 실행
         // 실행한 결과값으로 authentication 객체를 생성하고 SecurityContext에 저장
@@ -64,15 +63,19 @@ public class MemberController {
         body.put("jwt", jwt);
         body.put("memberNickName", authentication.getName());
 
-
         // Map 형태로 jwt, memberNickName response
         return new ResponseEntity<>(body, httpHeaders, HttpStatus.OK);
     }
 
     // 회원 가입
     @PostMapping("/new")
-    public ResponseEntity<MemberDto> signup(@Valid @RequestBody MemberDto memberDto) {
-        return ResponseEntity.ok(memberService.signup(memberDto));
+    public ResponseEntity signup(@Valid @RequestBody MemberDto memberDto) {
+        try {
+            memberService.signup(memberDto);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // test용
@@ -96,7 +99,7 @@ public class MemberController {
     // id 중복확인
     @GetMapping(value = "/new/idCheck/{memberId}")
     public ResponseEntity memberIdDuplicateCheck(@PathVariable("memberId") String memberId) {
-        if (memberService.memberIdDuplicateCheckService(memberId) == null) {
+        if (memberService.memberIdDuplicateCheck(memberId) == null) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -106,7 +109,7 @@ public class MemberController {
     // nick 중복확인
     @GetMapping(value = "/new/nickCheck/{memberNickName}")
     public ResponseEntity memberNickNameDuplicateCheck(@PathVariable("memberNickName") String memberNickName) {
-        if (memberService.memberNickNameDuplicateCheckService(memberNickName) == null) {
+        if (memberService.memberNickNameDuplicateCheck(memberNickName) == null) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

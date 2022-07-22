@@ -71,6 +71,31 @@ public class TokenProvider implements InitializingBean {
                 .compact();
     }
 
+    // OAtuh용 token(oauth는 인증을 거치고 들어온 사용자이고, 비밀번호를 확인할수 없기 때문에 authentication을
+    // UsernamePasswordAuthenticationToken로 만들수 없음)
+    public String createToken(String memberId) {
+        //Header 부분 설정
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("typ", "JWT");
+        headers.put("alg", "HS256");
+
+        //payload 부분 설정
+        Map<String, Object> payloads = new HashMap<>();
+        payloads.put("memberId", memberId);
+
+        long now = (new Date()).getTime();
+        Date validity = new Date(now + this.tokenValidityInMilliseconds);
+
+        return Jwts.builder()
+                .setHeader(headers)
+                .setSubject("member auth")
+                .setClaims(payloads)
+                .claim(AUTHORITIES_KEY, "ROLE_USER")
+                .signWith(key, SignatureAlgorithm.HS512)
+                .setExpiration(validity)
+                .compact();
+    }
+
     // 역으로 Token을 parameter로 받아서 Token에 담겨있는 정보를 이용해 Authentication 객체를 return
     public Authentication getAuthentication(String token) {
         // Token으로 Claims을 만들고
