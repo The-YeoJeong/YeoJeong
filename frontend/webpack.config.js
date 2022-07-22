@@ -58,11 +58,15 @@ module.exports = {
   ],
   devServer: {
     open: true,
-    port: 'auto',
+    port: '4000',
     historyApiFallback: true,
     proxy: {
-      '/api': 'http://localhost:80',
-      changeOrigin: true,
+      '/api': {
+        target: 'http://localhost:80',
+        changeOrigin: true,
+        logLevel: 'debug',
+        pathRewrite: { '^/api': '' },
+      },
     },
   },
   devtool: 'source-map',
