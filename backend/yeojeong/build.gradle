@@ -43,6 +43,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	// for json object
 	implementation group: 'com.google.code.gson', name: 'gson'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
+
 
 }
 

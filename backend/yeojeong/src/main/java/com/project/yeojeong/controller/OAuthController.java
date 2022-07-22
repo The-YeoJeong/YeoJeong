@@ -9,12 +9,15 @@ import com.project.yeojeong.service.OAuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/oauth2")
 public class OAuthController {
 
@@ -30,12 +33,21 @@ public class OAuthController {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
-
-    // 인가 코드 받기(원래는 프론트단에서 처리, TEST 용) 추후 삭제 예정
-    // https://kauth.kakao.com/oauth/authorize?client_id=d173137e871d96ad298bf43551057b2a&redirect_uri=http://localhost/oauth2/kakao&response_type=code
     @GetMapping("/kakao")
-    public ResponseEntity kakaoLoginWithCode(@RequestParam String code) {
-        // 아래 두줄로 사용자 고유식별값을 받아옴
+    public String kakaoLoginConnentURL() {
+        StringBuffer url = new StringBuffer();
+        url.append("https://kauth.kakao.com/oauth/authorize?");
+        url.append("client_id=d173137e871d96ad298bf43551057b2a");
+        url.append("&redirect_uri=http://localhost/oauth2/kakao/login");
+        url.append("&response_type=code");
+
+        return "redirect:" + url;
+    }
+
+    // redirect url로부터 직접 받음
+    @GetMapping("/kakao/login")
+    @ResponseBody
+    public ResponseEntity oAuthLoginWithCode(@RequestParam String code) {
         String accessToken = oAuthService.getKakaoAccessToken(code);
         String id = oAuthService.createKakaoUser(accessToken);
 
@@ -50,16 +62,62 @@ public class OAuthController {
             return new ResponseEntity(body, HttpStatus.OK);
         }
 
+        Map<String, Object> body = new HashMap<>();
+        body.put("accessToken", accessToken);
+
         // 사용자 없음(추가 회원가입 진행)
-        // 클라이언트한테 다시 access token을 던져야하는지 여부 check
-        return new ResponseEntity(HttpStatus.ACCEPTED);
+        // 클라이언트한테 다시 access token을 던짐
+        return new ResponseEntity(body, HttpStatus.ACCEPTED);
     }
 
-    // 소셜 최초 로그인인지, 가입한 유저인지 판단 with access token
-    @GetMapping("/kakao/login")
-    public ResponseEntity kakaoLogin(@RequestParam String accessToken) {
-        // 고유식별값을 받아옴
-        String id = oAuthService.createKakaoUser(accessToken);
+    // 추가 회원가입: access token, id, nick 받아서 회원가입 처리
+    @PostMapping("/{oauth_type}/new")
+    @ResponseBody
+    public ResponseEntity oAuthSignUp(@PathVariable("oauth_type") String oauth_type,
+                                      @RequestParam String accessToken, @RequestBody @Valid MemberDto memberDto) {
+        String id = "";
+        if(oauth_type.equals("kakao")){
+            // 고유식별값을 받아옴
+            id = oAuthService.createKakaoUser(accessToken);
+        } else if (oauth_type.equals("naver")) {
+            id = oAuthService.createNaverUser(accessToken);
+        }
+
+        // 사용자 디비 조회, 있을 때
+        if (memberService.oAuthDuplicateCheck(id) != null) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("jwt", tokenProvider.createToken(memberService.signup(memberDto, id).getMemberId()));
+
+        return new ResponseEntity(body, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/naver")
+    public String naverLoginConnentURL() {
+        // state용 난수 생성
+        SecureRandom random = new SecureRandom();
+        String state = new BigInteger(130, random).toString(32);
+
+        StringBuffer url = new StringBuffer();
+        url.append("https://nid.naver.com/oauth2.0/authorize?");
+        url.append("client_id=KWUoslendQDxZRSrkOFh");
+        url.append("&response_type=code");
+        url.append("&redirect_uri=http://localhost/oauth2/naver/login");
+        url.append("&state=" + state);
+
+        return "redirect:" + url;
+    }
+
+    // redirect url로부터 직접 받음
+    @GetMapping("/naver/login")
+    @ResponseBody
+    public ResponseEntity naverLoginWithCode(@RequestParam(value = "code") String code,
+                                   @RequestParam(value = "state") String state) {
+        String accessToken = oAuthService.getNaverAccessToken(code, state);
+        String id = oAuthService.createNaverUser(accessToken);
 
         // 사용자 디비 조회
         Member member =  memberService.oAuthDuplicateCheck(id);
@@ -72,25 +130,13 @@ public class OAuthController {
             return new ResponseEntity(body, HttpStatus.OK);
         }
 
-        // 사용자 없음(추가 회원가입 진행)
-        // 클라이언트한테 다시 access token을 던져야하는지 여부 check
-        return new ResponseEntity(HttpStatus.ACCEPTED);
-    }
-
-    // 추가 회원가입: access token, id, nick 받아서 회원가입 처리
-    @PostMapping("/kakao/new")
-    public ResponseEntity kakaoSignUp(@RequestParam String accessToken, @RequestBody @Valid MemberDto memberDto) {
-        // 고유식별값을 받아옴
-        String id = oAuthService.createKakaoUser(accessToken);
-
-        // 사용자 디비 조회, 있을 때
-        if (memberService.oAuthDuplicateCheck(id) != null) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-
         Map<String, Object> body = new HashMap<>();
-        body.put("jwt", tokenProvider.createToken(memberService.signup(memberDto, id).getMemberId()));
+        body.put("accessToken", accessToken);
 
-        return new ResponseEntity(body, HttpStatus.OK);
+        // 사용자 없음(추가 회원가입 진행)
+        // 클라이언트한테 다시 access token을 던짐
+        return new ResponseEntity(body, HttpStatus.ACCEPTED);
     }
+
+
 }
