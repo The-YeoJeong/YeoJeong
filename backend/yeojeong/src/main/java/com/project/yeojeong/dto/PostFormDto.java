@@ -1,8 +1,5 @@
 package com.project.yeojeong.dto;
 
-import com.project.yeojeong.entity.Member;
-import com.project.yeojeong.entity.Post;
-import com.project.yeojeong.entity.PostDateCard;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +11,7 @@ import java.util.List;
 @Setter
 public class PostFormDto {
     private int postNo;
-    private int memberNo;
+    private int memberId;
     private String postTitle;
     private Date postStartDate;
     private Date postEndDate;
