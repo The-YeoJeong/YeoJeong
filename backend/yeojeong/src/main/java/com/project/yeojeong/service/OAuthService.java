@@ -30,7 +30,7 @@ public class OAuthService{
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=d173137e871d96ad298bf43551057b2a"); // TODO REST_API_KEY 입력
-            sb.append("&redirect_uri=http://localhost/oauth2/code/kakao"); // TODO 인가코드 받은 redirect_uri 입력
+            sb.append("&redirect_uri=http://localhost/oauth2/kakao"); // TODO 인가코드 받은 redirect_uri 입력
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -56,7 +56,7 @@ public class OAuthService{
             access_Token = element.getAsJsonObject().get("access_token").getAsString();
             refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 
-            System.out.println("access_token : " + access_Token);
+            System.out.println("@access_token : " + access_Token);
             System.out.println("refresh_token : " + refresh_Token);
 
             br.close();
