@@ -9,15 +9,15 @@ import org.hibernate.annotations.NotFoundAction;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "travel_post_region")
+@Table(name = "heart")
 @Getter
 @Setter
 @ToString
-public class PostRegion extends BaseUpdateEntity{
+public class Heart extends BaseCreateEntity{
     @Id
-    @Column(name = "post_region_no")
+    @Column(name = "heart_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int post_region_no;
+    private int heartNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
@@ -26,7 +26,13 @@ public class PostRegion extends BaseUpdateEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "region_no")
-    private Region region;
+    @JoinColumn(name = "member_no")
+    private Member member;
 
+    public static Heart createHeart(Post post, Member member) {
+        Heart heart = new Heart();
+        heart.setPost(post);
+        heart.setMember(member);
+        return heart;
+    }
 }

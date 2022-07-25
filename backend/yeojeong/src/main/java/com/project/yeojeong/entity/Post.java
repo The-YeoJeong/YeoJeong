@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Post extends BaseEntity{
+public class Post extends BaseUpdateEntity{
     @Id
     @Column(name = "post_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
