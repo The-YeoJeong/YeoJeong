@@ -13,7 +13,21 @@ let isValidPwd = false;
 let isCheckId = false;
 let isCheckNick = false;
 
+const activeSignUpBtn = () => {
+  if (isValidId && isValidNick && isValidPwd && isCheckId && isCheckNick) {
+    const $signUpBtn = document.querySelector('.button.signup-button');
+    $signUpBtn.classList.remove('disabled');
+    $signUpBtn.disabled = false;
+  } else {
+    const $signUpBtn = document.querySelector('.button.signup-button');
+    $signUpBtn.classList.add('disabled');
+    $signUpBtn.disabled = true;
+  }
+};
+
 const idValidate = val => {
+  document.querySelector('.valid-msg.idDupVal').classList.add('hidden');
+  isCheckId = false;
   if (!rule.id.test(val)) {
     document.querySelector('.error-msg.idVal').classList.remove('hidden');
     document.querySelector('.valid-msg.idVal').classList.add('hidden');
@@ -25,6 +39,7 @@ const idValidate = val => {
     document.querySelector('.button.dupl_id').disabled = false;
     isValidId = true;
   }
+  activeSignUpBtn();
 };
 
 const pwdValidate = (val, val2) => {
@@ -48,9 +63,12 @@ const pwdValidate = (val, val2) => {
       isValidPwd = true;
     }
   }
+  activeSignUpBtn();
 };
 
 const nickValidate = val => {
+  document.querySelector('.valid-msg.nickDupVal').classList.add('hidden');
+  isCheckNick = false;
   if (!rule.nickName.test(val)) {
     document.querySelector('.error-msg.nick').classList.remove('hidden');
     document.querySelector('.valid-msg.nick').classList.add('hidden');
@@ -62,42 +80,36 @@ const nickValidate = val => {
     isValidNick = true;
     document.querySelector('.button.dupl_nick').disabled = false;
   }
+  activeSignUpBtn();
 };
 
 const isIdDuple = dupl => {
   if (!dupl) {
-    document.querySelector('error-msg.duplid').classList.remove('hidden');
+    document.querySelector('.error-msg.duplId').classList.remove('hidden');
+    document.querySelector('.valid-msg.idDupVal').classList.add('hidden');
     isCheckId = false;
   } else {
-    document.querySelector('valid-msg.id').classList.remove('hidden');
-    document.querySelector('error-msg.duplId').classList.add('hidden');
+    document.querySelector('.valid-msg.idVal').classList.add('hidden');
+    document.querySelector('.valid-msg.idDupVal').classList.remove('hidden');
+    document.querySelector('.error-msg.duplId').classList.add('hidden');
     isCheckId = true;
   }
+  activeSignUpBtn();
 };
 
 const isnickDup = dupl => {
   if (!dupl) {
-    document.querySelector('error-msg.duplNick').classList.remove('hidden');
+    document.querySelector('.error-msg.duplNick').classList.remove('hidden');
+    document.querySelector('.valid-msg.nickDupVal').classList.add('hidden');
     isCheckNick = false;
   } else {
-    document.querySelector('valid-msg.nick').classList.remove('hidden');
-    document.querySelector('error-msgxd.duplNick').classList.add('hidden');
+    document.querySelector('.valid-msg.nickDupVal').classList.remove('hidden');
+    document.querySelector('.error-msg.duplNick').classList.add('hidden');
+    document.querySelector('.valid-msg.nick').classList.add('hidden');
     isCheckNick = true;
   }
+  activeSignUpBtn();
 };
-
-document.querySelector('body').addEventListener('change', () => {
-  // if (isValidId && isValidNick && isValidPwd && isCheckId && isCheckNick) {
-  if (isValidId && isValidNick && isValidPwd) {
-    const $signUpBtn = document.querySelector('.button.signup-button');
-    $signUpBtn.classList.remove('disabled');
-    $signUpBtn.disabled = false;
-  } else {
-    const $signUpBtn = document.querySelector('.button.signup-button');
-    $signUpBtn.classList.add('disabled');
-    $signUpBtn.disabled = true;
-  }
-});
 
 export default {
   idValidate,
