@@ -1,7 +1,7 @@
 import App from './js/app';
-// import createHeaderNode from './js/header';
+import createHeaderNode from './js/header';
 
-// const history = require('history-events');
+const history = require('history-events');
 
 const $root = document.getElementById('root');
 

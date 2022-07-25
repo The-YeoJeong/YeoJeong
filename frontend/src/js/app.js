@@ -10,7 +10,7 @@ import SignUp from './signUp';
 import NotFound from './notFound';
 
 const routes = [
-  // { path: '/', component: Main },
+  { path: '/', component: Main },
   // { path: '/callback', component: Main },
   // { path: '/search', component: Search },
   // { path: '/develog', component: Develog },
@@ -18,8 +18,8 @@ const routes = [
   // { path: '/write', component: Write },
   // { path: '/mypage', component: Mypage },
   // { path: '/mypageEdit', component: MypageEdit },
-  // { path: '/signin', component: SignIn },
-  { path: '/', component: SignUp },
+  { path: '/signin', component: SignIn },
+  { path: '/signup', component: SignUp },
 ];
 
 const router = () => {
