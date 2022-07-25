@@ -38,15 +38,17 @@ public class CommentService {
 
     public List<CommentFormDto> commentlist(int postNo) {
         Post post = postRepository.getReferenceById(postNo);
-        List<Comment> commentList = commentRepository.getByPost(post);
+        List<Comment> commentList = commentRepository.getByPostOrderByCreatedByAsc(post);
         List<CommentFormDto> commentFormDtos = new ArrayList<>();
 
         for (int i=0;i<commentList.size();i++){
-            commentFormDtos.get(i).setCommentNo(commentList.get(i).getCommentNo());
-            commentFormDtos.get(i).setMemberId(commentList.get(i).getMember().getMemberId());
-            commentFormDtos.get(i).setMemberNickName(commentList.get(i).getMember().getMemberNickname());
-            commentFormDtos.get(i).setCommentContent(commentList.get(i).getCommentContent());
-            commentFormDtos.get(i).setCreatedTime(commentList.get(i).getCreatedTime());
+            CommentFormDto commentFormDto = new CommentFormDto();
+            commentFormDto.setCommentNo(commentList.get(i).getCommentNo());
+            commentFormDto.setMemberId(commentList.get(i).getMember().getMemberId());
+            commentFormDto.setMemberNickName(commentList.get(i).getMember().getMemberNickname());
+            commentFormDto.setCommentContent(commentList.get(i).getCommentContent());
+            commentFormDto.setCreatedTime(commentList.get(i).getCreatedTime());
+            commentFormDtos.add(commentFormDto);
         }
 
         return commentFormDtos;
