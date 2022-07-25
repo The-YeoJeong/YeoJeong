@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -32,5 +34,23 @@ public class CommentService {
     public void commentEdit(int commentNo, CommentFormDto commentFormDto) {
         Comment comment = commentRepository.getReferenceById(commentNo);
         comment.updateComment(commentFormDto);
+    }
+
+    public List<CommentFormDto> commentlist(int postNo) {
+        Post post = postRepository.getReferenceById(postNo);
+        List<Comment> commentList = commentRepository.getByPostOrderByCreatedByAsc(post);
+        List<CommentFormDto> commentFormDtos = new ArrayList<>();
+
+        for (int i=0;i<commentList.size();i++){
+            CommentFormDto commentFormDto = new CommentFormDto();
+            commentFormDto.setCommentNo(commentList.get(i).getCommentNo());
+            commentFormDto.setMemberId(commentList.get(i).getMember().getMemberId());
+            commentFormDto.setMemberNickName(commentList.get(i).getMember().getMemberNickname());
+            commentFormDto.setCommentContent(commentList.get(i).getCommentContent());
+            commentFormDto.setCreatedTime(commentList.get(i).getCreatedTime());
+            commentFormDtos.add(commentFormDto);
+        }
+
+        return commentFormDtos;
     }
 }
