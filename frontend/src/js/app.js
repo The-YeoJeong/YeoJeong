@@ -18,7 +18,7 @@ const routes = [
   // { path: '/write', component: Write },
   // { path: '/mypage', component: Mypage },
   // { path: '/mypageEdit', component: MypageEdit },
-  // { path: '/signin', component: SignIn },
+  { path: '/signin', component: SignIn },
   { path: '/signup', component: SignUp },
 ];
 
