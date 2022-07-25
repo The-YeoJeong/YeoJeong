@@ -8,16 +8,56 @@ const signupNode = () => {
 
   //func
 
+  // const checkId = async () => {
+  //   const { result: isDuplicate } = await axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`);
+  //   validatation.isIdDuple(isDuplicate);
+  // };
+
+  // const checkNick = async () => {
+  //   const { result: isDuplicate } = await axios.get(
+  //     `/api/member/new/nickCheck/${document.querySelector('#nickname').value}`
+  //     );
+  //     validatation.isnickDup(isDuplicate);
+
+  // };
+
   const checkId = async () => {
-    const { status } = await axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`);
-    console.log(status);
+    try {
+      const { status } = await axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`);
+      if (status === 200) {
+        validatation.isIdDuple(true);
+      } else {
+        validatation.isIdDuple(false);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const checkNick = nick => {};
+  const checkNick = async () => {
+    try {
+      const { status } = await axios.get(`/api/member/new/nickCheck/${document.querySelector('#nickname').value}`);
+      if (status === 200) {
+        validatation.isnickDup(true);
+      } else {
+        validatation.isnickDup(false);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-  const signUp = e => {
+  const signUp = async e => {
     e.preventDefault();
     try {
+      const { status } = await axios.post('/api/member/new', {
+        memberId: document.querySelector('#id').value,
+        memberNickname: document.querySelector('#nickname').value,
+        memberPw: document.querySelector('#password').value,
+      });
+      if (status === 200) {
+        window.history.pushState(null, null, '/signin');
+      }
     } catch (e) {
       console.log(e);
     }
