@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Comment extends BaseEntity{
+public class Comment extends BaseUpdateEntity{
     @Id
     @Column(name = "comment_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
