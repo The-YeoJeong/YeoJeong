@@ -7,6 +7,7 @@
 ### 팀 소개
 - 팀명 : Traveler
 - 팀 노션 : [Team.Traveler](https://polyester-periodical-73e.notion.site/Team-Traveler-Private-26e6f052aa4f44cab8aa096d08a674c5)
+- 피그마 링크 : [Traveler Figma](https://www.figma.com/file/edqAV140p51NPrV0J0G5N2/%EC%97%AC%EC%A0%95?node-id=0%3A1)
 - 팀장: [송진영](https://github.com/vSsongv)
 - 팀원: [서지현](https://github.com/jh0222), [박진석](https://github.com/jinseok1018)
 

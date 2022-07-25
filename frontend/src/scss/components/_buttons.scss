@@ -13,3 +13,7 @@
 .button:hover {
   background: rgb(0, 187, 100);
 }
+
+.button:disabled {
+  background: lightgrey;
+}

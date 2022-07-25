@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 public class PostFormDto {
     private int postNo;
-    private int memberId;
+    private String memberId;
     private String memberNickName;
     private String postTitle;
     private Date createdTime;

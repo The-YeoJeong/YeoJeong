@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class PostScheduleCard extends BaseEntity{
+public class PostScheduleCard extends BaseUpdateEntity{
     @Id
     @Column(name = "post_schedulecard_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
