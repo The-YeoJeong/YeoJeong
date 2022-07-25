@@ -99,23 +99,24 @@ public class MemberController {
     // id 중복확인
     @GetMapping(value = "/new/idCheck/{memberId}")
     public ResponseEntity memberIdDuplicateCheck(@PathVariable("memberId") String memberId) {
+        Map<String, Boolean> body = new HashMap<>();
         if (memberService.memberIdDuplicateCheck(memberId) == null) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            body.put("result", true);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            body.put("result", false);
         }
+        return new ResponseEntity(body, HttpStatus.OK);
     }
 
     // nick 중복확인
     @GetMapping(value = "/new/nickCheck/{memberNickName}")
     public ResponseEntity memberNickNameDuplicateCheck(@PathVariable("memberNickName") String memberNickName) {
+        Map<String, Boolean> body = new HashMap<>();
         if (memberService.memberNickNameDuplicateCheck(memberNickName) == null) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            body.put("result", true);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            body.put("result", false);
         }
+        return new ResponseEntity(body, HttpStatus.OK);
     }
-
-
-
 }
