@@ -64,9 +64,10 @@ i {
   width: rem(300px);
   margin: auto;
   margin-top: rem(30px);
-  cursor: pointer;
 
   &__login {
+    cursor: pointer;
+    border: 0;
     border-radius: 100%;
     height: rem(60px);
     width: rem(60px);

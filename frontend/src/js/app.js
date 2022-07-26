@@ -6,7 +6,7 @@ import SignUp from './signUp';
 // import Develog from './develog';
 // import Search from './search';
 // import Detail from './detail';
-// import Write from './write';
+import Write from './write';
 import NotFound from './notFound';
 
 const routes = [
@@ -15,7 +15,7 @@ const routes = [
   // { path: '/search', component: Search },
   // { path: '/develog', component: Develog },
   // { path: '/detail', component: Detail },
-  // { path: '/write', component: Write },
+  { path: '/write', component: Write },
   // { path: '/mypage', component: Mypage },
   // { path: '/mypageEdit', component: MypageEdit },
   { path: '/signin', component: SignIn },
