@@ -1,0 +1,74 @@
+@use '../utils' as *;
+
+.header {
+  background: $main;
+  font-weight: 800;
+  height: rem(70px);
+  margin-bottom: rem(30px);
+  font-size: rem(50px);
+  box-shadow: 5px 5px 5px 2px lightgrey;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  .maininfo {
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+    &--white {
+      color: white;
+    }
+  }
+
+  .maininfo--black.first {
+    margin-left: rem(30px);
+  }
+
+  .users {
+    font-size: rem(20px);
+    cursor: pointer;
+    font-weight: 400;
+
+    &__logout {
+      margin-right: rem(30px);
+    }
+  }
+}
+
+.maininfo--black.middle,
+.sign-header--black.middle {
+  margin-left: rem(20px);
+}
+
+.sign-header {
+  background: $main;
+  font-weight: 800;
+  height: rem(70px);
+  width: rem(400px);
+  margin: auto;
+  margin-bottom: rem(30px);
+  font-size: rem(50px);
+  text-align: center;
+  box-shadow: 5px 5px 5px 2px lightgrey;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+
+  &--white {
+    color: white;
+  }
+}
+
+.write-button {
+  margin-left: rem(40px);
+  background-color: $babyblue;
+  border: 0px;
+  padding: rem(15px);
+  border-radius: rem(10px);
+  bottom: 1;
+  cursor: pointer;
+}
+
+.fas.fa-house {
+  font-size: xx-large;
+}
