@@ -16,8 +16,8 @@ spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://cluv-2.cdvey5izwfml.ap-northeast-2.rds.amazonaws.com:3306/traveler??useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
-    username: it1870
-    password: it1870
+    username: it1869
+    password: it1869
 
 logging:
   level:
@@ -42,3 +42,5 @@ oauth2:
     client_secret: fXcuXgPFjB
   kakao:
     client_id: d173137e871d96ad298bf43551057b2a
+
+uploadPath: C://Users//박진석//IdeaProjects//YeoJeong//backend//yeojeong//src//main//resources//file

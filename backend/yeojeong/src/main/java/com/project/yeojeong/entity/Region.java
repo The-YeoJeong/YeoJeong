@@ -14,7 +14,6 @@ import javax.persistence.*;
 public class Region {
     @Id
     @Column(name = "region_no", length = 2)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String regionNo;
     @Column(nullable = false, length = 4)
     private String regionName;
