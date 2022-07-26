@@ -5,15 +5,16 @@ const history = require('history-events');
 
 const $root = document.getElementById('root');
 
-// const render = async elem => {
-//   const headerNode = await createHeaderNode();
-//   $root.replaceChildren(...headerNode, ...elem);
-// };
-
 const render = async elem => {
-  $root.replaceChildren(...elem);
-};
+  const headerNode = await createHeaderNode();
 
+  const path = window.location.pathname.split('/');
+  if (path[1] === 'signin' || path[1] === 'signup') {
+    $root.replaceChildren(...elem);
+  } else {
+    $root.replaceChildren(...headerNode, ...elem);
+  }
+};
 render(App());
 
 // url 변경감지
