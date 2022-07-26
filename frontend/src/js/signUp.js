@@ -64,6 +64,11 @@ const signupNode = () => {
   };
 
   //Event
+
+  node.querySelector('.sign-header').addEventListener('click', () => {
+    window.history.pushState(null, null, '/');
+  });
+
   node.querySelector('.signup-wrapper').addEventListener('change', e => {
     if (e.target === document.querySelector('#id')) validatation.idValidate(e.target.value);
     if (e.target === document.querySelector('#password'))

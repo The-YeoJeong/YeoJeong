@@ -5,6 +5,10 @@ const signinNode = () => {
   const node = document.createElement('div');
   node.innerHTML = signin;
 
+  node.querySelector('.sign-header').addEventListener('click', () => {
+    window.history.pushState(null, null, '/');
+  });
+
   node.querySelector('.button.signup').addEventListener('click', () => {
     window.history.pushState(null, null, '/signup');
   });
