@@ -1,5 +1,6 @@
 package com.project.yeojeong.service;
 
+import com.project.yeojeong.dto.MainPostDto;
 import com.project.yeojeong.dto.PostFormDto;
 import com.project.yeojeong.entity.*;
 import com.project.yeojeong.repository.*;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -15,6 +18,7 @@ import java.security.Principal;
 public class PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
+    private final UploadFileRepository uploadFileRepository;
     private final PostDateCardRepository postDateCardRepository;
     private final PostScheduleCardRepository postScheduleCardRepository;
     private final PostRegionRepository postRegionRepository;
@@ -103,4 +107,29 @@ public class PostService {
 //        postFormDto.setPostTitle(post.getPostTitle());
 //        postFormDto.set
 //    }
+
+    public List<MainPostDto> postTopList() {
+
+        List<MainPostDto> mainPostDtoList = new ArrayList<>();
+        for (Post post : postRepository.findTopList()) {
+            MainPostDto mainPostDto = new MainPostDto();
+            mainPostDto.setPostNo(post.getPostNo());
+            mainPostDto.setPostTitle(post.getPostTitle());
+            mainPostDto.setCreatedTime(post.getCreatedTime());
+            mainPostDto.setMemberId(post.getMember().getMemberId());
+            mainPostDto.setMemberNickname(post.getMember().getMemberNickname());
+            mainPostDto.setPostHeartCnt(post.getPostHeartCnt());
+
+            String filePath = null;
+            if (uploadFileRepository.findByPostNo(post.getPostNo()).size() != 0) {
+                filePath = uploadFileRepository.findByPostNo(post.getPostNo()).get(0).getFilePath();
+            }
+
+            mainPostDto.setFilePath( filePath);
+
+            mainPostDtoList.add(mainPostDto);
+        }
+
+        return mainPostDtoList;
+    }
 }

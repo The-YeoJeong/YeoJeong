@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class CommentFormDto {
-    private int commentNo;
+public class MainPostDto {
     private int postNo;
     private String memberId;
     private String memberNickname;
-    private String commentContent;
+    private String postTitle;
     private LocalDateTime createdTime;
+    private int postHeartCnt;
+    private String filePath;
 }
