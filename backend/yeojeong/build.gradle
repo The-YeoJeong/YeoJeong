@@ -45,6 +45,8 @@ dependencies {
 	implementation group: 'com.google.code.gson', name: 'gson'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
 
+	// for file upload test
+	implementation group: 'org.thymeleaf', name: 'thymeleaf'
 
 }
 
