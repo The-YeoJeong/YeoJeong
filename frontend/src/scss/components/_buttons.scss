@@ -17,3 +17,10 @@
 .button:disabled {
   background: lightgrey;
 }
+
+button {
+  background: $main;
+  border: none;
+  border-radius: 8px;
+  padding: rem(5px) rem(10px);
+}
