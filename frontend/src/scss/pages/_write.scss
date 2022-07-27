@@ -1,0 +1,129 @@
+@use '../utils' as *;
+
+.plan-text {
+  font-size: large;
+}
+
+.plan-title {
+  border: 1px solid black;
+  padding: rem(20px) rem(20px);
+  margin: rem(20px) 0;
+}
+
+#post-title {
+  margin-left: rem(10px);
+  border: 0;
+  border-bottom: 1px solid black;
+}
+
+.plan-period-wrapper {
+  margin: rem(20px) 0;
+}
+
+.plan-period {
+  margin-right: rem(10px);
+}
+
+.map {
+  border: 1px solid black;
+}
+
+.plan-city {
+  margin-top: rem(10px);
+  display: grid;
+  grid-template-rows: 30px 30px;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px 100px;
+  button {
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 0;
+  }
+}
+
+summary {
+  cursor: pointer;
+}
+
+.date-card {
+  border: 1px solid black;
+  border-radius: rem(10px);
+  padding: rem(20px) rem(20px);
+  margin: rem(20px) 0;
+  position: relative;
+  &__title {
+    margin-bottom: rem(20px);
+    border-bottom: 1px solid black;
+  }
+
+  &__buttons {
+    width: 100%;
+    padding: 0 rem(20px);
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.schedule-card {
+  border: 1px solid black;
+  margin: rem(20px) rem(20px);
+  padding: rem(20px) rem(20px);
+  position: relative;
+
+  &__location {
+    display: block;
+    margin-bottom: rem(20px);
+
+    .location__name {
+      margin-right: rem(10px);
+    }
+
+    #location__name {
+      margin-right: rem(30px);
+      border: 0;
+      border-bottom: 1px solid black;
+    }
+
+    .location__addr {
+      margin-right: rem(10px);
+    }
+  }
+
+  .memo {
+    margin-right: rem(10px);
+    margin-left: rem(15px);
+    float: left;
+  }
+
+  #memo {
+    resize: vertical;
+    width: 80%;
+  }
+
+  &__button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: rem(10px);
+    margin-right: rem(10px);
+  }
+}
+
+.add-date-card-button {
+  width: 100%;
+  height: rem(80px);
+  background: transparent;
+  border: 1px solid black;
+}
+
+.fa-plus {
+  font-size: 30px;
+  color: lightgray;
+  position: absolute;
+}
+
+.fa-xmark {
+  position: absolute;
+  right: 0;
+  margin-right: rem(20px);
+  cursor: pointer;
+}
