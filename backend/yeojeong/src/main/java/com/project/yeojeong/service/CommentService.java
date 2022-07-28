@@ -45,7 +45,7 @@ public class CommentService {
             CommentFormDto commentFormDto = new CommentFormDto();
             commentFormDto.setCommentNo(commentList.get(i).getCommentNo());
             commentFormDto.setMemberId(commentList.get(i).getMember().getMemberId());
-            commentFormDto.setMemberNickName(commentList.get(i).getMember().getMemberNickname());
+            commentFormDto.setMemberNickname(commentList.get(i).getMember().getMemberNickname());
             commentFormDto.setCommentContent(commentList.get(i).getCommentContent());
             commentFormDto.setCreatedTime(commentList.get(i).getCreatedTime());
             commentFormDtos.add(commentFormDto);

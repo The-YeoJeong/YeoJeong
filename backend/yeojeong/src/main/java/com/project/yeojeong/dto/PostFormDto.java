@@ -12,12 +12,13 @@ import java.util.List;
 public class PostFormDto {
     private int postNo;
     private String memberId;
-    private String memberNickName;
+    private String memberNickname;
     private String postTitle;
     private Date createdTime;
     private Date postStartDate;
     private Date postEndDate;
     private String postContent;
+    private int postHeartCnt;
     private boolean postOnlyMe;
     public boolean getPostOnlyMe() {
         return postOnlyMe;

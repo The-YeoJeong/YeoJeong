@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostRegionRepository extends JpaRepository<PostRegion, Integer> {
     Integer deleteAllByPost(Post post);
+
+
 }
