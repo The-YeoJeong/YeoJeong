@@ -44,6 +44,9 @@ public class Post extends BaseUpdateEntity{
     @Column(nullable = false)
     private boolean postOnlyme;
 
+    @Column(name = "date_diff")
+    private Integer dateDiff;
+
     public static Post createPost(PostFormDto postFormDto, Member member) {
         Post post = new Post();
         post.setMember(member);
@@ -52,6 +55,7 @@ public class Post extends BaseUpdateEntity{
         post.setPostEnddate(postFormDto.getPostEndDate());
         post.setPostContent(postFormDto.getPostContent());
         post.setPostOnlyme(postFormDto.getPostOnlyMe());
+        post.setDateDiff((int)(postFormDto.getPostEndDate().getTime() - postFormDto.getPostStartDate().getTime()) / 1000 / (24*60*60));
         return post;
     }
 
