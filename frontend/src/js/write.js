@@ -5,6 +5,22 @@ const writeNode = () => {
   node.innerHTML = write;
   // Event
 
+  $(function () {
+    $('#summernote').summernote({
+      toolbar: [
+        ['font', ['underline', 'clear']],
+        ['fontname', ['fontname']],
+        ['color', ['color']],
+        ['para', ['paragraph']],
+        ['height', ['height']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'hr']],
+        ['view', ['codeview']],
+        ['help', ['help']],
+      ],
+    });
+  });
+
   const $cardContainer = node.querySelector('.card-container');
 
   node.querySelector('.add-date-card-button').addEventListener('click', () => {
