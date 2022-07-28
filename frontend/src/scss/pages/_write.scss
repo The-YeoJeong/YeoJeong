@@ -48,7 +48,7 @@ summary {
   border: 1px solid black;
   border-radius: rem(10px);
   padding: rem(20px) rem(20px);
-  margin: rem(20px) 0;
+  margin: rem(20px) 0 0 0;
   position: relative;
   &__title {
     margin-bottom: rem(20px);
@@ -62,6 +62,10 @@ summary {
     display: flex;
     justify-content: space-between;
   }
+}
+
+.add-schedule-button {
+  padding: rem(10px) rem(30px) !important;
 }
 
 .schedule-card {
@@ -112,6 +116,7 @@ summary {
 .add-date-card-button {
   width: 100%;
   height: rem(80px);
+  margin-top: rem(20px);
   background: transparent;
   border: 1px solid black;
 }
