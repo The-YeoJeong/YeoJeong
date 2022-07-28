@@ -1,5 +1,55 @@
-<section class="top3-container">
-  <span>인기많은 게시글</span>
-  <div>좋아효</div>
-  <button class="testBtn">test</button>
+<section class="container">
+  <article class="top3-container">
+    <h2>오늘의 추천 TOP3</h2>
+  </article>
+  <div class="plan-city">
+    <button>서울</button>
+    <button>인천</button>
+    <button>대전</button>
+    <button>대구</button>
+    <button>광주</button>
+    <button>부산</button>
+    <button>울산</button>
+    <button>세종</button>
+    <button>경기</button>
+    <button>강원</button>
+    <button>충북</button>
+    <button>충남</button>
+    <button>경북</button>
+    <button>경남</button>
+    <button>전북</button>
+    <button>전남</button>
+    <button>제주</button>
+    <button>전국</button>
+  </div>
+  <div class="period-buttons">
+    <button class="period-button oneday">당일치기</button>
+    <button class="period-button ontd">1박2일</button>
+    <button class="period-button tnthd">2박3일</button>
+    <button class="period-button middle">중장기<span>3박~2주</span></button>
+    <button class="period-button long">장기<span>2주 이상</span></button>
+  </div>
+  <div class="travleSet-container">
+    <label class="city-name" for="city-name"></label>
+    <input id="city-name" type="text" value="전국" disabled />
+    <span>(으)로</span>
+    <label class="travel-period" for="travel-period"></label>
+    <input id="travel-period" type="text" value="여행" disabled />
+    <button class="GO-button">GO!</button>
+  </div>
+  <div class="option">
+    <label class="withreview"><input type="checkbox" name="only-me" value="postOnlyMe" />후기 포함 글만 보기</label>
+    <select name="sort">
+      <option value="최신순">최신순</option>
+      <option value="인기순">인기순</option>
+    </select>
+  </div>
+
+  <article class="post-container"></article>
+
+  <form class="search--form" action="">
+    <input id="search" class="search" type="text" placeholder="제목 + 내용으로 검색됩니다." />
+    <label for="search"><i class="fas fa-search"></i></label>
+    <button class="search-button">검색</button>
+  </form>
 </section>

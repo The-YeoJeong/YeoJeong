@@ -6,7 +6,6 @@ const mainNode = () => {
   if (window.location.pathname !== '/') window.history.pushState(null, null, '/');
 
   // Event
-  node.querySelector('.testBtn').addEventListener('click', () => console.log('click'));
 
   return node.children;
 };
