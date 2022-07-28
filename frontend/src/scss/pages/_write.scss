@@ -31,7 +31,7 @@
 .plan-city {
   margin-top: rem(10px);
   display: grid;
-  grid-template-rows: 30px 30px;
+  grid-template-rows: rem(30px) rem(30px);
   grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px 100px;
   button {
     background-color: transparent;
@@ -48,7 +48,7 @@ summary {
   border: 1px solid black;
   border-radius: rem(10px);
   padding: rem(20px) rem(20px);
-  margin: rem(20px) 0;
+  margin: rem(20px) 0 0 0;
   position: relative;
   &__title {
     margin-bottom: rem(20px);
@@ -58,14 +58,19 @@ summary {
   &__buttons {
     width: 100%;
     padding: 0 rem(20px);
+    margin-top: rem(20px);
     display: flex;
     justify-content: space-between;
   }
 }
 
+.add-schedule-button {
+  padding: rem(10px) rem(30px) !important;
+}
+
 .schedule-card {
   border: 1px solid black;
-  margin: rem(20px) rem(20px);
+  margin: rem(20px) rem(20px) 0;
   padding: rem(20px) rem(20px);
   position: relative;
 
@@ -111,6 +116,7 @@ summary {
 .add-date-card-button {
   width: 100%;
   height: rem(80px);
+  margin-top: rem(20px);
   background: transparent;
   border: 1px solid black;
 }
@@ -126,4 +132,20 @@ summary {
   right: 0;
   margin-right: rem(20px);
   cursor: pointer;
+  padding: rem(5);
+}
+
+.review-button {
+  margin: rem(20px) 0;
+}
+
+.post-below {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: rem(20px);
+}
+
+.post-button {
+  margin-left: rem(20px);
 }
