@@ -73,4 +73,10 @@ public class PostSpecification {
             return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get("dateDiff"), 14);
         }
     }
+
+    // 게시글 나만보기, 전체공개 여부
+    public static Specification<Post> fullDisclosure() {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("postOnlyme"), false);
+    }
+
 }

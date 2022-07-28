@@ -164,6 +164,11 @@ public class PostService {
         if (conditionDto.getSearchContent() != null) {
             spec = spec.and(PostSpecification.searchTitleAndContent(conditionDto.getSearchContent()));
         }
+        // 전체 공개 게시글만 노출
+        if (conditionDto.getSearchContent() != null) {
+            spec = spec.and(PostSpecification.fullDisclosure());
+        }
+
 
         List<MainPostDto> mainPostDtoList = new ArrayList<>();
 //        for (Post post : postRepository.findAll(spec , Sort.by(Sort.Direction.DESC,"postHeartCnt"))) {
