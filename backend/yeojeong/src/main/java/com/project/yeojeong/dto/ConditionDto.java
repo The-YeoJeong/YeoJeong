@@ -16,6 +16,4 @@ public class ConditionDto {
     private boolean order;
 
     private String searchContent;
-    private String pageNum;
-
 }

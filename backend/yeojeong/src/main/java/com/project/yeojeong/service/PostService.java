@@ -7,6 +7,7 @@ import com.project.yeojeong.entity.*;
 import com.project.yeojeong.repository.*;
 import com.project.yeojeong.specification.PostSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -141,7 +142,7 @@ public class PostService {
         return mainPostDtoList;
     }
 
-    public List<MainPostDto> postList(ConditionDto conditionDto) {
+    public List<MainPostDto> postList(ConditionDto conditionDto, Pageable pageable) {
         Specification<Post> spec = (root, query, criteriaBuilder) -> null;
         if (conditionDto.getRegionName() != null)
             spec = spec.and(PostSpecification.findRegionName(conditionDto.getRegionName()));
@@ -156,14 +157,17 @@ public class PostService {
         } else {
             spec = spec.and(PostSpecification.orderDate());
         }
+        // 제목 필드와 후기(내용) 컬럼, 두개를 검색해야하기 때문에 spec에 두개를 and, or 조건으로 걸수 없음
+        // and title, and content로 걸시, 두 컬럼에 동시에 포함되는 row return
+        // or title, or content로 조건 설정시, 다른 조건 + 제목, 내용 검색으로 제목, 내용에 검색되는 row가 다른조건에 부합하지 않더라도 return됨
+        // 하나의 and조건으로 걸고 searchTitleAndContent 내부에서 or 조건으로 return
         if (conditionDto.getSearchContent() != null) {
-            spec = spec.and(PostSpecification.searchTitle(conditionDto.getSearchContent()));
-            spec = spec.or(PostSpecification.searchContent(conditionDto.getSearchContent()));
+            spec = spec.and(PostSpecification.searchTitleAndContent(conditionDto.getSearchContent()));
         }
 
         List<MainPostDto> mainPostDtoList = new ArrayList<>();
 //        for (Post post : postRepository.findAll(spec , Sort.by(Sort.Direction.DESC,"postHeartCnt"))) {
-        for (Post post : postRepository.findAll(spec)) {
+        for (Post post : postRepository.findAll(spec, pageable)) {
             MainPostDto mainPostDto = new MainPostDto();
             mainPostDto.setPostNo(post.getPostNo());
             mainPostDto.setPostTitle(post.getPostTitle());
@@ -178,7 +182,6 @@ public class PostService {
             }
 
             mainPostDto.setFilePath(filePath);
-
             mainPostDtoList.add(mainPostDto);
         }
 

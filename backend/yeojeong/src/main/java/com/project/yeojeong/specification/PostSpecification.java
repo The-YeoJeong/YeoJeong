@@ -9,7 +9,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Date;
 
 @Component
 public class PostSpecification {
@@ -53,12 +52,10 @@ public class PostSpecification {
     }
 
     // 제목 + 내용 검색
-    public static Specification<Post> searchContent(String content) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("postContent"), "%" + content + "%");
-    }
-
-    public static Specification<Post> searchTitle(String content) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get("postTitle"), "%" + content + "%");
+    public static Specification<Post> searchTitleAndContent(String content) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.or(
+                criteriaBuilder.like(root.get("postTitle"), "%" + content + "%"),
+                criteriaBuilder.like(root.get("postContent"), "%" + content + "%"));
     }
 
     // 기간 검색
