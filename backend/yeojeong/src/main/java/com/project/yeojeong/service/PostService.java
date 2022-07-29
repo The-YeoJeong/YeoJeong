@@ -1,17 +1,9 @@
 package com.project.yeojeong.service;
 
 import com.project.yeojeong.dto.ConditionDto;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.project.yeojeong.dto.PostDto;
-=======
-import com.project.yeojeong.dto.MainPostDto;
-import com.project.yeojeong.dto.PostDateCardDto;
->>>>>>> 4ecbffc39a35755e2b0a42232d2283904b568516
-=======
 import com.project.yeojeong.dto.PostDto;
 import com.project.yeojeong.dto.PostDateCardDto;
->>>>>>> 0348a4c44c3fe343cf439a92057c0c50e0a70fd0
+
 import com.project.yeojeong.dto.PostFormDto;
 import com.project.yeojeong.dto.PostScheduleCardDto;
 import com.project.yeojeong.entity.*;
@@ -25,17 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import java.util.Map;
-=======
 
->>>>>>> 4ecbffc39a35755e2b0a42232d2283904b568516
-=======
 import java.util.Map;
 
->>>>>>> 0348a4c44c3fe343cf439a92057c0c50e0a70fd0
 
 @Service
 @Transactional
