@@ -6,7 +6,6 @@ const createHeaderNode = async () => {
   node.innerHTML = header;
 
   node.querySelector('.header').addEventListener('click', e => {
-    console.log('ppp', e.target);
     if (e.target.classList.contains('maininfo')) {
       window.history.pushState(null, null, '/');
     } else if (e.target.classList.contains('write-button')) {
