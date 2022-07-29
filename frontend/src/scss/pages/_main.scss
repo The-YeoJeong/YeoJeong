@@ -1,3 +1,5 @@
+@use '../utils' as *;
+
 .top3-container {
   width: 100%;
   height: rem(300px);
@@ -11,17 +13,95 @@
   border: 1px solid black;
 }
 
+.plan-city {
+  display: flex;
+  justify-content: center;
+}
+
 .option {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: rem(20px);
 
   .withreview {
-    margin-left: rem(20px);
+    margin-right: rem(20px);
+  }
+  select {
+    width: rem(200px);
   }
 }
 
-.period-button {
-  border-radius: rem(2px) !important;
-  padding: rem(20px);
+.period-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  button {
+    margin: rem(40px) rem(30px);
+    border-radius: rem(10px);
+    padding: rem(10px) rem(40px) !important;
+    font-size: x-large;
+
+    span {
+      display: block;
+      font-size: medium;
+    }
+  }
+
+  .period-button {
+    &__oneday {
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), #5eeac8;
+    }
+    &__ontd {
+      background: #5eeac8;
+    }
+    &__tbthd {
+      background: #5eeab8;
+    }
+    &__middle {
+      background: #4eef97;
+    }
+    &__long {
+      background: #13de70;
+    }
+  }
+}
+
+.travleSet-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: rem(20px);
+  input {
+    width: rem(130px);
+    height: rem(50px);
+    font-size: large;
+    text-align: center;
+  }
+
+  span {
+    margin: rem(20px);
+    font-size: large;
+  }
+
+  button {
+    font-size: large;
+    padding: rem(15px) rem(40px);
+    margin-left: rem(40px);
+    background: $babyblue;
+  }
+}
+
+.search--form {
+  margin-top: rem(20px);
+
+  input {
+    position: relative;
+  }
+  i {
+    position: absolute;
+    margin-right: rem(20px);
+  }
+}
+
+.searchs {
   background: red;
 }

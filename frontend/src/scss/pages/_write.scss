@@ -31,12 +31,13 @@
 .plan-city {
   margin-top: rem(10px);
   display: grid;
-  grid-template-rows: rem(30px) rem(30px);
-  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: rem(40px) rem(40px);
+  grid-template-columns: 120px 120px 120px 120px 120px 120px 120px 120px 120px;
   button {
     background-color: transparent;
     border: 1px solid grey;
     border-radius: 0;
+    font-size: medium !important;
   }
 }
 
