@@ -2,24 +2,22 @@ package com.project.yeojeong.service;
 
 import com.project.yeojeong.dto.ConditionDto;
 import com.project.yeojeong.dto.MainPostDto;
+import com.project.yeojeong.dto.PostDateCardDto;
 import com.project.yeojeong.dto.PostFormDto;
+import com.project.yeojeong.dto.PostScheduleCardDto;
 import com.project.yeojeong.entity.*;
 import com.project.yeojeong.repository.*;
 import com.project.yeojeong.specification.PostSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.locks.Condition;
-import java.util.stream.Collectors;
+
 
 @Service
 @Transactional
@@ -32,6 +30,7 @@ public class PostService {
     private final PostScheduleCardRepository postScheduleCardRepository;
     private final PostRegionRepository postRegionRepository;
     private final RegionRepository regionRepository;
+    private final HeartRepository heartRepository;
 
     //글 작성
     public int postnew(PostFormDto postFormDto, Principal principal) {
@@ -109,14 +108,72 @@ public class PostService {
         return postNoResult;
     }
 
-//    public PostFormDto postdetail(int postNo) {
-//        PostFormDto postFormDto = new PostFormDto();
-//        Post post = postRepository.getReferenceById(postNo);
-//        postFormDto.setPostNo(postNo);
-//        postFormDto.setMemberNickName(post.getMember().getMemberNickname());
-//        postFormDto.setPostTitle(post.getPostTitle());
-//        postFormDto.set
-//    }
+    public PostFormDto postDetail(int postNo, Principal principal) {
+        Post post = postRepository.getReferenceById(postNo);
+        List<PostRegion> postRegion = postRegionRepository.getAllByPost(post);
+        List<PostDateCard> postDateCard = postDateCardRepository.getAllByPost(post);
+        List<String> regionName = new ArrayList<>();
+
+        PostFormDto postFormDto = new PostFormDto();
+        postFormDto.setPostNo(postNo);
+        postFormDto.setPostTitle(post.getPostTitle());
+        postFormDto.setMemberId(post.getMember().getMemberId());
+        postFormDto.setMemberNickname(post.getMember().getMemberNickname());
+        postFormDto.setCreatedTime(post.getCreatedTime());
+        postFormDto.setHeartCnt(post.getPostHeartCnt());
+        postFormDto.setPostStartDate(post.getPostStartdate());
+        postFormDto.setPostEndDate(post.getPostEnddate());
+        postFormDto.setPostOnlyMe(post.isPostOnlyme());
+        postFormDto.setPostContent(post.getPostContent());
+
+        //해당 글 지역 가져오기
+        for (int i=0;i<postRegion.size();i++) {
+            regionName.add(postRegion.get(i).getRegion().getRegionName());
+        }
+        postFormDto.setPostRegionName(regionName);
+
+        //해당 글 일자 카드 가져오기
+        List<PostDateCardDto> postDateCardDtoList = new ArrayList<>();
+        for (int i=0;i<postDateCard.size();i++){
+            PostDateCardDto postDateCardDto = new PostDateCardDto();
+            postDateCardDto.setPostDatecardNo(postDateCard.get(i).getPostDatecardNo());
+            postDateCardDto.setPostDateCardTitle(postDateCard.get(i).getPostDatecardTitle());
+
+            //해당 일정 카드 가져오기
+            List<PostScheduleCard> postScheduleCard = postScheduleCardRepository.getAllByPostDatecard(postDateCard.get(i));
+            List<PostScheduleCardDto> postScheduleCardDtoList = new ArrayList<>();
+            for (int j=0;j<postScheduleCard.size();j++){
+                PostScheduleCardDto postScheduleCardDto = new PostScheduleCardDto();
+                postScheduleCardDto.setPostSchedulecardNo(postScheduleCard.get(i).getPostSchedulecardNo());
+                postScheduleCardDto.setPlaceName(postScheduleCard.get(i).getPostSchedulecardPlaceName());
+                postScheduleCardDto.setPlaceAddress(postScheduleCard.get(i).getPostSchedulecardPlaceAddress());
+                postScheduleCardDto.setPlaceContent(postScheduleCard.get(i).getPostSchedulecardContent());
+                postScheduleCardDtoList.add(postScheduleCardDto);
+            }
+
+            postDateCardDto.setPostScheduleCard(postScheduleCardDtoList);
+            postDateCardDtoList.add(postDateCardDto);
+        }
+        postFormDto.setPostDateCard(postDateCardDtoList);
+
+        //하트 확인
+        //로그인 됐을 때
+        if (principal==null) {
+            postFormDto.setLiked(false);
+        }
+        //로그인 안 했을 때
+        else {
+            Member member = memberRepository.getByMemberId(principal.getName());
+            Heart heart = heartRepository.getByPostAndMember(post,member);
+            if (heart!=null) {
+                postFormDto.setLiked(true);
+            } else {
+                postFormDto.setLiked(false);
+            }
+        }
+
+        return postFormDto;
+    }
 
     public List<MainPostDto> postTopList() {
         List<MainPostDto> mainPostDtoList = new ArrayList<>();

@@ -29,6 +29,7 @@ public class HeartService {
         } else {
             Heart heart = Heart.createHeart(post, member);
             heartRepository.save(heart);
+            post.setPostHeartCnt(post.getPostHeartCnt()+1);
             result="성공";
         }
         return result;
@@ -39,5 +40,6 @@ public class HeartService {
         Member member = memberRepository.getByMemberId(principal.getName());
         Heart heart = heartRepository.getByPostAndMember(post, member);
         heartRepository.deleteById(heart.getHeartNo());
+        post.setPostHeartCnt(post.getPostHeartCnt()-1);
     }
 }
