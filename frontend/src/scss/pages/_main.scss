@@ -1,10 +1,49 @@
 @use '../utils' as *;
 
+h2 {
+  margin-left: rem(80px);
+}
+
 .top3-container {
   width: 100%;
-  height: rem(300px);
-  background-color: yellowgreen;
+  margin-bottom: rem(30px);
+  height: rem(350px);
   border-bottom: 1px solid black;
+  justify-content: space-evenly;
+  flex-direction: row;
+  display: flex;
+
+  .top-post {
+    margin: rem(30px) 0;
+    border: 2px solid black;
+    border-radius: rem(5px);
+    padding: rem(20px);
+    width: rem(250px);
+    cursor: pointer;
+
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__title {
+      font-size: x-large;
+    }
+
+    &__user {
+      display: block;
+      margin-top: rem(20px);
+    }
+
+    i {
+      font-size: x-large;
+      color: orangered;
+    }
+    &__likenum {
+      font-size: x-large;
+      margin-left: rem(10px);
+    }
+  }
 }
 
 .post-container {

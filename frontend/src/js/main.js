@@ -8,7 +8,7 @@ const mainNode = () => {
   if (window.location.pathname !== '/') window.history.pushState(null, null, '/');
 
   // Event
-  postFunc.top3posts(node.querySelector('top3-container'));
+  postFunc.top3posts(node.querySelector('.top3-container'));
 
   return node.children;
 };
