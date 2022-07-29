@@ -1,7 +1,7 @@
 package com.project.yeojeong.service;
 
 import com.project.yeojeong.dto.ConditionDto;
-import com.project.yeojeong.dto.MainPostDto;
+import com.project.yeojeong.dto.PostDto;
 import com.project.yeojeong.dto.PostDateCardDto;
 import com.project.yeojeong.dto.PostFormDto;
 import com.project.yeojeong.dto.PostScheduleCardDto;
@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -175,41 +176,37 @@ public class PostService {
         return postFormDto;
     }
 
-    public List<MainPostDto> postTopList() {
-        List<MainPostDto> mainPostDtoList = new ArrayList<>();
+    // 메인 TOP3
+    public List<PostDto> postTopList() {
+        List<PostDto> PostDtoList = new ArrayList<>();
         for (Post post : postRepository.findTopList()) {
-            MainPostDto mainPostDto = new MainPostDto();
-            mainPostDto.setPostNo(post.getPostNo());
-            mainPostDto.setPostTitle(post.getPostTitle());
-            mainPostDto.setCreatedTime(post.getCreatedTime());
-            mainPostDto.setMemberId(post.getMember().getMemberId());
-            mainPostDto.setMemberNickname(post.getMember().getMemberNickname());
-            mainPostDto.setPostHeartCnt(post.getPostHeartCnt());
-
             String filePath = null;
             if (uploadFileRepository.findByPostNo(post.getPostNo()).size() != 0) {
                 filePath = uploadFileRepository.findByPostNo(post.getPostNo()).get(0).getFilePath();
             }
 
-            mainPostDto.setFilePath(filePath);
-
-            mainPostDtoList.add(mainPostDto);
+            PostDto PostDto = Post.createPostDto(post, filePath);
+            PostDtoList.add(PostDto);
         }
 
-        return mainPostDtoList;
+        return PostDtoList;
     }
 
-    public List<MainPostDto> postList(ConditionDto conditionDto, Pageable pageable) {
+    // 메인페이지
+    public Map<String, Object> postList(ConditionDto conditionDto, Pageable pageable) {
         Specification<Post> spec = (root, query, criteriaBuilder) -> null;
+        // 전체 공개 게시글만 노출
+        spec = spec.and(PostSpecification.fullDisclosure());
         if (conditionDto.getRegionName() != null)
             spec = spec.and(PostSpecification.findRegionName(conditionDto.getRegionName()));
+        //후기가 포함된 글만 노출
         if (conditionDto.isPostContent())
-            spec = spec.and(PostSpecification.onlyPostContent());
+            spec = spec.and(PostSpecification.onlyContent());
         // conditionDto.getPeriod()에 값이 없을경우 int 형이라 default 0으로 잡혀 조건에 걸림 -> Integer 형으로 변환
         if (conditionDto.getPeriod() != null && conditionDto.getPeriod() >= 0 && conditionDto.getPeriod() < 5)
             spec = spec.and(PostSpecification.period(conditionDto.getPeriod()));
         // if - else if문으로 true / false 처리하는 것보다 if - else 문으로 null 값일 경우에 else 조건문에 걸리도록
-        if (conditionDto.isOrder() ) {
+        if (conditionDto.isOrder()) {
             spec = spec.and(PostSpecification.orderHeart());
         } else {
             spec = spec.and(PostSpecification.orderDate());
@@ -222,26 +219,65 @@ public class PostService {
             spec = spec.and(PostSpecification.searchTitleAndContent(conditionDto.getSearchContent()));
         }
 
-        List<MainPostDto> mainPostDtoList = new ArrayList<>();
-//        for (Post post : postRepository.findAll(spec , Sort.by(Sort.Direction.DESC,"postHeartCnt"))) {
+        List<PostDto> PostDtoList = new ArrayList<>();
         for (Post post : postRepository.findAll(spec, pageable)) {
-            MainPostDto mainPostDto = new MainPostDto();
-            mainPostDto.setPostNo(post.getPostNo());
-            mainPostDto.setPostTitle(post.getPostTitle());
-            mainPostDto.setCreatedTime(post.getCreatedTime());
-            mainPostDto.setMemberId(post.getMember().getMemberId());
-            mainPostDto.setMemberNickname(post.getMember().getMemberNickname());
-            mainPostDto.setPostHeartCnt(post.getPostHeartCnt());
-
             String filePath = null;
             if (uploadFileRepository.findByPostNo(post.getPostNo()).size() != 0) {
                 filePath = uploadFileRepository.findByPostNo(post.getPostNo()).get(0).getFilePath();
             }
 
-            mainPostDto.setFilePath(filePath);
-            mainPostDtoList.add(mainPostDto);
+            PostDto PostDto = Post.createPostDto(post, filePath);
+            PostDtoList.add(PostDto);
         }
 
-        return mainPostDtoList;
+        Map<String, Object> map = new HashMap<>();
+        map.put("postList", PostDtoList);
+        map.put("postCnt", postRepository.findAll(spec, pageable).getTotalElements());
+
+        return map;
+    }
+
+    // 마이페이지
+    public Map<String, Object> myPostList(int section, String searchContent, boolean onlyPlan, Pageable pageable, Principal principal) {
+        Specification<Post> spec = (root, query, criteriaBuilder) -> null;
+        switch (section) {
+            case 0:
+                // 내 게시글
+                spec = spec.and(PostSpecification.myPost(principal.getName()));
+                if (searchContent != null)
+                    // 검색
+                    spec = spec.and(PostSpecification.searchTitleAndContent(searchContent));
+                if (onlyPlan)
+                    // 계획만 보기(false나 null은 전체보기)
+                    spec = spec.and(PostSpecification.onlyPlan());
+                break;
+            case 1:
+                // 좋아요 누른 게시글
+                spec = spec.and(PostSpecification.heartedPost(principal.getName()));
+                break;
+            case 2:
+                // 댓글 단 게시글
+                spec = spec.and(PostSpecification.commentedPost(principal.getName()));
+                break;
+        }
+        // 최근날짜 정렬
+        spec = spec.and(PostSpecification.orderDate());
+
+        List<PostDto> PostDtoList = new ArrayList<>();
+        for (Post post : postRepository.findAll(spec, pageable)) {
+            String filePath = null;
+            if (uploadFileRepository.findByPostNo(post.getPostNo()).size() != 0) {
+                filePath = uploadFileRepository.findByPostNo(post.getPostNo()).get(0).getFilePath();
+            }
+
+            PostDto PostDto = Post.createPostDto(post, filePath);
+            PostDtoList.add(PostDto);
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("postList", PostDtoList);
+        map.put("postCnt", postRepository.findAll(spec, pageable).getTotalElements());
+
+        return map;
     }
 }

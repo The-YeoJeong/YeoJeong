@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class MainPostDto {
+public class PostDto {
     private int postNo;
     private String memberId;
     private String memberNickname;

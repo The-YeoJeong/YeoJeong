@@ -1,5 +1,6 @@
 package com.project.yeojeong.entity;
 
+import com.project.yeojeong.dto.PostDto;
 import com.project.yeojeong.dto.PostFormDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -65,5 +66,19 @@ public class Post extends BaseUpdateEntity{
         this.postEnddate = postDto.getPostEndDate();
         this.postContent = postDto.getPostContent();
         this.postOnlyme = postDto.isPostOnlyMe();
+    }
+
+    public static PostDto createPostDto(Post post, String filePath) {
+        PostDto PostDto = new PostDto();
+
+        PostDto.setPostNo(post.getPostNo());
+        PostDto.setPostTitle(post.getPostTitle());
+        PostDto.setCreatedTime(post.getCreatedTime());
+        PostDto.setMemberId(post.getMember().getMemberId());
+        PostDto.setMemberNickname(post.getMember().getMemberNickname());
+        PostDto.setPostHeartCnt(post.getPostHeartCnt());
+        PostDto.setFilePath(filePath);
+
+        return PostDto;
     }
 }
