@@ -71,10 +71,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/member/login").permitAll()
-//                .antMatchers("/**").permitAll()
-                .antMatchers("/member/new").permitAll()
                 .antMatchers("/member/new/**").permitAll()
                 .antMatchers("/oauth2/**").permitAll()
+                .antMatchers("/main/post/**").permitAll()
+                .antMatchers("/post/detail/**").permitAll()
+                .antMatchers("/comment/new").hasRole("USER")
+                .antMatchers("/comment/**").permitAll()
 
                 .anyRequest().authenticated()
 

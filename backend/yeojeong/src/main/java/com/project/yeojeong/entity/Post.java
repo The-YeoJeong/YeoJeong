@@ -1,5 +1,6 @@
 package com.project.yeojeong.entity;
 
+import com.project.yeojeong.dto.PostDto;
 import com.project.yeojeong.dto.PostFormDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,7 +55,7 @@ public class Post extends BaseUpdateEntity{
         post.setPostStartdate(postFormDto.getPostStartDate());
         post.setPostEnddate(postFormDto.getPostEndDate());
         post.setPostContent(postFormDto.getPostContent());
-        post.setPostOnlyme(postFormDto.getPostOnlyMe());
+        post.setPostOnlyme(postFormDto.isPostOnlyMe());
         post.setDateDiff((int)(postFormDto.getPostEndDate().getTime() - postFormDto.getPostStartDate().getTime()) / 1000 / (24*60*60));
         return post;
     }
@@ -64,6 +65,20 @@ public class Post extends BaseUpdateEntity{
         this.postStartdate = postDto.getPostStartDate();
         this.postEnddate = postDto.getPostEndDate();
         this.postContent = postDto.getPostContent();
-        this.postOnlyme = postDto.getPostOnlyMe();
+        this.postOnlyme = postDto.isPostOnlyMe();
+    }
+
+    public static PostDto createPostDto(Post post, String filePath) {
+        PostDto PostDto = new PostDto();
+
+        PostDto.setPostNo(post.getPostNo());
+        PostDto.setPostTitle(post.getPostTitle());
+        PostDto.setCreatedTime(post.getCreatedTime());
+        PostDto.setMemberId(post.getMember().getMemberId());
+        PostDto.setMemberNickname(post.getMember().getMemberNickname());
+        PostDto.setPostHeartCnt(post.getPostHeartCnt());
+        PostDto.setFilePath(filePath);
+
+        return PostDto;
     }
 }
