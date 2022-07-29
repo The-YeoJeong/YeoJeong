@@ -21,11 +21,12 @@ public class PostController {
     private final PostRepository postRepository;
 
     //글 디테일
-//    @GetMapping(value = "")
-//    public @ResponseBody ResponseEntity postdetail(@Valid @PathVariable("postNo") int postNo) {
-//        PostFormDto postFormDto = postService.postdetail(postNo);
-//        return new ResponseEntity<>(postFormDto,HttpStatus.OK);
-//    }
+    @GetMapping(value = "/detail/{postNo}")
+    public @ResponseBody ResponseEntity postDetail(@Valid @PathVariable("postNo") int postNo, Principal principal) {
+        PostFormDto postFormDto = postService.postDetail(postNo,principal);
+        return new ResponseEntity<>(postFormDto,HttpStatus.OK);
+    }
+
     //글 작성
     @PostMapping(value = "/new")
     public @ResponseBody ResponseEntity postNew(@Valid @RequestBody PostFormDto postFormDto, Principal principal) {

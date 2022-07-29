@@ -36,40 +36,43 @@
     <div class="card-container">
       <details class="date-card">
         <summary><input class="data-card__title" placeholder="1일차" /><i class="fa-solid fa-xmark"></i></summary>
-        <fieldset class="schedule-card">
-          <div class="schedule-card__location">
-            <i class="fa-solid fa-xmark"></i>
-            <label class="location__name" for="location__name">장소명</label>
-            <input id="location__name" type="text" />
-            <label class="location__addr" for="location__addr">주소</label>
-            <input id="location__addr" type="text" disabled />
-            <i class="fas fa-magnifying-glass"></i>
-          </div>
-          <label class="memo" for="memo">메모</label>
-          <textarea
-            id="memo"
-            name="story"
-            rows="5"
-            cols="33"
-            placeholder="[작성예시]
+        <div class="schedule-card-container">
+          <fieldset class="schedule-card">
+            <div class="schedule-card__location">
+              <i class="fa-solid fa-xmark"></i>
+              <label class="location__name" for="location__name">장소명</label>
+              <input id="location__name" type="text" />
+              <label class="location__addr" for="location__addr">주소</label>
+              <input id="location__addr" type="text" disabled />
+              <i class="fas fa-magnifying-glass"></i>
+            </div>
+            <label class="memo" for="memo">메모</label>
+            <textarea
+              id="memo"
+              name="story"
+              rows="5"
+              cols="33"
+              placeholder="[작성예시]
 총 비용 : 25000원 
 이동수단 : 버스 주변에 공원 있으니까 사진 찍기
                 "
-          ></textarea>
-          <button class="schedule-card__button">저장</button>
-        </fieldset>
+            ></textarea>
+          </fieldset>
+        </div>
         <div class="date-card__buttons">
-          <button class="saveAll-button">전체 저장</button>
           <button class="add-schedule-button">+</button>
         </div>
       </details>
     </div>
 
     <button class="add-date-card-button"><i class="fa-solid fa-plus"></i>일자 카드 추가</button>
+    <button class="review-button">후기 작성 폼 열기</button>
   </article>
-
-  <article class="review-container">
-
-    <div id="summernote">hellddddo</div>
+  <article class="review-container hidden">
+    <div id="summernote">후기를 작성해 주세요</div>
   </article>
+  <div class="post-below">
+    <label><input type="checkbox" name="only-me" value="postOnlyMe" />나만 보기</label>
+    <button class="post-button">작성 완료</button>
+  </div>
 </section>
