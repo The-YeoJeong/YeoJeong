@@ -131,14 +131,14 @@ public class PostService {
         postFormDto.setPostContent(post.getPostContent());
 
         //해당 글 지역 가져오기
-        for (int i=0;i<postRegion.size();i++) {
+        for (int i = 0; i < postRegion.size(); i++) {
             regionName.add(postRegion.get(i).getRegion().getRegionName());
         }
         postFormDto.setPostRegionName(regionName);
 
         //해당 글 일자 카드 가져오기
         List<PostDateCardDto> postDateCardDtoList = new ArrayList<>();
-        for (int i=0;i<postDateCard.size();i++){
+        for (int i = 0; i < postDateCard.size(); i++) {
             PostDateCardDto postDateCardDto = new PostDateCardDto();
             postDateCardDto.setPostDatecardNo(postDateCard.get(i).getPostDatecardNo());
             postDateCardDto.setPostDateCardTitle(postDateCard.get(i).getPostDatecardTitle());
@@ -146,7 +146,7 @@ public class PostService {
             //해당 일정 카드 가져오기
             List<PostScheduleCard> postScheduleCard = postScheduleCardRepository.getAllByPostDatecard(postDateCard.get(i));
             List<PostScheduleCardDto> postScheduleCardDtoList = new ArrayList<>();
-            for (int j=0;j<postScheduleCard.size();j++){
+            for (int j = 0; j < postScheduleCard.size(); j++) {
                 PostScheduleCardDto postScheduleCardDto = new PostScheduleCardDto();
                 postScheduleCardDto.setPostSchedulecardNo(postScheduleCard.get(i).getPostSchedulecardNo());
                 postScheduleCardDto.setPlaceName(postScheduleCard.get(i).getPostSchedulecardPlaceName());
@@ -162,14 +162,14 @@ public class PostService {
 
         //하트 확인
         //로그인 됐을 때
-        if (principal==null) {
+        if (principal == null) {
             postFormDto.setLiked(false);
         }
         //로그인 안 했을 때
         else {
             Member member = memberRepository.getByMemberId(principal.getName());
-            Heart heart = heartRepository.getByPostAndMember(post,member);
-            if (heart!=null) {
+            Heart heart = heartRepository.getByPostAndMember(post, member);
+            if (heart != null) {
                 postFormDto.setLiked(true);
             } else {
                 postFormDto.setLiked(false);
@@ -179,16 +179,35 @@ public class PostService {
         return postFormDto;
     }
 
+    // 게시글의 content변수의 첫번째 이미지의 no값을 가져오는 함수
+    public String getFilePath(Post post) {
+        int start = post.getPostContent().indexOf("<img src=\"/image/") + 17;
+
+        String filePath = "";
+        if (start != 16) {
+            int end = 0;
+            for (int i = start; i < post.getPostContent().length(); i++) {
+                if (Character.toString(post.getPostContent().charAt(i)).equals("\"")) {
+                    end = i - 1;
+                    break;
+                }
+            }
+
+            String num = "";
+            for (int i = start; i < end + 1; i++) {
+                num += Character.toString(post.getPostContent().charAt(i));
+            }
+
+            filePath = "/api/image/" + num;
+        }
+        return filePath;
+    }
+
     // 메인 TOP3
     public List<PostDto> postTopList() {
         List<PostDto> PostDtoList = new ArrayList<>();
         for (Post post : postRepository.findTopList()) {
-            String filePath = null;
-            if (uploadFileRepository.findByPostNo(post.getPostNo()).size() != 0) {
-                filePath = uploadFileRepository.findByPostNo(post.getPostNo()).get(0).getFilePath();
-            }
-
-            PostDto PostDto = Post.createPostDto(post, filePath);
+            PostDto PostDto = Post.createPostDto(post, getFilePath(post));
             PostDtoList.add(PostDto);
         }
 
@@ -224,12 +243,7 @@ public class PostService {
 
         List<PostDto> PostDtoList = new ArrayList<>();
         for (Post post : postRepository.findAll(spec, pageable)) {
-            String filePath = null;
-            if (uploadFileRepository.findByPostNo(post.getPostNo()).size() != 0) {
-                filePath = uploadFileRepository.findByPostNo(post.getPostNo()).get(0).getFilePath();
-            }
-
-            PostDto PostDto = Post.createPostDto(post, filePath);
+            PostDto PostDto = Post.createPostDto(post, getFilePath(post));
             PostDtoList.add(PostDto);
         }
 
@@ -268,12 +282,7 @@ public class PostService {
 
         List<PostDto> PostDtoList = new ArrayList<>();
         for (Post post : postRepository.findAll(spec, pageable)) {
-            String filePath = null;
-            if (uploadFileRepository.findByPostNo(post.getPostNo()).size() != 0) {
-                filePath = uploadFileRepository.findByPostNo(post.getPostNo()).get(0).getFilePath();
-            }
-
-            PostDto PostDto = Post.createPostDto(post, filePath);
+            PostDto PostDto = Post.createPostDto(post, getFilePath(post));
             PostDtoList.add(PostDto);
         }
 

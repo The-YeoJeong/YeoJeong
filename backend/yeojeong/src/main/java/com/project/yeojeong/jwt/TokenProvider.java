@@ -45,6 +45,7 @@ public class TokenProvider implements InitializingBean {
 
     // Authentication 객체의 권한 정보를 이용해, Token을 생성
     public String createToken(Authentication authentication) {
+
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));

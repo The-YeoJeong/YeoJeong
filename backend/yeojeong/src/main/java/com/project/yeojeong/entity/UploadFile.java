@@ -14,11 +14,6 @@ public class UploadFile extends BaseCreateEntity{
     @Column(name = "file_no")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "post_no")
-    private Post post;
-
     @Column
     private String fileName;
 
