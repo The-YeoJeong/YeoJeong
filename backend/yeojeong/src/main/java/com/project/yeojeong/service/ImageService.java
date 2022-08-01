@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -25,6 +27,7 @@ public class ImageService {
     }
 
     public UploadFile store(MultipartFile file) throws Exception {
+
         //		 fileName : 예류2.jpg
         //		 filePath : d:/images/uuid-예류2.jpg
         //		 saveFileName : uuid-예류2.png
@@ -38,11 +41,11 @@ public class ImageService {
 
             String saveFileName = fileSave(rootLocation.toString(), file);
             UploadFile saveFile = new UploadFile();
-//            saveFile.setPost();
             saveFile.setFileName(file.getOriginalFilename());
             saveFile.setFileSaveName(saveFileName);
             saveFile.setFileSize(file.getResource().contentLength());
             saveFile.setFilePath(rootLocation.toString().replace(File.separatorChar, '/') + '/' + saveFileName);
+//            saveFile.setFilePath(fileRoot + '/' + saveFileName);
             return uploadFileRepository.save(saveFile);
 
         } catch (IOException e) {

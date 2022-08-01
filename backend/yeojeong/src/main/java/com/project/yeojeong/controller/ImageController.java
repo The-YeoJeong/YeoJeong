@@ -27,7 +27,7 @@ public class ImageController {
     public ResponseEntity<?> imageUpload(@RequestParam("file") MultipartFile file) {
         try {
             UploadFile uploadFile = imageService.store(file);
-            return ResponseEntity.ok().body("/image/" + uploadFile.getId());
+            return ResponseEntity.ok().body("api/image/" + uploadFile.getId());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
