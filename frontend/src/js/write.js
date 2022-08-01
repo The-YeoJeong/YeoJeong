@@ -8,15 +8,15 @@ const writeNode = () => {
   $(function () {
     $('#summernote').summernote({
       height: 300,
-      minHeight : null,
-      maxHeight : null,
-      focus : true,
-      callbacks : {
-        onImageUpload : function(files, editor, welEditable) {
+      minHeight: null,
+      maxHeight: null,
+      focus: true,
+      callbacks: {
+        onImageUpload: function (files, editor, welEditable) {
           for (var i = 0; i < files.length; i++) {
             sendFile(files[i], this);
           }
-        }
+        },
       },
       toolbar: [
         ['font', ['underline', 'clear']],
@@ -30,24 +30,49 @@ const writeNode = () => {
         ['help', ['help']],
       ],
     });
+    $('#plan-period-startdate').datepicker({
+      dateFormat: 'yy-mm-dd',
+      // 날짜의 형식
+      changeMonth: true,
+      // 월을 이동하기 위한 선택상자 표시여부
+      minDate: 0,
+      // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
+      onClose: function (selectedDate) {
+        // 시작일(fromDate) datepicker가 닫힐때
+        // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+        $('#plan-period-enddate').datepicker('option', 'minDate', selectedDate);
+      },
+    });
+    //종료일
+    $('#plan-period-enddate').datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeMonth: true,
+      minDate: 0,
+      // 오늘 이전 날짜 선택 불가
+      onClose: function (selectedDate) {
+        // 종료일(toDate) datepicker가 닫힐때
+        // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정
+        $('#plan-period-startdate').datepicker('option', 'maxDate', selectedDate);
+      },
+    });
   });
 
   function sendFile(file, el) {
     var form_data = new FormData();
     form_data.append('file', file);
     $.ajax({
-      data : form_data,
-      type : "POST",
-      url : '/api/image',
-      cache : false,
-      contentType : false,
-      enctype : 'multipart/form-data',
-      processData : false,
-      success : function(url) {
-        $(el).summernote('insertImage', url, function($image) {
-          $image.css('width', "50%");
+      data: form_data,
+      type: 'POST',
+      url: '/api/image',
+      cache: false,
+      contentType: false,
+      enctype: 'multipart/form-data',
+      processData: false,
+      success: function (url) {
+        $(el).summernote('insertImage', url, function ($image) {
+          $image.css('width', '50%');
         });
-      }
+      },
     });
   }
 
