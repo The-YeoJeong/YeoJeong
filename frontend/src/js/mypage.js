@@ -8,6 +8,13 @@ const mypageNode = () => {
 
   // Event
 
+  node.querySelector('.resign').addEventListener('click', () => {
+    document.querySelector('.resign-modal').classList.toggle('hidden');
+  });
+
+  node.querySelector('.resign-cancle').addEventListener('click', () => {
+    document.querySelector('.resign-modal').classList.toggle('hidden');
+  });
   return node.children;
 };
 
