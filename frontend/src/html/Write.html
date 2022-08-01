@@ -32,7 +32,28 @@
         <button>전국</button>
       </div>
     </fieldset>
-    <div class="map">지도</div>
+
+    <div class="background">
+      <div class="window">
+        <div class="popup">
+          <div class="map-wrapper">
+            <div class="map"></div>
+            <div class="menu_wrap" class="bg_white">
+              <div id="option">
+                <div>
+                  키워드 : <input type="text" value="" id="keyword" size="15" />
+                  <button class="searchLoca" type="submit">검색하기</button>
+                </div>
+              </div>
+              <ul id="placesList"></ul>
+              <div id="pagination"></div>
+            </div>
+          </div>
+          <button id="close">팝업닫기</button>
+        </div>
+      </div>
+    </div>
+
     <div class="card-container">
       <details class="date-card">
         <summary><input class="data-card__title" placeholder="1일차" /><i class="fa-solid fa-xmark"></i></summary>
