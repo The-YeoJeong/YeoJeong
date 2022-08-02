@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
   .options {
     display: flex;
     flex-direction: column;
@@ -72,4 +73,27 @@
   &__sort {
     width: rem(150px);
   }
+}
+
+.resign-modal {
+  height: rem(150px);
+  width: rem(300px);
+  position: absolute;
+  text-align: center;
+  border: 1px solid black;
+  background: white;
+  bottom: 0;
+  margin-bottom: rem(30px);
+}
+
+.resign-modal > span {
+  margin-top: rem(40px);
+  margin-bottom: rem(40px);
+  display: block;
+}
+
+.resign-confirm {
+  margin-right: rem(50px);
+  background: red;
+  color: white;
 }
