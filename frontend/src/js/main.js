@@ -17,18 +17,31 @@ const mainNode = () => {
   postFunc.top3posts(node.querySelector('.top3-container'));
 
   node.querySelector('.plan-city').addEventListener('click', e => {
-    e.target.style.backgroundColor = '#60b2ff';
-    regionName = e.target.textContent;
-    document.querySelector('#city-name').value = regionName;
+    // e.target.style.backgroundColor = '#60b2ff';
+    if (e.target.tagName === 'INPUT') {
+      console.log(e.target.value);
+      regionName = e.target.value;
+      document.querySelector('#city-name').value = regionName;
+    }
   });
 
   node.querySelector('.period-buttons').addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') {
-      e.target.style.border = '3px solid black';
+      // e.target이 뭔지? 
+      // e.target에서 input에 접근하기
+      //checked 값이 ture인지 확인하고
+      //true이면 style 변경
+      console.log(e.target.tagName);
       period = e.target.dataset.id;
-      document.querySelector('#travel-period').value = e.target.textContent;
+
+      document.querySelector('#travel-period').value = e.target.value;
     }
   });
+
+  node.querySelector('.top-post').addEventListener('click', () => {
+    detailPost(container, dataset.id)
+    window.pushstate(null, null, `detail/${id}`)
+  })
 
   return node.children;
 };
