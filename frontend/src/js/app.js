@@ -1,6 +1,6 @@
 import Main from './main';
 import SignIn from './signIn';
-// import Mypage from './mypage';
+import Mypage from './mypage';
 // import MypageEdit from './mypageEdit';
 import SignUp from './signUp';
 // import Develog from './develog';
@@ -16,7 +16,7 @@ const routes = [
   // { path: '/develog', component: Develog },
   // { path: '/detail', component: Detail },
   { path: '/write', component: Write },
-  // { path: '/mypage', component: Mypage },
+  { path: '/mypage', component: Mypage },
   // { path: '/mypageEdit', component: MypageEdit },
   { path: '/signin', component: SignIn },
   { path: '/signup', component: SignUp },
