@@ -49,9 +49,8 @@ public class OAuthController {
 
     // 최초 로그인 창으로 연결
     @GetMapping("/{oauthType}")
-    public StringBuffer LoginConnentURL(@PathVariable("oauthType") String oauthType) {
+    public ResponseEntity LoginConnectURL(@PathVariable("oauthType") String oauthType) {
         StringBuffer url = new StringBuffer();
-        url.append("redirect:");
 
         switch (oauthType) {
             case KAKAO:
@@ -85,7 +84,7 @@ public class OAuthController {
 
                 break;
         }
-        return url;
+        return new ResponseEntity(url, HttpStatus.OK);
     }
 
 
@@ -96,11 +95,16 @@ public class OAuthController {
                                              @RequestParam(value = "state", required = false) String state) {
         String accessToken = "";
         String id = "";
-
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + code);
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + state);
         switch (oauthType) {
             case KAKAO:
+                System.out.println("1");
                 accessToken = oAuthService.getKakaoAccessToken(code);
+                System.out.println("2");
                 id = oAuthService.createKakaoUser(accessToken);
+                System.out.println("3");
                 break;
             case NAVER:
                 accessToken = oAuthService.getNaverAccessToken(code, state);

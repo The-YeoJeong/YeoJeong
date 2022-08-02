@@ -1,0 +1,78 @@
+<header class="sign-header">
+  <span class="sign-header--black first">여</span>
+  <span class="sign-header--white">행을</span>
+  <span class="sign-header--black middle">정</span>
+  <span class="sign-header--white">하다</span>
+
+  <button class="button button--login hidden">Login</button>
+
+  <button class="button button--posting hidden">Posting</button>
+
+  <div class="user hidden"></div>
+
+  <nav class="nav-box hidden">
+    <ul>
+      <li>내 블로그</li>
+      <li>마이페이지</li>
+      <li>로그아웃</li>
+    </ul>
+  </nav>
+</header>
+<fieldset>
+  <legend class="a11yHidden">signup form</legend>
+  <form class="signup-form"> 
+    <p class="signup-title">소셜 회원가입</p>
+    <div class="signup-wrapper">
+      <div class="signup-input-form">
+        <div class="info-title">아이디</div>
+        <div class="input-wrapper">
+          <input
+            placeholder="10자리 이내의 영어로 입력해주세요."
+            id="id"
+            class="input-box"
+            type="text"
+            autocomplete="off"
+          />
+          <button type="button" class="button dupl_id" disabled>중복확인</button>
+          <span class="error-msg duplId hidden" style="font-size: small; margin-bottom: 10px"
+            >이미 존재하는 아이디입니다.</span
+          >
+          <span class="error-msg idVal hidden" style="font-size: small; margin-bottom: 10px"
+            >10자리 이내의 영어로 입력해주세요.</span
+          >
+          <span class="valid-msg idVal hidden" style="font-size: small; margin-bottom: 10px"
+            >사용 가능합니다. 중복확인을 해주세요.</span
+          >
+          <span class="valid-msg idDupVal hidden" style="font-size: small; margin-bottom: 10px">사용 가능합니다.</span>
+        </div>
+      </div>
+      
+      <div class="signup-input-form">
+        <div class="info-title">닉네임</div>
+        <div class="input-wrapper">
+          <input
+            placeholder="10자 이내의 닉네임을 입력해주세요."
+            id="nickname"
+            class="input-box"
+            type="text"
+            autocomplete="off"
+          />
+          <button type="button" class="button dupl_nick" disabled>중복확인</button>
+          <span class="error-msg duplNick hidden" style="font-size: small; margin-bottom: 10px"
+            >이미 존재하는 닉네임입니다.</span
+          >
+          <span class="error-msg nick hidden" style="font-size: small; margin-bottom: 10px"
+            >10자 이내의 닉네임을 입력해주세요.</span
+          >
+          <span class="valid-msg nick hidden" style="font-size: small; margin-bottom: 10px"
+            >사용 가능합니다. 중복확인을 해주세요.</span
+          >
+          <span class="valid-msg nickDupVal hidden" style="font-size: small; margin-bottom: 10px"
+            >사용 가능합니다.</span
+          >
+        </div>
+      </div>
+    </div>
+    <button type="button" class="button signup-button" disabled>가입하기</button>
+  </form>
+</fieldset>

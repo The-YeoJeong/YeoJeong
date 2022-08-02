@@ -1,24 +1,24 @@
 import axios from 'axios';
 import validatation from './validation';
-import signup from '../html/SignUp.html';
+import OauthSignup from '../html/oauthSignUp.html';
 
-const signupNode = () => {
+const oauthSignUpNode = () => {
   const node = document.createElement('div');
-  node.innerHTML = signup;
+  node.innerHTML = OauthSignup;
 
-  const checkId = async () => {
+  const oauthCheckId = async () => {
     try {
       const { data } = await axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`);
-      validatation.isIdDuple(data.result);
+      validatation.isOAuthIdDuple(data.result);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const checkNick = async () => {
+  const oauthCheckNick = async () => {
     try {
       const { data } = await axios.get(`/api/member/new/nickCheck/${document.querySelector('#nickname').value}`);
-      validatation.isnickDup(data.result);
+      validatation.isOAuthNickDup(data.result);
     } catch (e) {
       console.log(e);
     }
@@ -27,15 +27,15 @@ const signupNode = () => {
   const signUp = async e => {
     e.preventDefault();
     try {
-      const { status } = await axios.post('/api/member/new', {
+      const { data } = await axios.post('/api/oauth2/' + window.localStorage.getItem('oauthCheck') + '/new?accessToken=' + window.localStorage.getItem('accessToken'), {
         memberId: document.querySelector('#id').value,
-        memberNickname: document.querySelector('#nickname').value,
-        memberPw: document.querySelector('#password').value,
-      });
+        memberNickname: document.querySelector('#nickname').value
+      })
 
-      if (status === 200) {
-        window.history.pushState(null, null, '/signin');
-      }
+      if (response.data.jwt != null) {
+        window.localStorage.setItem('jwt', data.jwt)
+        window.history.pushState(null, null, '/')
+      };
     } catch (e) {
       console.log(e);
     }
@@ -49,18 +49,14 @@ const signupNode = () => {
 
   node.querySelector('.signup-wrapper').addEventListener('change', e => {
     if (e.target === document.querySelector('#id')) validatation.idValidate(e.target.value);
-    if (e.target === document.querySelector('#password'))
-      validatation.pwdValidate(e.target.value, document.querySelector('#passwordConfirm').value);
-    if (e.target === document.querySelector('#passwordConfirm'))
-      validatation.pwdValidate(document.querySelector('#password').value, e.target.value);
     if (e.target === document.querySelector('#nickname')) validatation.nickValidate(e.target.value);
   });
 
-  node.querySelector('.button.dupl_id').addEventListener('click', checkId);
-  node.querySelector('.button.dupl_nick').addEventListener('click', checkNick);
+  node.querySelector('.button.dupl_id').addEventListener('click', oauthCheckId);
+  node.querySelector('.button.dupl_nick').addEventListener('click', oauthCheckNick);
   node.querySelector('.button.signup-button').addEventListener('click', signUp);
 
   return node.children;
 };
 
-export default signupNode;
+export default oauthSignUpNode;
