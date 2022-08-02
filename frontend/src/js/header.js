@@ -5,6 +5,26 @@ const createHeaderNode = async () => {
   const node = document.createElement('div');
   node.innerHTML = header;
 
+  const { data } = await axios.get(`/api/member/get/me`, {
+    headers: {
+      Authorization: `Bearer ` + window.localStorage.getItem('jwt')
+    }
+  });
+
+  if (window.localStorage.getItem('jwt') != null) { // 로그인시
+    // 기록하기, 000님, 홈 아이콘, 로그아웃
+    node.querySelector('.users__nickname').textContent = data.memberNickname;
+    node.querySelector('.users__signin').style.display = "none";
+    node.querySelector('.users__signup').style.display = "none";
+
+  } else { // 로그아웃시
+    // 로그인, 회원가입
+    node.querySelector('.write-button').style.display = "none";
+    node.querySelector('.nim').style.display = "none";
+    node.querySelector('.fas.fa-house').style.display = "none";
+    node.querySelector('.users__logout').style.display = "none";
+  }
+
   node.querySelector('.header').addEventListener('click', e => {
     if (e.target.classList.contains('maininfo')) {
       window.history.pushState(null, null, '/');
@@ -19,10 +39,11 @@ const createHeaderNode = async () => {
     }
   });
 
-  //로그아웃이 되어야 함
-  // node.querySelector('.users--logout').addEventListener('click', () => {
-  //   window.history.pushState(null, null, '/signin');
-  // });
+  // 로그아웃
+  node.querySelector('.users__logout').addEventListener('click', () => {
+    window.localStorage.clear();
+    window.history.pushState(null, null, '/');
+  });
 
   return node.children;
 };

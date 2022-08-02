@@ -12,9 +12,23 @@ let isValidNick = false;
 let isValidPwd = false;
 let isCheckId = false;
 let isCheckNick = false;
+let isOAuthCheckId = false;
+let isOAuthCheckNick = false;
+
+const activeOAuthSignUpBtn = () => {
+  if (isValidId && isValidNick && isCheckId && isCheckNick) {
+    const $signUpBtn = document.querySelector('.button.signup-button');
+    $signUpBtn.classList.remove('disabled');
+    $signUpBtn.disabled = false;
+  } else {
+    const $signUpBtn = document.querySelector('.button.signup-button');
+    $signUpBtn.classList.add('disabled');
+    $signUpBtn.disabled = true;
+  }
+};
 
 const activeSignUpBtn = () => {
-  if (isValidId && isValidNick && isValidPwd && isCheckId && isCheckNick) {
+  if ((isValidId && isValidNick && isValidPwd && isCheckId && isCheckNick) || (isOAuthCheckId && isOAuthCheckNick)) {
     const $signUpBtn = document.querySelector('.button.signup-button');
     $signUpBtn.classList.remove('disabled');
     $signUpBtn.disabled = false;
@@ -111,10 +125,40 @@ const isnickDup = dupl => {
   activeSignUpBtn();
 };
 
+const isOAuthIdDuple = dupl => {
+  if (!dupl) {
+    document.querySelector('.error-msg.duplId').classList.remove('hidden');
+    document.querySelector('.valid-msg.idDupVal').classList.add('hidden');
+    isOAuthCheckId = false;
+  } else {
+    document.querySelector('.valid-msg.idVal').classList.add('hidden');
+    document.querySelector('.valid-msg.idDupVal').classList.remove('hidden');
+    document.querySelector('.error-msg.duplId').classList.add('hidden');
+    isOAuthCheckId = true;
+  }
+  activeSignUpBtn();
+};
+
+const isOAuthNickDup = dupl => {
+  if (!dupl) {
+    document.querySelector('.error-msg.duplNick').classList.remove('hidden');
+    document.querySelector('.valid-msg.nickDupVal').classList.add('hidden');
+    isOAuthCheckNick = false;
+  } else {
+    document.querySelector('.valid-msg.nickDupVal').classList.remove('hidden');
+    document.querySelector('.error-msg.duplNick').classList.add('hidden');
+    document.querySelector('.valid-msg.nick').classList.add('hidden');
+    isOAuthCheckNick = true;
+  }
+  activeSignUpBtn();
+};
+
 export default {
   idValidate,
   pwdValidate,
   isnickDup,
   nickValidate,
   isIdDuple,
+  isOAuthIdDuple,
+  isOAuthNickDup
 };
