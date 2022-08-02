@@ -8,12 +8,12 @@ const signinNode = () => {
   const signIn = async e => {
     e.preventDefault();
     try {
-      const { status } = await axios.post('/api/member/login', {
+      const { data } = await axios.post('/api/member/login', {
         memberId: document.querySelector('#id').value,
         memberPw: document.querySelector('#password').value,
-      }).then(function (response) {
-        window.localStorage.setItem('jwt', response.data.jwt)
       });
+      window.localStorage.setItem('jwt', data.jwt)
+      window.history.pushState(null, null, '/')
     } catch (e) {
       console.log(e);
     }

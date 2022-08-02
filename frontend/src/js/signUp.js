@@ -6,30 +6,10 @@ const signupNode = () => {
   const node = document.createElement('div');
   node.innerHTML = signup;
 
-  //func
-
-  // const checkId = async () => {
-  //   const { result: isDuplicate } = await axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`);
-  //   validatation.isIdDuple(isDuplicate);
-  // };
-
-  // const checkNick = async () => {
-  //   const { result: isDuplicate } = await axios.get(
-  //     `/api/member/new/nickCheck/${document.querySelector('#nickname').value}`
-  //     );
-  //     validatation.isnickDup(isDuplicate);
-
-  // };
-
   const checkId = async () => {
     try {
-      const { status } = await axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`).then(function(response) {
-        if(response.data.result == true){
-          validatation.isIdDuple(true);
-        } else {
-          validatation.isIdDuple(false);
-        }
-      });
+      const { data } = await axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`);
+      validatation.isIdDuple(data.result);
     } catch (e) {
       console.log(e);
     }
@@ -37,13 +17,8 @@ const signupNode = () => {
 
   const checkNick = async () => {
     try {
-      const { status } = await axios.get(`/api/member/new/nickCheck/${document.querySelector('#nickname').value}`).then(function(response) {
-        if(response.data.result == true){
-          validatation.isnickDup(true);
-        } else {
-          validatation.isnickDup(false);
-        }
-      });
+      const { data } = await axios.get(`/api/member/new/nickCheck/${document.querySelector('#nickname').value}`);
+      validatation.isnickDup(data.result);
     } catch (e) {
       console.log(e);
     }
@@ -57,6 +32,7 @@ const signupNode = () => {
         memberNickname: document.querySelector('#nickname').value,
         memberPw: document.querySelector('#password').value,
       });
+
       if (status === 200) {
         window.history.pushState(null, null, '/signin');
       }

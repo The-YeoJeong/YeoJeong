@@ -8,13 +8,8 @@ const oauthSignUpNode = () => {
 
   const oauthCheckId = async () => {
     try {
-      axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`).then(function (response) {
-        if (response.data.result == true) {
-          validatation.isOAuthIdDuple(true);
-        } else {
-          validatation.isOAuthIdDuple(false);
-        }
-      });
+      const { data } = await axios.get(`/api/member/new/idCheck/${document.querySelector('#id').value}`);
+      validatation.isOAuthIdDuple(data.result);
     } catch (e) {
       console.log(e);
     }
@@ -22,13 +17,8 @@ const oauthSignUpNode = () => {
 
   const oauthCheckNick = async () => {
     try {
-      axios.get(`/api/member/new/nickCheck/${document.querySelector('#nickname').value}`).then(function (response) {
-        if (response.data.result == true) {
-          validatation.isOAuthNickDup(true);
-        } else {
-          validatation.isOAuthNickDup(false);
-        }
-      });
+      const { data } = await axios.get(`/api/member/new/nickCheck/${document.querySelector('#nickname').value}`);
+      validatation.isOAuthNickDup(data.result);
     } catch (e) {
       console.log(e);
     }
@@ -37,18 +27,15 @@ const oauthSignUpNode = () => {
   const signUp = async e => {
     e.preventDefault();
     try {
-
-      axios.post('/api/oauth2/' + window.localStorage.getItem('oauthCheck') + '/new?accessToken=' + window.localStorage.getItem('accessToken'), {
+      const { data } = await axios.post('/api/oauth2/' + window.localStorage.getItem('oauthCheck') + '/new?accessToken=' + window.localStorage.getItem('accessToken'), {
         memberId: document.querySelector('#id').value,
         memberNickname: document.querySelector('#nickname').value
-      }).then(function (response) {
-        console.log("jwt : " + response.data.jwt)
+      })
 
-        if (response.data.jwt != null) {
-          window.localStorage.setItem('jwt', response.data.jwt)
-          // window.history.pushState(null, null, '/');
-        }
-      });
+      if (response.data.jwt != null) {
+        window.localStorage.setItem('jwt', data.jwt)
+        window.history.pushState(null, null, '/')
+      };
     } catch (e) {
       console.log(e);
     }
