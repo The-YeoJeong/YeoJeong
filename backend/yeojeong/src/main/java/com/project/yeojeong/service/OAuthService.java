@@ -44,7 +44,7 @@ public class OAuthService {
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=").append(GOOGLE_CLIENT_ID);
             sb.append("&client_secret=").append(GOOGLE_CLIENT_SECRET);
-            sb.append("&redirect_uri=http://localhost/oauth2/google/login");
+            sb.append("&redirect_uri=http://localhost:4000/oauth2/google/login");
             sb.append("&code=").append(code);
             bw.write(sb.toString());
             bw.flush();
@@ -143,7 +143,7 @@ public class OAuthService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=").append(KAKAO_CLIENT_ID); // TODO REST_API_KEY 입력
-            sb.append("&redirect_uri=http://localhost/oauth2/kakao/login"); // TODO 인가코드 받은 redirect_uri 입력
+            sb.append("&redirect_uri=http://localhost:4000/oauth2/kakao/login"); // TODO 인가코드 받은 redirect_uri 입력
             sb.append("&code=").append(code);
             bw.write(sb.toString());
             bw.flush();

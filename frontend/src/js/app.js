@@ -8,6 +8,8 @@ import SignUp from './signUp';
 // import Detail from './detail';
 import Write from './write';
 import NotFound from './notFound';
+import Oauth from './ouath';
+import OauthSignUp from './oauthSignUp';
 
 const routes = [
   { path: '/', component: Main },
@@ -20,6 +22,8 @@ const routes = [
   // { path: '/mypageEdit', component: MypageEdit },
   { path: '/signin', component: SignIn },
   { path: '/signup', component: SignUp },
+  { path: '/oauth2', component: Oauth},
+  { path: '/oauthSignUp', component: OauthSignUp }
 ];
 
 const router = () => {
