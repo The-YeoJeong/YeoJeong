@@ -71,20 +71,36 @@ h2 {
   }
 }
 
-.period-buttons {
-  display: flex;
-  justify-content: space-evenly;
-  button {
-    margin: rem(40px) rem(30px);
-    border-radius: rem(10px);
-    padding: rem(5px) rem(30px) !important;
-    font-size: x-large;
+// .period-buttons {
+//   display: flex;
+//   justify-content: space-evenly;
+//   button {
+//     margin: rem(40px) rem(30px);
+//     border-radius: rem(10px);
+//     padding: rem(5px) rem(30px) !important;
+//     font-size: x-large;
 
+//     span {
+//       display: block;
+//       font-size: medium;
+//     }
+//   }
+
+  .period-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    input[type="radio"]  {
+      display: none;
+    
     span {
-      display: block;
-      font-size: medium;
+      display: inline-block;
+      padding: 15px 10px;
+      border: 1px solid #dfdfdf;
+      background-color: #ffffff;
+      text-align: center;
+      cursor: pointer;
+      }
     }
-  }
 
   .period-button {
     &__oneday {
