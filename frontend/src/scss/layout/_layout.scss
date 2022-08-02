@@ -1,4 +1,7 @@
-.post-container {
+@use '../utils' as *;
+
+.container {
   width: 80%;
   margin: auto;
+  padding-bottom: rem(30px);
 }
