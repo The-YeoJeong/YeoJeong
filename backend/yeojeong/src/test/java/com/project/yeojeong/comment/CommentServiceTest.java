@@ -1,4 +1,4 @@
-package com.project.yeojeong.service;
+package com.project.yeojeong.comment;
 
 import com.project.yeojeong.dto.CommentFormDto;
 import com.project.yeojeong.entity.Comment;

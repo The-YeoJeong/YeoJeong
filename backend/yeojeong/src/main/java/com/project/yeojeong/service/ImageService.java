@@ -18,8 +18,7 @@ import java.util.UUID;
 @Service
 public class ImageService {
 
-    private final Path rootLocation = Paths.get("C://Users//박진석//IdeaProjects//YeoJeong//backend//yeojeong//src//main//resources//file");
-
+    private final Path rootLocation = Paths.get(System.getProperty("user.dir") + "\\src\\main\\resources\\file");
     private final UploadFileRepository uploadFileRepository;
 
     public ImageService(UploadFileRepository uploadFileRepository) {
@@ -27,7 +26,6 @@ public class ImageService {
     }
 
     public UploadFile store(MultipartFile file) throws Exception {
-
         //		 fileName : 예류2.jpg
         //		 filePath : d:/images/uuid-예류2.jpg
         //		 saveFileName : uuid-예류2.png
@@ -38,14 +36,13 @@ public class ImageService {
             if (file.isEmpty()) {
                 throw new Exception("Failed to store empty file " + file.getOriginalFilename());
             }
-
             String saveFileName = fileSave(rootLocation.toString(), file);
             UploadFile saveFile = new UploadFile();
             saveFile.setFileName(file.getOriginalFilename());
             saveFile.setFileSaveName(saveFileName);
             saveFile.setFileSize(file.getResource().contentLength());
             saveFile.setFilePath(rootLocation.toString().replace(File.separatorChar, '/') + '/' + saveFileName);
-//            saveFile.setFilePath(fileRoot + '/' + saveFileName);
+
             return uploadFileRepository.save(saveFile);
 
         } catch (IOException e) {

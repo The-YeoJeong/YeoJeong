@@ -80,6 +80,24 @@
             ></textarea>
           </fieldset>
         </div>
+        <div class="searchMap-wrapper hidden">
+          <!-- 지도-->
+          <div id="search-map"></div>
+          <!-- 지도 검색창-->
+          <div id="menu_wrap" class="bg_white">
+            <div class="option">
+              <div>
+                <form onsubmit="searchPlaces(); return false;">
+                  키워드 : <input type="text" value="" id="keyword" size="15" />
+                  <button type="submit">검색하기</button>
+                </form>
+              </div>
+            </div>
+            <hr />
+            <ul id="placesList"></ul>
+            <div id="pagination"></div>
+          </div>
+        </div>
         <div class="date-card__buttons">
           <button class="add-schedule-button">+</button>
         </div>

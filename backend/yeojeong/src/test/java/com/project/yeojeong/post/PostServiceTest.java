@@ -1,18 +1,14 @@
-package com.project.yeojeong.service;
+package com.project.yeojeong.post;
 
-import com.project.yeojeong.dto.PostDateCardDto;
-import com.project.yeojeong.dto.PostFormDto;
-import com.project.yeojeong.dto.PostScheduleCardDto;
+import com.project.yeojeong.dto.*;
 import com.project.yeojeong.entity.*;
 import com.project.yeojeong.repository.*;
+import com.project.yeojeong.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.parameters.P;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

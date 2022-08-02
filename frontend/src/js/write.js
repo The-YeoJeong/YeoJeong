@@ -81,7 +81,7 @@ const writeNode = () => {
   function show() {
     document.querySelector('.background').className = 'background show';
   }
-  
+
   node.querySelector('.searchLoca').addEventListener('click', () => {
     map.searchPlaces();
   });

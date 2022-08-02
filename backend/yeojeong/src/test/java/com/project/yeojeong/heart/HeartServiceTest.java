@@ -1,4 +1,4 @@
-package com.project.yeojeong.service;
+package com.project.yeojeong.heart;
 
 import com.project.yeojeong.entity.Heart;
 import com.project.yeojeong.entity.Member;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @Transactional
 public class HeartServiceTest {
