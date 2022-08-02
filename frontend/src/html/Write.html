@@ -37,7 +37,9 @@
       <div class="window">
         <div class="popup">
           <div class="map-wrapper">
-            <div class="map"></div>
+            <div class="map">
+              <button id="close">닫기</button>
+            </div>
             <div class="menu_wrap" class="bg_white">
               <div id="option">
                 <div>
@@ -49,7 +51,6 @@
               <div id="pagination"></div>
             </div>
           </div>
-          <button id="close">팝업닫기</button>
         </div>
       </div>
     </div>
@@ -64,8 +65,7 @@
               <label class="location__name" for="location__name">장소명</label>
               <input id="location__name" type="text" />
               <label class="location__addr" for="location__addr">주소</label>
-              <input id="location__addr" type="text" disabled />
-              <i class="fas fa-magnifying-glass"></i>
+              <input id="location__addr" type="text" disabled placeholder="주소 검색" />
             </div>
             <label class="memo" for="memo">메모</label>
             <textarea
