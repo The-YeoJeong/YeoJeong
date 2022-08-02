@@ -8,7 +8,6 @@ console.log(oauth.get('state'))
 
 var check = window.location.pathname.split("/")[2]
 
-
 function LoginWithCode() {
     axios.get('/api/oauth2/' + check + '/login?code=' + oauth.get('code') + '&state=' + oauth.get('state')).then(function (response) {
         console.log("jwt : " + response.data.jwt)
@@ -23,13 +22,5 @@ function LoginWithCode() {
         }
     });
 }
-
-// function signUpWithAT() {
-//     axios.get('/api/oauth2/naver/new?code='+ oauth.get('code')+'&state=' + oauth.get('state')).then(function(response) {
-
-//         console.log("jwt : "+response.data.jwt)
-//         console.log("accessToken : "+response.data.accessToken)
-//     });
-// }
 
 export default LoginWithCode;
