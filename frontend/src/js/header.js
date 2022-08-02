@@ -14,6 +14,8 @@ const createHeaderNode = async () => {
       window.history.pushState(null, null, '/signin');
     } else if (e.target.classList.contains('users__signup')) {
       window.history.pushState(null, null, '/signup');
+    } else if (e.target.classList.contains('fa-house')) {
+      window.history.pushState(null, null, '/mypage');
     }
   });
 

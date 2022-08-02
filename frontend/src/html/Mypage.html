@@ -1,0 +1,33 @@
+<section class="container">
+  <div class="user-name">쏭의 여행기록 모음</div>
+  <div class="control">
+    <span class="control__category">여행 기록</span>
+    <form class="search--form" action="">
+      <div class="searchs">
+        <input id="search" class="search" type="text" placeholder="제목 + 내용으로 검색됩니다." />
+        <label for="search"><i class="fas fa-search"></i></label>
+      </div>
+      <button class="search-button">검색</button>
+    </form>
+    <select class="control__sort" name="control__sort">
+      <option value="계획">계획</option>
+      <option value="계획+후기">계획+후기</option>
+    </select>
+  </div>
+  <div class="mypages">
+    <div class="options">
+      <div class="category">
+        <span data-id="0">여행 기록</span>
+        <span data-id="1">좋아요한 글</span>
+        <span data-id="2">답글 단 글</span>
+      </div>
+      <span class="resign">탈퇴하기</span>
+    </div>
+    <div class="resign-modal hidden">
+      <span>정말 탈퇴하시겠습니까?</span>
+      <button class="resign-confirm">예</button>
+      <button class="resign-cancle">아니요</button>
+    </div>
+    <div class="myposts"></div>
+  </div>
+</section>

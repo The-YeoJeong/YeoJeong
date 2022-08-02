@@ -1,8 +1,4 @@
-<script
-  type="text/javascript"
-  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a3158fba9cbbec5dd81d6bcff259f747&libraries=services"
-></script>
-<section class="post-container">
+<section class="container">
   <legend class="plan-text">-계획-</legend>
   <article class="plan-container">
     <fieldset class="plan-title">
@@ -10,9 +6,9 @@
       <input id="post-title" type="text" placeholder="글 제목을 입력해주세요" />
       <div class="plan-period-wrapper">
         <label class="plan-period" for="plan-period">기간</label>
-        <input id="plan-period startdate" type="date" />
+        <input id="plan-period-startdate" type="date" />
         <span>~</span>
-        <input id="plan-period enddate" type="date" />
+        <input id="plan-period-enddate" type="date" />
       </div>
       <label id="plan-city" for="plan-city">시,도 선택</label>
       <div class="plan-city">
@@ -36,8 +32,7 @@
         <button>전국</button>
       </div>
     </fieldset>
-    <div class="main-map"></div>
-    <!--  지도 찾을때 -->
+
     <div class="card-container">
       <details class="date-card">
         <summary><input class="data-card__title" placeholder="1일차" /><i class="fa-solid fa-xmark"></i></summary>
