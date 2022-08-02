@@ -65,7 +65,6 @@ const addScheduleCard = container => {
           <input id="location__name" type="text" />
           <label class="location__addr" for="location__addr">주소</label>
           <input id="location__addr" type="text" disabled />
-          <i class="fas fa-magnifying-glass"></i>
         </div>
         <label class="memo" for="memo">메모</label>
         <textarea
