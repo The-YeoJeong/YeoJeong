@@ -1,3 +1,4 @@
+import axios from 'axios';
 import write from '../html/write.html';
 import map from './map';
 import post from './post';
@@ -8,15 +9,13 @@ const writeNode = () => {
   node.innerHTML = write;
   // Event
   const $cardContainer = node.querySelector('.card-container');
-  const $postTitle = node.querySelector('#post-title').value;
 
   let postTitle = '';
   let postStartDate = '';
   let postEndDate = '';
   let postRegionName = [];
-  let postDateCard = [
-    { postDateCardTitle: '', postScheduleCard: [{ placeName: '', placeAddress: '', placeContent: '' }] },
-  ];
+  let postDateCard = [];
+
   let postContent = '';
   let postOnlyMe = false;
 
@@ -42,8 +41,57 @@ const writeNode = () => {
     }
   });
 
+  const uploadPost = async ($postTitle, $startDate, $endDate, postDateCard) => {
+    const { status } = await axios.post('post/new', {
+      postTitle: $postTitle,
+      postStartDate: $startDate,
+      postEndDate: $endDate,
+      postDateCard,
+    });
+    return status;
+  };
+
   //작성 완료
-  node.querySelector('.post-button').addEventListener('click', () => {});
+  node.querySelector('.post-button').addEventListener('click', () => {
+    const $postTitle = document.querySelector('#post-title').value;
+    const $startDate = document.querySelector('#plan-period-startdate').value;
+    const $endDate = document.querySelector('#plan-period-enddate').value;
+    const $dateCardList = document.querySelectorAll('.date-card');
+    let cardInput = false;
+
+    $dateCardList.forEach(dateCard => {
+      const scheduleCards = [];
+      const $scheduleCardList = dateCard.querySelectorAll('.schedule-card');
+
+      $scheduleCardList.forEach(scheduleCard => {
+        const $placeName = scheduleCard.querySelector('#location__name').value;
+        const $placeAddress = scheduleCard.querySelector('#location__addr').value;
+        const $placeContent = scheduleCard.querySelector('#memo').value;
+        if ($placeName === '' || $placeAddress === '') {
+          cardInput = false;
+        } else {
+          cardInput = true;
+          scheduleCards.push({ placeName: $placeName, placeAddress: $placeAddress, placeContent: $placeContent });
+        }
+      });
+
+      const $postDateCardTitle = dateCard.querySelector('.date-card__title').value;
+
+      if ($postDateCardTitle === '') {
+        cardInput = false;
+      } else {
+        cardInput = true;
+        postDateCard.push({ postDateCardTitle: $postDateCardTitle, postScheduleCard: scheduleCards });
+      }
+    });
+
+    if ($postTitle === '' || $startDate === '' || $endDate === '' || cardInput === false) {
+      alert('빠진 내용 없이 작성해 주세요.');
+    } else {
+      console.log(uploadPost($postTitle, $startDate, $endDate, postDateCard));
+    }
+  });
+
   //지도 관련
   let mapContainer = node.querySelector('.map'), // 지도를 표시할 div
     mapOption = {

@@ -24,7 +24,7 @@ const addDataCard = container => {
   container.insertAdjacentHTML(
     'beforeend',
     `<details class="date-card">
-  <summary><input class="data-card__title" placeholder="1일차" /><i class="fa-solid fa-xmark"></i></summary>
+  <summary><input class="date-card__title" placeholder="1일차" /><i class="fa-solid fa-xmark"></i></summary>
   <div class="schedule-card-container">
     <fieldset class="schedule-card">
       <div class="schedule-card__location">
@@ -33,7 +33,6 @@ const addDataCard = container => {
         <input id="location__name" type="text" />
         <label class="location__addr" for="location__addr">주소</label>
         <input id="location__addr" type="text" disabled />
-        <i class="fas fa-magnifying-glass"></i>
       </div>
       <label class="memo" for="memo">메모</label>
       <textarea
