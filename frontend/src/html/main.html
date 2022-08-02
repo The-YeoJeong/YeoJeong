@@ -2,11 +2,11 @@
   <h2>오늘의 추천 TOP3</h2>
   <article class="top3-container"></article>
   <div class="plan-city">
-    <button>서울</button>
-    <button>인천</button>
-    <button>대전</button>
-    <button>대구</button>
-    <button>광주</button>
+    <label class="city"><input name="city" type="radio" value="서울"/><span>서울</span></label>
+    <label class="city"><input name="city" type="radio" value="인천"/><span>인천</span></label>
+    <label class="city"><input name="city" type="radio" value="대전"/><span>대전</span></label>
+    <label class="city"><input name="city" type="radio" value="대구"/><span>대구</span></label>
+    <label class="city"><input name="city" type="radio" value="광주"/><span>광주</span></label>
     <button>부산</button>
     <button>울산</button>
     <button>세종</button>
@@ -21,7 +21,35 @@
     <button>제주</button>
     <button>전국</button>
   </div>
+
   <div class="period-buttons">
+    <label class="period">
+      <input type="radio" name="period" data-id="0"/>
+      <button class="period-span__oneday" data-id="0" value="당일치기">당일치기</button>
+    </label>
+    
+    <label class="period">
+      <input type="radio"  name="period" data-id="1"/>
+      <button class="period-span__ontd" value="1박2일">1박2일</button>
+    </label>
+    
+    <label class="period">
+      <input type="radio" value="2박3일" name="period" data-id="2"/>
+      <button class="period-span__tbthd">2박3일</button>
+    </label>
+
+    <label class="period">
+      <input type="radio" value="중장기" name="period" data-id="3"/>
+      <button class="period-span__middle">중장기<span>(3박~2주)</span></button>
+    </label>
+
+    <label class="period">
+      <input type="radio" value="장기" name="period" data-id="4"/>
+      <button class="period-span__long">장기<span>(2주 이상)</span></button>
+    </label>
+  </div>
+
+  <div class="period-buttons2">
     <button data-id="0" class="period-button__oneday">당일치기</button>
     <button data-id="1" class="period-button__ontd">1박2일</button>
     <button data-id="2" class="period-button__tnthd">2박3일</button>
