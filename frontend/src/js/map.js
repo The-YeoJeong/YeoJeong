@@ -234,5 +234,6 @@ function removeMarker() {
 export default {
   searchPlaces,
   makeMap,
+  close,
   setInputArea,
 };

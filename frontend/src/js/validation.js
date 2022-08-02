@@ -15,18 +15,6 @@ let isCheckNick = false;
 let isOAuthCheckId = false;
 let isOAuthCheckNick = false;
 
-const activeOAuthSignUpBtn = () => {
-  if (isValidId && isValidNick && isCheckId && isCheckNick) {
-    const $signUpBtn = document.querySelector('.button.signup-button');
-    $signUpBtn.classList.remove('disabled');
-    $signUpBtn.disabled = false;
-  } else {
-    const $signUpBtn = document.querySelector('.button.signup-button');
-    $signUpBtn.classList.add('disabled');
-    $signUpBtn.disabled = true;
-  }
-};
-
 const activeSignUpBtn = () => {
   if ((isValidId && isValidNick && isValidPwd && isCheckId && isCheckNick) || (isOAuthCheckId && isOAuthCheckNick)) {
     const $signUpBtn = document.querySelector('.button.signup-button');

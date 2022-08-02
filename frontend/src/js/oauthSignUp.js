@@ -27,12 +27,12 @@ const oauthSignUpNode = () => {
   const signUp = async e => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/api/oauth2/' + window.localStorage.getItem('oauthCheck') + '/new?accessToken=' + window.localStorage.getItem('accessToken'), {
+      const { data } = await axios.post(`/api/oauth2/` + window.localStorage.getItem('oauthCheck') + '/new?accessToken=' + window.localStorage.getItem('accessToken'), {
         memberId: document.querySelector('#id').value,
         memberNickname: document.querySelector('#nickname').value
       })
 
-      if (response.data.jwt != null) {
+      if (data.jwt != null) {
         window.localStorage.setItem('jwt', data.jwt)
         window.history.pushState(null, null, '/')
       };
