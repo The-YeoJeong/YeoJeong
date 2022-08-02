@@ -33,6 +33,28 @@
       </div>
     </fieldset>
 
+    <div class="background">
+      <div class="window">
+        <div class="popup">
+          <div class="map-wrapper">
+            <div class="map">
+              <button id="close">닫기</button>
+            </div>
+            <div class="menu_wrap" class="bg_white">
+              <div id="option">
+                <div>
+                  키워드 : <input type="text" value="" id="keyword" size="15" />
+                  <button class="searchLoca" type="submit">검색하기</button>
+                </div>
+              </div>
+              <ul id="placesList"></ul>
+              <div id="pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="card-container">
       <details class="date-card">
         <summary><input class="data-card__title" placeholder="1일차" /><i class="fa-solid fa-xmark"></i></summary>
@@ -43,8 +65,7 @@
               <label class="location__name" for="location__name">장소명</label>
               <input id="location__name" type="text" />
               <label class="location__addr" for="location__addr">주소</label>
-              <input id="location__addr" type="text" disabled />
-              <i class="fas fa-magnifying-glass"></i>
+              <input id="location__addr" type="text" disabled placeholder="주소 검색" />
             </div>
             <label class="memo" for="memo">메모</label>
             <textarea

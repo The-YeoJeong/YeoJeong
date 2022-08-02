@@ -24,19 +24,7 @@
   margin-right: rem(10px);
 }
 
-.map-wrapper {
-  position: relative;
-}
-
 .map {
-  position: relative;
-}
-
-.main-map {
-  border: 1px solid black;
-  width: 90;
-  height: 350px;
-  margin: auto;
   position: relative;
 }
 
@@ -76,7 +64,7 @@
 
   /* 임시 지정 */
   width: 800px;
-  height: 450px;
+  height: 400px;
 
   /* 초기에 약간 아래에 배치 */
   transform: translate(-50%, -40%);
@@ -96,7 +84,7 @@
   margin: 10px 0 30px 10px;
   padding: 5px;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(222, 216, 216, 0.8);
   z-index: 1;
   font-size: 12px;
   border-radius: 10px;
@@ -105,8 +93,8 @@
 .plan-city {
   margin-top: rem(10px);
   display: grid;
-  grid-template-rows: rem(40px) rem(40px);
-  grid-template-columns: 120px 120px 120px 120px 120px 120px 120px 120px 120px;
+  grid-template-rows: rem(40%) rem(40%);
+  grid-template-columns: 11% 11% 11% 11% 11% 11% 11% 11% 11%;
   button {
     background-color: transparent;
     border: 1px solid grey;
@@ -158,6 +146,7 @@ summary {
     }
 
     #location__name {
+      width: rem(250px);
       margin-right: rem(30px);
       border: 0;
       border-bottom: 1px solid black;
@@ -168,7 +157,9 @@ summary {
     }
 
     #location__addr {
+      width: rem(250px);
       cursor: pointer;
+
     }
   }
 
@@ -244,6 +235,14 @@ summary {
   margin-left: rem(20px);
 }
 
+#close {
+  position: absolute;
+  z-index: 10;
+  margin-top: rem(10px);
+  margin-right: rem(10px);
+  right: 0;
+}
+
 #menu_wrap {
   position: absolute;
   top: 0;
@@ -277,6 +276,7 @@ summary {
 #menu_wrap .option button {
   margin-left: 5px;
 }
+
 #placesList li {
   list-style: none;
 }
