@@ -62,12 +62,15 @@
   <div class="option">
     <label class="withreview"><input type="checkbox" name="only-me" value="postOnlyMe" />후기 포함 글만 보기</label>
     <select name="sort">
-      <option value="최신순">최신순</option>
-      <option value="인기순">인기순</option>
+      <option>선택</option>
+      <option value=0>최신순</option>
+      <option value=1>인기순</option>
     </select>
   </div>
 
   <article class="post-container"></article>
+
+  <div id="pagination"></div>
 
   <form class="search--form" action="">
     <div class="searchs">
