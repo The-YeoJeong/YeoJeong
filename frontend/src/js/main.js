@@ -1,6 +1,8 @@
 import main from '../html/main.html';
 import axios from 'axios';
 import postFunc from './post';
+import detailFunc from './detail';
+import post from './post';
 
 const mainNode = () => {
   const node = document.createElement('div');
@@ -38,10 +40,14 @@ const mainNode = () => {
     }
   });
 
-  node.querySelector('.top-post').addEventListener('click', () => {
-    detailPost(container, dataset.id)
-    window.pushstate(null, null, `detail/${id}`)
-  })
+  node.querySelector('.top3-container').addEventListener('click', e => {
+    if(e.target.className.split('__')[0].includes('top-post')) {
+      postFunc.detailPost(document.querySelector('.container'), e.target.dataset.id);
+      postFunc.commentList(document.querySelector('.comment_container'), e.target.dataset.id);
+      window.history.pushState(null, null, `detail/${e.target.closest('div').dataset.id}`);
+    }
+    console.log()
+  });
 
   return node.children;
 };
