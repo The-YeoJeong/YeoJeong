@@ -25,3 +25,7 @@ button {
   border-radius: 8px;
   padding: rem(5px) rem(10px);
 }
+
+.plan-city > button.selected {
+  background-color: $babyblue;
+}

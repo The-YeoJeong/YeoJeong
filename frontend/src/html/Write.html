@@ -6,9 +6,9 @@
       <input id="post-title" type="text" placeholder="글 제목을 입력해주세요" />
       <div class="plan-period-wrapper">
         <label class="plan-period" for="plan-period">기간</label>
-        <input id="plan-period-startdate" type="date" />
+        <input id="plan-period-startdate" type="text" placeholder="년-월-일" />
         <span>~</span>
-        <input id="plan-period-enddate" type="date" />
+        <input id="plan-period-enddate" type="text" placeholder="년-월-일" />
       </div>
       <label id="plan-city" for="plan-city">시,도 선택</label>
       <div class="plan-city">
@@ -57,7 +57,7 @@
 
     <div class="card-container">
       <details class="date-card">
-        <summary><input class="data-card__title" placeholder="1일차" /><i class="fa-solid fa-xmark"></i></summary>
+        <summary><input class="date-card__title" placeholder="1일차" /><i class="fa-solid fa-xmark"></i></summary>
         <div class="schedule-card-container">
           <fieldset class="schedule-card">
             <div class="schedule-card__location">
@@ -75,7 +75,8 @@
               cols="33"
               placeholder="[작성예시]
 총 비용 : 25000원 
-이동수단 : 버스 주변에 공원 있으니까 사진 찍기
+이동수단 : 버스 
+주변에 공원 있으니까 사진 찍기
                 "
             ></textarea>
           </fieldset>
@@ -90,10 +91,10 @@
     <button class="review-button">후기 작성 폼 열기</button>
   </article>
   <article class="review-container hidden">
-    <div id="summernote">후기를 작성해 주세요</div>
+    <textarea id="summernote">후기를 작성해 주세요</textarea>
   </article>
   <div class="post-below">
-    <label><input type="checkbox" name="only-me" value="postOnlyMe" />나만 보기</label>
+    <label><input id="only-me" type="checkbox" name="only-me" value="postOnlyMe" />나만 보기</label>
     <button class="post-button">작성 완료</button>
   </div>
 </section>

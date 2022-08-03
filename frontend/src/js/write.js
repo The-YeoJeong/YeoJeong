@@ -1,3 +1,4 @@
+import axios from 'axios';
 import write from '../html/write.html';
 import map from './map';
 import post from './post';
@@ -6,19 +7,28 @@ const writeNode = () => {
   const node = document.createElement('div');
 
   node.innerHTML = write;
+
+  let cities = [];
+  let postDateCard = [];
+  let user;
+
+  (async () => {
+    const { data } = await axios.get('/api/member/get/me', {
+      headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+    });
+    user = data;
+    console.log(user.memberId);
+  })();
+
   // Event
   const $cardContainer = node.querySelector('.card-container');
-  const $postTitle = node.querySelector('#post-title').value;
 
-  let postTitle = '';
-  let postStartDate = '';
-  let postEndDate = '';
-  let postRegionName = [];
-  let postDateCard = [
-    { postDateCardTitle: '', postScheduleCard: [{ placeName: '', placeAddress: '', placeContent: '' }] },
-  ];
-  let postContent = '';
-  let postOnlyMe = false;
+  //지역 선택
+  node.querySelector('.plan-city').addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON') {
+      e.target.classList.toggle('selected');
+    }
+  });
 
   //일자 카드 추가
   node.querySelector('.add-date-card-button').addEventListener('click', () => {
@@ -42,8 +52,74 @@ const writeNode = () => {
     }
   });
 
+  //post upload
+  const uploadPost = async ($postTitle, $startDate, $endDate, postDateCard, $postContent, $postOnlyMe) => {
+    const { data } = await axios({
+      method: 'post',
+      url: '/api/post/new',
+      headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+      data: {
+        postTitle: $postTitle,
+        postRegionName: cities,
+        postStartDate: $startDate,
+        postEndDate: $endDate,
+        postDateCard,
+        postContent: $postContent,
+        postOnlyMe: $postOnlyMe,
+      },
+    });
+    window.history.pushState(null, null, `/detail/${data}`);
+  };
+
   //작성 완료
-  node.querySelector('.post-button').addEventListener('click', () => {});
+  node.querySelector('.post-button').addEventListener('click', () => {
+    const $postTitle = document.querySelector('#post-title').value;
+    const $startDate = document.querySelector('#plan-period-startdate').value;
+    const $endDate = document.querySelector('#plan-period-enddate').value;
+    const $dateCardList = document.querySelectorAll('.date-card');
+    // const $postContent = document.querySelector('.note-editable');
+    const $postOnlyMe = document.querySelector('#only-me').checked;
+    const $cities = document.querySelectorAll('.selected');
+
+    $cities.forEach(city => cities.push(city.textContent));
+    console.log($postContent.children);
+
+    let cardInput = false;
+    let cardTitle = false;
+
+    $dateCardList.forEach(dateCard => {
+      const scheduleCards = [];
+      const $scheduleCardList = dateCard.querySelectorAll('.schedule-card');
+
+      $scheduleCardList.forEach(scheduleCard => {
+        const $placeName = scheduleCard.querySelector('#location__name').value;
+        const $placeAddress = scheduleCard.querySelector('#location__addr').value;
+        const $placeContent = scheduleCard.querySelector('#memo').value;
+        if ($placeName === '' || $placeAddress === '' || $placeContent === '') {
+          cardInput = false;
+        } else {
+          cardInput = true;
+          scheduleCards.push({ placeName: $placeName, placeAddress: $placeAddress, placeContent: $placeContent });
+        }
+      });
+
+      const $postDateCardTitle = dateCard.querySelector('.date-card__title').value;
+
+      if ($postDateCardTitle === '') {
+        cardTitle = false;
+      } else {
+        cardTitle = true;
+        postDateCard.push({ postDateCardTitle: $postDateCardTitle, postScheduleCard: scheduleCards });
+      }
+    });
+
+    if ($postTitle === '' || $startDate === '' || $endDate === '' || cardInput === false || cardTitle === false) {
+      alert('빠진 내용 없이 작성해 주세요.');
+    } else {
+      uploadPost($postTitle, $startDate, $endDate, postDateCard, $postContent, $postOnlyMe);
+    }
+  });
+
   //지도 관련
   let mapContainer = node.querySelector('.map'), // 지도를 표시할 div
     mapOption = {
