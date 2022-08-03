@@ -1,6 +1,6 @@
 import axios from 'axios';
-import detail from '../html/Detail.html'
-import postFunc from '../js/post'
+import detail from '../html/Detail.html';
+import postFunc from '../js/post';
 
 const detailNode = () => {
   const uri = window.location.pathname.split('/');
@@ -8,7 +8,7 @@ const detailNode = () => {
 
   const node = document.createElement('div');
   node.innerHTML = detail;
-  postFunc.detailPost(node.querySelector('.container'), postId);
+  postFunc.detailPost(node.querySelector('.card-container'), postId);
 
   postFunc.commentList(node.querySelector('.comment_container'), postId);
   return node.children;
