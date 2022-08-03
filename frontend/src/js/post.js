@@ -6,10 +6,10 @@ const top3posts = async container => {
   const top3post = data
     .map(
       post =>
-        `  <div class="top-post" id=${post.postNo}>
+        `  <div class="top-post" data-id=${post.postNo}>
     <div class="wrapper">
       <span class="top-post__title">${post.postTitle}</span>
-      <span class="heart-wrapper"> <i class="fas fa-heart"></i><span class="top-post__likenum">${post.postHeartCnt}</span> </span>
+      <span class="top-post__heart-wrapper"> <i class="fas fa-heart"></i><span class="top-post__likenum">${post.postHeartCnt}</span> </span>
     </div>
     <span class="top-post__user">${post.memberNickname}님</span>
     <img class="top_post__img"></img>
@@ -81,8 +81,60 @@ const addScheduleCard = container => {
   );
 };
 
+//detail page
+const detailPost = async (container, id) => {
+  const { data } = await axios.get(`/api/post/detail/${id}`);
+  const detailPostData = 
+    `<div class="top-post" data-id=${data.postNo}>
+      <div class="wrapper">
+        <span class="top-post__title">${data.postTitle}</span>
+        <span class="heart-wrapper"> <i class="fas fa-heart"></i><span class="top-post__likenum">${data.heartCnt}</span> </span>
+      </div>
+      <span class="top-post__user">${data.memberNickname}님</span>
+      <img class="top_post__img"></img>
+      <div>등록 날짜 : ${data.createdTime.substring(0,10)}</div>
+      <div>시작 날짜 : ${data.postStartDate.substring(0,10)}</div>
+      <div>끝 날짜 : ${data.postEndDate.substring(0,10)}</div>
+      <div>좋아요 수 : ${data.heartCnt}</div>
+      <div>지역 : ${data.postRegionName}</div>
+      <div>일자 카드 : ${data.postDateCard[0].postDateCardTitle}</div>
+      <div>일정 카드 : ${data.postDateCard[0].postScheduleCard[0].placeName}</div>
+      <div>나만보기 : ${data.postOnlyMe}</div>
+      <div>후기 : ${data.postContent}</div>
+    </div>`
+  container.innerHTML
+  document.querySelector('.post_title')
+  console.log('dfsa');
+  console.log(data);
+  console.log(data.heartCnt);
+  container.innerHTML = detailPostData;
+};
+
+const commentList = async (container, id) => {
+  const { data } = await axios.get(`/api/comment/${id}`);
+  const comments =  data
+  .map(
+    comment =>
+    `<div data-id=${comment.commentNo}>
+      <div>댓글 번호 : ${comment.commentNo}</div>
+      <div>등록 날짜 : ${comment.createdTime.substring(0,10)}</div>
+      <div>아이디 : ${comment.memberId}</div>
+      <div>닉네임 : ${comment.memberNickname}</div>
+      <div>내용 : ${comment.commentContent}</div>
+      <hr>
+    </div>`
+  )
+  .join('');
+  console.log(data);
+  container.innerHTML = comments;
+};
+
+
 export default {
   top3posts,
   addDataCard,
   addScheduleCard,
+  detailPost,
+  commentList,
 };
+

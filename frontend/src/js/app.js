@@ -5,7 +5,7 @@ import Mypage from './mypage';
 import SignUp from './signUp';
 // import Develog from './develog';
 // import Search from './search';
-// import Detail from './detail';
+import Detail from './detail';
 import Write from './write';
 import NotFound from './notFound';
 import Oauth from './ouath';
@@ -16,7 +16,7 @@ const routes = [
   // { path: '/callback', component: Main },
   // { path: '/search', component: Search },
   // { path: '/develog', component: Develog },
-  // { path: '/detail', component: Detail },
+  { path: '/detail', component: Detail },
   { path: '/write', component: Write },
   { path: '/mypage', component: Mypage },
   // { path: '/mypageEdit', component: MypageEdit },
