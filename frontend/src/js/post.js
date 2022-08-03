@@ -70,7 +70,7 @@ const addScheduleCard = container => {
           <label class="location__name" for="location__name">장소명</label>
           <input id="location__name" type="text" />
           <label class="location__addr" for="location__addr">주소</label>
-          <input id="location__addr" type="text" disabled />
+          <input id="location__addr" type="text" disabled placeholder="주소 검색"/>
         </div>
         <label class="memo" for="memo">메모</label>
         <textarea
@@ -87,54 +87,92 @@ const addScheduleCard = container => {
   );
 };
 
+const makeScheduleCardNode = scheduleCards => {
+  return scheduleCards
+    .map(
+      scheduleCard =>
+        `<fieldset class="schedule-card">
+     <div class="schedule-card__location">
+       <label class="location__name" for="location__name" disabled>장소명:</label>
+       <input id="location__name" value="${scheduleCard.placeName}" type="text" disabled/>
+       <label class="location__addr" for="location__addr"disabled >주소:</label>
+       <input id="location__addr" value="${scheduleCard.placeAddress}" type="text" disabled />
+       </div>
+     <label class="memo" for="memo">메모</label>
+     <textarea
+       id="memo"
+       name="story"
+       rows="5"
+       cols="33"
+       disabled
+       >${scheduleCard.placeContent}</textarea>
+   </fieldset>`
+    )
+    .join('');
+};
+
+const makeDetailCardNode = dateCards => {
+  return dateCards
+    .map(
+      dateCard =>
+        `<details class="date-card">
+      <summary>${dateCard.postDateCardTitle}</summary>
+      <div class="schedule-card-container">
+      ${makeScheduleCardNode(dateCard.postScheduleCard)}
+        </div>
+       </details>`
+    )
+    .join('');
+};
+
 //detail page
-const detailPost = async (container, id) => {
+const detailPost = async (cardcontainer, id) => {
   const { data } = await axios.get(`/api/post/detail/${id}`);
-  const detailPostData = 
-    `<div class="top-post" data-id=${data.postNo}>
-      <div class="wrapper">
-        <span class="top-post__title">${data.postTitle}</span>
-        <span class="heart-wrapper"> <i class="fas fa-heart"></i><span class="top-post__likenum">${data.heartCnt}</span> </span>
-      </div>
-      <span class="top-post__user">${data.memberNickname}님</span>
-      <img class="top_post__img"></img>
-      <div>등록 날짜 : ${data.createdTime.substring(0,10)}</div>
-      <div>시작 날짜 : ${data.postStartDate.substring(0,10)}</div>
-      <div>끝 날짜 : ${data.postEndDate.substring(0,10)}</div>
-      <div>좋아요 수 : ${data.heartCnt}</div>
-      <div>지역 : ${data.postRegionName}</div>
-      <div>일자 카드 : ${data.postDateCard[0].postDateCardTitle}</div>
-      <div>일정 카드 : ${data.postDateCard[0].postScheduleCard[0].placeName}</div>
-      <div>나만보기 : ${data.postOnlyMe}</div>
-      <div>후기 : ${data.postContent}</div>
-    </div>`
-  container.innerHTML
-  document.querySelector('.post_title')
-  console.log('dfsa');
-  console.log(data);
-  console.log(data.heartCnt);
-  container.innerHTML = detailPostData;
+
+  console.log(data.liked);
+  if (data.memberNickname === document.querySelector('.users__nickname').textContent) {
+    document.querySelector('.detail-buttons').classList.remove('hidden');
+    if (data.liked) {
+      document.querySelector('.fas.fa-heart').classList.add('liked');
+    }
+  }
+
+  document.querySelector('.detailpost').dataset.id = data.postNo;
+  document.querySelector('.detailpost__title').textContent = data.postTitle;
+  document.querySelector('.detailpost__user').textContent = `${data.memberNickname}(${data.memberId})`;
+  document.querySelector('.post__likenum').textContent = data.heartCnt;
+  document.querySelector('.detailpost__date').textContent = data.createdTime.substring(0, 10);
+  document.querySelector('.date').textContent = `여행 기간 : ${data.postStartDate.substring(
+    0,
+    10
+  )} ~ ${data.postEndDate.substring(0, 10)}`;
+  document.querySelector('.cities').textContent = `여행 지역 : ${data.postRegionName}`;
+
+  cardcontainer.innerHTML += makeDetailCardNode(data.postDateCard);
+
+  if (data.postContent !== null) {
+    cardcontainer.insertAdjacentHTML('afterend', `<div class="review">후기 ${data.postContent}</div>`);
+  }
 };
 
 const commentList = async (container, id) => {
   const { data } = await axios.get(`/api/comment/${id}`);
-  const comments =  data
-  .map(
-    comment =>
-    `<div data-id=${comment.commentNo}>
+  const comments = data
+    .map(
+      comment =>
+        `<div data-id=${comment.commentNo}>
       <div>댓글 번호 : ${comment.commentNo}</div>
-      <div>등록 날짜 : ${comment.createdTime.substring(0,10)}</div>
+      <div>등록 날짜 : ${comment.createdTime.substring(0, 10)}</div>
       <div>아이디 : ${comment.memberId}</div>
       <div>닉네임 : ${comment.memberNickname}</div>
       <div>내용 : ${comment.commentContent}</div>
       <hr>
     </div>`
-  )
-  .join('');
+    )
+    .join('');
   console.log(data);
   container.innerHTML = comments;
 };
-
 
 export default {
   top3posts,
@@ -144,4 +182,3 @@ export default {
   commentList,
   mainPost
 };
-

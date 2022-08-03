@@ -1,11 +1,23 @@
 <div class="container">
-    <div class="post_title"></div>
-    <div class="post_startdate"></div>~
-    <div class="post_enddate"></div>
-    <div class="post_region"></div> 
-    <div class="post_datecard"></div>   
-</div>
-</div>
-<div class="comment_container">
-댓글-------
+  <div class="detailpost">
+    <span class="detailpost__title"></span>
+    <div class="detail-wrapper">
+      <span class="detailpost__user"></span>
+      <span class="detailright-wrapper">
+        <i class="fas fa-heart"></i><span class="post__likenum"></span> <span class="detailpost__date"></span>
+      </span>
+    </div>
+    <div>
+      <div class="detail-buttons hidden">
+        <button class="edit">수정</button>
+        <button class="delete">삭제</button>
+      </div>
+      <div class="detailpost__info">
+        <span class="date"></span>
+        <span class="cities"></span>
+      </div>
+    </div>
+    <div class="card-container"></div>
+  </div>
+  <div class="comment_container"></div>
 </div>

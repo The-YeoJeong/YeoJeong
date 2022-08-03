@@ -1,0 +1,61 @@
+@use '../utils' as *;
+
+.detailpost {
+  &__title {
+    display: block;
+    text-align: center;
+    font-size: rem(45px);
+    margin-top: rem(50px);
+  }
+
+  &__info {
+    height: rem(130px);
+    background: #edffe9;
+    display: flex;
+    flex-direction: column;
+    font-size: rem(23px);
+    padding: rem(30px) rem(30px);
+    justify-content: space-between;
+  }
+
+  i {
+    cursor: pointer;
+  }
+}
+
+.fas.fa-heart.liked {
+  color: orangered;
+}
+
+.fas.fa-heart {
+  color: gray;
+}
+
+.detail-buttons {
+  margin-bottom: rem(20px);
+}
+
+.detail-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: rem(25px);
+  border-bottom: 2px solid black;
+  margin: rem(20px) 0;
+  padding: rem(30px);
+}
+
+.detailright-wrapper {
+  .post__likenum {
+    margin-right: rem(30px);
+  }
+}
+
+.review {
+  margin-top: rem(20px);
+}
+.review > div {
+  margin-top: rem(10px);
+  border: 1px solid black;
+  padding: rem(30px);
+}
