@@ -78,14 +78,9 @@ const mainNode = () => {
   });
 
   node.querySelector('.period-buttons').addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON') {
-      // e.target이 뭔지?
-      // e.target에서 input에 접근하기
-      //checked 값이 ture인지 확인하고
-      //true이면 style 변경
+    if (e.target.tagName === 'INPUT') {
       console.log(e.target.tagName);
       period = e.target.dataset.id;
-
       document.querySelector('#travel-period').value = e.target.value;
     }
   });

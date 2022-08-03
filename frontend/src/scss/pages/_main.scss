@@ -53,10 +53,10 @@ h2 {
   border: 1px solid black;
 }
 
-.plan-city {
-  display: flex;
-  justify-content: center;
-}
+// .plan-city {
+//   display: flex;
+//   justify-content: center;
+// }
 
 .city input[type="radio"] {
   display: none;
@@ -69,20 +69,18 @@ h2 {
   text-align: center;
   width: 111px;
   height: 40px;
-  border: 1px solid black;
+  border: 0.5px solid black;
   cursor: pointer;
 }
 
 .city input[type="radio"]:checked + span {
-  background-color: #113a6b;
-  color: #ffffff;
+  background-color: #60b2ff;
 }
 
 .option {
   display: flex;
   justify-content: flex-end;
   margin-bottom: rem(20px);
-
   .withreview {
     margin-right: rem(20px);
   }
@@ -91,75 +89,48 @@ h2 {
   }
 }
 
+.period-explication {
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 135px;
+}
+
 .period input[type="radio"] {
   display: none;
 }
 
 .period input[type="radio"] + span {
   display: inline-block;
-  padding: 15px 10px;
-  border: 1px solid #dfdfdf;
+  padding: 30px 20px;
   text-align: center;
   cursor: pointer;
 }
 
 .period input[type="radio"]:checked + span {
-  background-color: #113a6b;
-  color: #ffffff;
+  border: 2px solid black;
 }
 
 .period-buttons {
   display: flex;
   justify-content: space-evenly;
-  button {
+  span {
+    height: 60px;
+    line-height: 2;
     margin: rem(40px) rem(30px);
     border-radius: rem(10px);
     padding: rem(5px) rem(30px) !important;
     font-size: x-large;
-    span {
-      display: block;
-      font-size: 13px;
-    }
+  }
+  
+  p {
+    // display: block;
+    font-size: medium;
   }
 
   .period-span {
     &__oneday {
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), #5eeac8;
-    }
-    &__ontd {
-      background: #5eeac8;
-    }
-    &__tbthd {
-      background: #5eeab8;
-    }
-    &__middle {
-      background: #4eef97;
-    }
-    &__long {
-      background: #13de70;
-    }
-  }
-}
-
-
-.period-buttons2 {
-  display: flex;
-  justify-content: space-evenly;
-  button {
-    margin: rem(40px) rem(30px);
-    border-radius: rem(10px);
-    padding: rem(5px) rem(30px) !important;
-    font-size: x-large;
-
-    span {
-      display: block;
-      font-size: medium;
-    }
-  }
-
-  .period-button {
-    &__oneday {
-      background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), #5eeac8;
+      background: rgba(191, 247, 233);
     }
     &__ontd {
       background: #5eeac8;
