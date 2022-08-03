@@ -1,5 +1,16 @@
 import axios from 'axios';
 
+let user = '';
+
+(async () => {
+  const { data } = await axios.get('/api/member/get/me', {
+    headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+  });
+  user = data;
+  console.log(user);
+  console.log(user.memberNickname);
+})();
+
 //main page
 const top3posts = async container => {
   const { data } = await axios.get('/api/main/post/top');
@@ -120,11 +131,12 @@ const makeDetailCardNode = dateCards => {
 };
 
 //detail page
-const detailPost = async (cardcontainer, id) => {
+const detailPost = async (cardcontainer, id, nickName) => {
   const { data } = await axios.get(`/api/post/detail/${id}`);
 
-  console.log(data.liked);
-  if (data.memberNickname === document.querySelector('.users__nickname').textContent) {
+  console.log('?', user.memberNickname, data.memberNickname);
+  console.log(nickName, data.memberNickname);
+  if (data.memberNickname === nickName) {
     document.querySelector('.detail-buttons').classList.remove('hidden');
     if (data.liked) {
       document.querySelector('.fas.fa-heart').classList.add('liked');
@@ -145,33 +157,32 @@ const detailPost = async (cardcontainer, id) => {
   cardcontainer.innerHTML += makeDetailCardNode(data.postDateCard);
 
   if (data.postContent !== null) {
-    cardcontainer.insertAdjacentHTML('afterend', `<div class="review">후기 ${data.postContent}</div>`);
+    document.querySelector('.review').innerHTML = data.postContent;
   }
 };
 
-const commentList = async (container, id) => {
-  const { data } = await axios.get(`/api/comment/${id}`);
-  const comments = data
-    .map(
-      comment =>
-        `<div data-id=${comment.commentNo}>
-      <div>댓글 번호 : ${comment.commentNo}</div>
-      <div>등록 날짜 : ${comment.createdTime.substring(0, 10)}</div>
-      <div>아이디 : ${comment.memberId}</div>
-      <div>닉네임 : ${comment.memberNickname}</div>
-      <div>내용 : ${comment.commentContent}</div>
-      <hr>
-    </div>`
-    )
-    .join('');
-  console.log(data);
-  container.innerHTML = comments;
-};
+// const commentList = async (container, id) => {
+//   const { data } = await axios.get(`/api/comment/${id}`);
+//   const comments = data
+//     .map(
+//       comment =>
+//         `<div data-id=${comment.commentNo}>
+//       <div>댓글 번호 : ${comment.commentNo}</div>
+//       <div>등록 날짜 : ${comment.createdTime.substring(0, 10)}</div>
+//       <div>아이디 : ${comment.memberId}</div>
+//       <div>닉네임 : ${comment.memberNickname}</div>
+//       <div>내용 : ${comment.commentContent}</div>
+//       <hr>
+//     </div>`
+//     )
+//     .join('');
+//   container.innerHTML = comments;
+// };
 
 export default {
   top3posts,
   addDataCard,
   addScheduleCard,
   detailPost,
-  commentList,
+  // commentList,
 };

@@ -8,31 +8,34 @@ const createHeaderNode = async () => {
   let nickname = '';
 
   $.ajax({
-    type: "GET",
+    type: 'GET',
     url: '/api/member/get/me',
-    headers: { "Authorization": `Bearer ` + window.localStorage.getItem('jwt') },
+    headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
     timeout: 5000,
     dataType: 'json',
     async: false,
     cache: false,
     success: function (data) {
       nickname = data.memberNickname;
-    }, error: function (request, status, error) {
-      console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-    }
+    },
+    error: function (request, status, error) {
+      console.log('code:' + request.status + '\n' + 'message:' + request.responseText + '\n' + 'error:' + error);
+    },
   });
 
-  if (window.localStorage.getItem('jwt') != null) { // 로그인시
+  if (window.localStorage.getItem('jwt') != null) {
+    // 로그인시
     // 기록하기, 000님, 홈 아이콘, 로그아웃
     node.querySelector('.users__nickname').textContent = nickname;
-    node.querySelector('.users__signin').style.display = "none";
-    node.querySelector('.users__signup').style.display = "none";
-  } else { // 로그아웃시
+    node.querySelector('.users__signin').style.display = 'none';
+    node.querySelector('.users__signup').style.display = 'none';
+  } else {
+    // 로그아웃시
     // 로그인, 회원가입
-    node.querySelector('.write-button').style.display = "none";
-    node.querySelector('.nim').style.display = "none";
-    node.querySelector('.fas.fa-house').style.display = "none";
-    node.querySelector('.users__logout').style.display = "none";
+    node.querySelector('.write-button').style.display = 'none';
+    node.querySelector('.nim').style.display = 'none';
+    node.querySelector('.fas.fa-house').style.display = 'none';
+    node.querySelector('.users__logout').style.display = 'none';
   }
 
   node.querySelector('.header').addEventListener('click', e => {
