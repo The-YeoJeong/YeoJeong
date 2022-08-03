@@ -60,7 +60,6 @@ const mainNode = () => {
       processData: false,
       success: function (data) {
         console.log("postList result : " + JSON.stringify(data));
-        console.log("?" + data.json())
         totalCnt = data.postCnt;
         // totalCnt = data.postCnt;
       },
