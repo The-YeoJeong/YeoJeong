@@ -178,6 +178,8 @@ public class PostService {
 
     // 게시글의 content변수의 첫번째 이미지의 no값을 가져오는 함수
     public String getFilePath(Post post) {
+        if(post.getPostContent() == null) return "";
+
         int start = post.getPostContent().indexOf("<img src=\"/image/") + 17;
 
         String filePath = "";
@@ -268,10 +270,16 @@ public class PostService {
             case 1:
                 // 좋아요 누른 게시글
                 spec = spec.and(PostSpecification.heartedPost(principal.getName()));
+                if (searchContent != null)
+                    // 검색
+                    spec = spec.and(PostSpecification.searchTitleAndContent(searchContent));
                 break;
             case 2:
                 // 댓글 단 게시글
                 spec = spec.and(PostSpecification.commentedPost(principal.getName()));
+                if (searchContent != null)
+                    // 검색
+                    spec = spec.and(PostSpecification.searchTitleAndContent(searchContent));
                 break;
         }
         // 최근날짜 정렬
