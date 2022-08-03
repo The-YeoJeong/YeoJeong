@@ -123,24 +123,29 @@ const makeDetailCardNode = dateCards => {
 const detailPost = async (cardcontainer, id) => {
   const { data } = await axios.get(`/api/post/detail/${id}`);
 
-  const detailPostData = `<div class="post" data-id=${data.postNo}>
-  <span class="post__title">${data.postTitle}</span>
-  <div class="wrapper">
-  <span class="post__user">${data.memberNickname}(${data.memberId})</span>
-  <span class="heart-wrapper"> <i class="fas fa-heart"></i><span class="post__likenum">${
-    data.heartCnt
-  }</span class="post__date">${data.createdTime.substring(0, 10)} </span>
-  </div>
-  <div class="post__info">
-  <span>여행 기간 : </span>
-  <span>${data.postStartDate.substring(0, 10)} ~ ${data.postEndDate.substring(0, 10)}</span>
-  <span>여행 지역 : ${data.postRegionName}</span>
-  </div>
-  </div>`;
-  cardcontainer.insertAdjacentHTML('beforeend', detailPostData);
+  console.log(data.liked);
+  if (data.memberNickname === document.querySelector('.users__nickname').textContent) {
+    document.querySelector('.detail-buttons').classList.remove('hidden');
+    if (data.liked) {
+      document.querySelector('.fas.fa-heart').classList.add('liked');
+    }
+  }
+
+  document.querySelector('.detailpost').dataset.id = data.postNo;
+  document.querySelector('.detailpost__title').textContent = data.postTitle;
+  document.querySelector('.detailpost__user').textContent = `${data.memberNickname}(${data.memberId})`;
+  document.querySelector('.post__likenum').textContent = data.heartCnt;
+  document.querySelector('.detailpost__date').textContent = data.createdTime.substring(0, 10);
+  document.querySelector('.date').textContent = `여행 기간 : ${data.postStartDate.substring(
+    0,
+    10
+  )} ~ ${data.postEndDate.substring(0, 10)}`;
+  document.querySelector('.cities').textContent = `여행 지역 : ${data.postRegionName}`;
+
   cardcontainer.innerHTML += makeDetailCardNode(data.postDateCard);
+
   if (data.postContent !== null) {
-    cardcontainer.insertAdjacentHTML('afterend', `<div class="review">${data.postContent}</div>`);
+    cardcontainer.insertAdjacentHTML('afterend', `<div class="review">후기 ${data.postContent}</div>`);
   }
 };
 

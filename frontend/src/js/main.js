@@ -46,7 +46,6 @@ const mainNode = () => {
       postFunc.commentList(document.querySelector('.comment_container'), e.target.dataset.id);
       window.history.pushState(null, null, `detail/${e.target.closest('div').dataset.id}`);
     }
-    console.log()
   });
 
   return node.children;

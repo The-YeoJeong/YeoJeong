@@ -89,7 +89,6 @@ function displayPlaces(places) {
       });
       itemEl.onclick = function () {
         $locaAddr.value = road_address_name;
-        console.log($locaAddr);
         $locaName.value = addName;
         close();
       };
