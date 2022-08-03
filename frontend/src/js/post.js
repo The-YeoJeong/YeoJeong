@@ -30,6 +30,12 @@ const top3posts = async container => {
   container.innerHTML = top3post;
 };
 
+const mainPost = async () => {
+  const { data } = await axios.post('/api/main/post', { regionName: [''] });
+  console.log(data);
+  return data;
+};
+
 //write page
 const addDataCard = container => {
   container.insertAdjacentHTML(
@@ -185,4 +191,5 @@ export default {
   addScheduleCard,
   detailPost,
   // commentList,
+  mainPost,
 };
