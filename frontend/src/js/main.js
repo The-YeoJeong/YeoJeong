@@ -22,7 +22,7 @@ const mainNode = () => {
   let totalCnt = 0;
   let totalPageNum = 0;
   let pageGroup = 1;
-  
+
   let start = 0;
   let end = 0;
 
@@ -55,12 +55,13 @@ const mainNode = () => {
       type: "post",
       contentType: 'application/json',
       data: JSON.stringify(reqBody),
-      url: '/api/main/post?page=' + (currentPageNum-1) + '&size=' + postCntPerPage,
+      url: '/api/main/post?page=' + (currentPageNum - 1) + '&size=' + postCntPerPage,
       dataType: 'json',
       async: false,
       processData: false,
       success: function (data) {
         console.log("postList result : " + JSON.stringify(data));
+        console.log("?" + data.json())
         totalCnt = data.postCnt;
         // totalCnt = data.postCnt;
       }
@@ -116,9 +117,9 @@ const mainNode = () => {
 
   // 후기가 포함된 글만 포기(null)
   node.querySelector('.withreview').addEventListener('click', (e) => {
-    if(e.target.checked){
+    if (e.target.checked) {
       postContent = true;
-    }else{
+    } else {
       postContent = false;
     }
     getPosts()
@@ -131,33 +132,33 @@ const mainNode = () => {
     getPosts()
   });
 
-    // 페이징 버튼 클릭
-    node.querySelector('#pagination').addEventListener('click', e => {
-      if (e.target.classList.contains('page-next')) {
-        console.log(e.target)
-        pageGroup += 1;
-        getPosts()
-      }
-    })
-  
-    node.querySelector('#pagination').addEventListener('click', e => {
-      if (e.target.classList.contains('page-prev')) {
-        console.log(e.target)
-        pageGroup -= 1;
-        getPosts()
-      }
-    })
-  
-    node.querySelector('#pagination').addEventListener('click', e => {
-      if (e.target.classList.contains('page-idx')) {
-        console.log("*****************************")
-        // console.log(e.target.textContent)
-        currentPageNum = e.target.textContent;
-        console.log("*****************************")
-        // console.log(currentPageNum)
-        getPosts()
-      }
-    })
+  // 페이징 버튼 클릭
+  node.querySelector('#pagination').addEventListener('click', e => {
+    if (e.target.classList.contains('page-next')) {
+      console.log(e.target)
+      pageGroup += 1;
+      getPosts()
+    }
+  })
+
+  node.querySelector('#pagination').addEventListener('click', e => {
+    if (e.target.classList.contains('page-prev')) {
+      console.log(e.target)
+      pageGroup -= 1;
+      getPosts()
+    }
+  })
+
+  node.querySelector('#pagination').addEventListener('click', e => {
+    if (e.target.classList.contains('page-idx')) {
+      console.log("*****************************")
+      // console.log(e.target.textContent)
+      currentPageNum = e.target.textContent;
+      console.log("*****************************")
+      // console.log(currentPageNum)
+      getPosts()
+    }
+  })
 
 
 

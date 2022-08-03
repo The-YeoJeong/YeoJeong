@@ -78,7 +78,8 @@ const writeNode = () => {
     const $startDate = document.querySelector('#plan-period-startdate').value;
     const $endDate = document.querySelector('#plan-period-enddate').value;
     const $dateCardList = document.querySelectorAll('.date-card');
-    const $postContent = document.querySelector('.note-editable').textContent;
+    // const $postContent = document.querySelector('.note-editable').textContent;
+    const $postContent = $('#summernote').summernote('code');
     const $postOnlyMe = document.querySelector('#only-me').checked;
     const $cities = document.querySelectorAll('.selected');
 
