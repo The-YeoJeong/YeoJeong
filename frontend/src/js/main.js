@@ -27,7 +27,7 @@ const mainNode = () => {
 
   node.querySelector('.period-buttons').addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') {
-      // e.target이 뭔지? 
+      // e.target이 뭔지?
       // e.target에서 input에 접근하기
       //checked 값이 ture인지 확인하고
       //true이면 style 변경
@@ -37,11 +37,6 @@ const mainNode = () => {
       document.querySelector('#travel-period').value = e.target.value;
     }
   });
-
-  node.querySelector('.top-post').addEventListener('click', () => {
-    detailPost(container, dataset.id)
-    window.pushstate(null, null, `detail/${id}`)
-  })
 
   return node.children;
 };
