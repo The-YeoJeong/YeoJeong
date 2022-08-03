@@ -113,10 +113,6 @@ summary {
   padding: rem(20px) rem(20px);
   margin: rem(20px) 0 0 0;
   position: relative;
-  &__title {
-    margin-bottom: rem(20px);
-    border-bottom: 1px solid black;
-  }
 
   &__buttons {
     width: 100%;
@@ -146,7 +142,7 @@ summary {
     }
 
     #location__name {
-      width: rem(250px);
+      width: rem(230px);
       margin-right: rem(30px);
       border: 0;
       border-bottom: 1px solid black;
@@ -157,9 +153,8 @@ summary {
     }
 
     #location__addr {
-      width: rem(250px);
+      width: rem(230px);
       cursor: pointer;
-
     }
   }
 
