@@ -57,7 +57,7 @@ const mypageNode = () => {
 
     $.ajax({
       type: "GET",
-      url: '/api/mypage/post/' + sectionValue + '/filter?searchContent=' + searchContentValue + '&onlyPlan=' + planFilterValue + '&page=' + currentPageNum + '&size=' + postCntPerPage,
+      url: '/api/mypage/post/' + sectionValue + '/filter?searchContent=' + searchContentValue + '&onlyPlan=' + planFilterValue + '&page=' + (currentPageNum - 1) + '&size=' + postCntPerPage,
       headers: { "Authorization": `Bearer ` + window.localStorage.getItem('jwt') },
       timeout: 5000,
       dataType: 'json',
