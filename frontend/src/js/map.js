@@ -89,6 +89,7 @@ function displayPlaces(places) {
       });
       itemEl.onclick = function () {
         $locaAddr.value = road_address_name;
+        console.log($locaAddr);
         $locaName.value = addName;
         close();
       };
@@ -100,7 +101,6 @@ function displayPlaces(places) {
   // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
   listEl.appendChild(fragment);
   menuEl.scrollTop = 0;
-  console.log(mainMap);
 
   // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
   mainMap.setBounds(bounds);

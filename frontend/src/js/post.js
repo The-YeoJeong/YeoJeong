@@ -42,7 +42,8 @@ const addDataCard = container => {
         cols="33"
         placeholder="[작성예시]
 총 비용 : 25000원 
-이동수단 : 버스 주변에 공원 있으니까 사진 찍기
+이동수단 : 버스 
+주변에 공원 있으니까 사진 찍기
           "
       ></textarea>
     </fieldset>
