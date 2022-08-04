@@ -112,7 +112,7 @@ public class PostService {
     public PostFormDto postDetail(int postNo, Principal principal) {
         Post post = postRepository.getReferenceById(postNo);
         List<PostRegion> postRegion = postRegionRepository.getAllByPost(post);
-        List<PostDateCard> postDateCard = postDateCardRepository.getAllByPost(post);
+        List<PostDateCard> postDateCard = postDateCardRepository.getAllByPost(post.getPostNo());
         List<String> regionName = new ArrayList<>();
 
         PostFormDto postFormDto = new PostFormDto();
@@ -141,14 +141,14 @@ public class PostService {
             postDateCardDto.setPostDateCardTitle(postDateCard.get(i).getPostDatecardTitle());
 
             //해당 일정 카드 가져오기
-            List<PostScheduleCard> postScheduleCard = postScheduleCardRepository.getAllByPostDatecard(postDateCard.get(i));
+            List<PostScheduleCard> postScheduleCard = postScheduleCardRepository.getAllByPostDatecard(postDateCard.get(i).getPostDatecardNo());
             List<PostScheduleCardDto> postScheduleCardDtoList = new ArrayList<>();
             for (int j = 0; j < postScheduleCard.size(); j++) {
                 PostScheduleCardDto postScheduleCardDto = new PostScheduleCardDto();
-                postScheduleCardDto.setPostSchedulecardNo(postScheduleCard.get(i).getPostSchedulecardNo());
-                postScheduleCardDto.setPlaceName(postScheduleCard.get(i).getPostSchedulecardPlaceName());
-                postScheduleCardDto.setPlaceAddress(postScheduleCard.get(i).getPostSchedulecardPlaceAddress());
-                postScheduleCardDto.setPlaceContent(postScheduleCard.get(i).getPostSchedulecardContent());
+                postScheduleCardDto.setPostSchedulecardNo(postScheduleCard.get(j).getPostSchedulecardNo());
+                postScheduleCardDto.setPlaceName(postScheduleCard.get(j).getPostSchedulecardPlaceName());
+                postScheduleCardDto.setPlaceAddress(postScheduleCard.get(j).getPostSchedulecardPlaceAddress());
+                postScheduleCardDto.setPlaceContent(postScheduleCard.get(j).getPostSchedulecardContent());
                 postScheduleCardDtoList.add(postScheduleCardDto);
             }
 
@@ -166,6 +166,9 @@ public class PostService {
         else {
             Member member = memberRepository.getByMemberId(principal.getName());
             Heart heart = heartRepository.getByPostAndMember(post, member);
+            System.out.println("12341234aaa"+post.getPostNo());
+            System.out.println("123444444aaa"+member.getMemberNickname());
+            System.out.println("heart"+principal.getName());
             if (heart != null) {
                 postFormDto.setLiked(true);
             } else {
@@ -178,8 +181,6 @@ public class PostService {
 
     // 게시글의 content변수의 첫번째 이미지의 no값을 가져오는 함수
     public String getFilePath(Post post) {
-        if(post.getPostContent() == null) return "";
-
         int start = post.getPostContent().indexOf("<img src=\"/image/") + 17;
 
         String filePath = "";
@@ -275,16 +276,10 @@ public class PostService {
             case 1:
                 // 좋아요 누른 게시글
                 spec = spec.and(PostSpecification.heartedPost(principal.getName()));
-                if (searchContent != null)
-                    // 검색
-                    spec = spec.and(PostSpecification.searchTitleAndContent(searchContent));
                 break;
             case 2:
                 // 댓글 단 게시글
                 spec = spec.and(PostSpecification.commentedPost(principal.getName()));
-                if (searchContent != null)
-                    // 검색
-                    spec = spec.and(PostSpecification.searchTitleAndContent(searchContent));
                 break;
         }
         // 최근날짜 정렬

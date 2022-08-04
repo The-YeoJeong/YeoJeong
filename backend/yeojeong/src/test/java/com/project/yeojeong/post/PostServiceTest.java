@@ -178,7 +178,7 @@ public class PostServiceTest {
         postRepository.save(post);
 
         List<PostRegion> postRegion = postRegionRepository.getAllByPost(post);
-        List<PostDateCard> postDateCard = postDateCardRepository.getAllByPost(post);
+        List<PostDateCard> postDateCard = postDateCardRepository.getAllByPost(post.getPostNo());
         List<String> regionName = new ArrayList<>();
 
         PostFormDto postFormDtoDetail = new PostFormDto();
@@ -207,7 +207,7 @@ public class PostServiceTest {
             postDateCardDto.setPostDateCardTitle(postDateCard.get(i).getPostDatecardTitle());
 
             //해당 일정 카드 가져오기
-            List<PostScheduleCard> postScheduleCard = postScheduleCardRepository.getAllByPostDatecard(postDateCard.get(i));
+            List<PostScheduleCard> postScheduleCard = postScheduleCardRepository.getAllByPostDatecard(postDateCard.get(i).getPostDatecardNo());
             List<PostScheduleCardDto> postScheduleCardDtoList = new ArrayList<>();
             for (int j=0;j<postScheduleCard.size();j++){
                 PostScheduleCardDto postScheduleCardDto = new PostScheduleCardDto();

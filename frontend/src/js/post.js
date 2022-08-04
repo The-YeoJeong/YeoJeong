@@ -72,6 +72,18 @@ const addDataCard = container => {
   );
 };
 
+let positions = [];
+
+const makePositions = dateCards => {
+  dateCards.forEach(dateCard => {
+    dateCard.postScheduleCard.forEach(schedule => {
+      positions.push({no: schedule.postSchedulecardNo, addr: schedule.placeAddress, addr_name: schedule.placeName})
+    })
+  });
+  console.log(positions);
+}
+
+
 const addScheduleCard = container => {
   container.insertAdjacentHTML(
     'beforeend',
@@ -123,6 +135,7 @@ const makeScheduleCardNode = scheduleCards => {
 };
 
 const makeDetailCardNode = dateCards => {
+  console.log(makePositions(dateCards));
   return dateCards
     .map(
       dateCard =>
