@@ -7,7 +7,6 @@ const detailNode = () => {
   const uri = window.location.pathname.split('/');
   const postId = uri[uri.length - 1];
   const node = document.createElement('div');
-  console.log(postId);
 
   let user = '';
 
@@ -29,9 +28,15 @@ const detailNode = () => {
 
   node.innerHTML = detail;
 
-  postFunc.detailPost(node.querySelector('.card-container'), postId, user.memberId);
+  const $commentContainer = node.querySelector('.comment_container');
 
-  postFunc.commentRender(node.querySelector('.comment_container'), postId);
+  if (user) {
+    node.querySelector('.comment-wrapper').classList.remove('hidden');
+  }
+
+  postFunc.detailPostRender(node.querySelector('.card-container'), postId, user.memberId);
+
+  postFunc.commentRender($commentContainer, postId, user.memberId);
 
   const like = async () => {
     const { status } = await axios({
@@ -69,6 +74,39 @@ const detailNode = () => {
     }
   });
 
+  const wirteComment = async comment => {
+    const { status } = await axios({
+      method: 'post',
+      url: '/api/comment/new',
+      headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+      data: { postNo: postId, commentContent: comment },
+    });
+    console.log(status);
+  };
+
+  // node.querySelector('.comment-button').addEventListener('click', e => {
+  // wirteComment(document.querySelector('#comment').value);
+  // $commentContainer.insertAdjacentHTML('afterend', `
+  // <div class="post-comment">
+  // <span class="comment-writer">${commentData.memberNickname}(${commentData.memberId})</span>
+  // <span class="comment-content">${document.querySelector('#comment').value}</span>
+  // <span class="comment-date">${commentData.createdTime.substring(0, 10)}</span>
+  // <div class="comment-buttons">
+  // <button class = "comment-editBtn">수정</button>
+  // <button class = "comment-editBtn">삭제</button>
+  // </div>
+  // </div>
+  // `)
+  // });
+
+  node.querySelector('.comment_container').addEventListener('click', e => {
+    if (e.target.className === 'comment-deleteBtn') {
+      console.log('delete');
+    }
+    if (e.target.className === 'comment-editBtn') {
+      console.log(e.target.parentNode.parentNode.querySelector('.comment-content'));
+    }
+  });
   //지도 관련
   let detailMapContainer = node.querySelector('.detailMap'), // 지도를 표시할 div
     detailMapOption = {

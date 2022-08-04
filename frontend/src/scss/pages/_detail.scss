@@ -53,7 +53,6 @@
 
 .review {
   margin-top: rem(20px);
-  margin-bottom: rem(50px);
 }
 .review > div {
   margin-top: rem(10px);
@@ -63,5 +62,54 @@
 
 .comment_container {
   background: #f6f6f6;
-  height: rem(100px);
+  padding: rem(30px);
+  margin-top: rem(20px);
+}
+
+.comment-wrapper {
+  border-top: 2px solid black;
+  padding-top: rem(30px);
+  margin: rem(40px) 0;
+  display: flex;
+  justify-content: center;
+}
+
+.comment-wrapper > span {
+  line-height: 2;
+}
+
+.post-comment {
+  position: relative;
+  font-size: rem(18px);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: rem(30px);
+  padding-bottom: rem(30px);
+  border-bottom: 2px solid lightgrey;
+
+  .comment-writer {
+    display: inline-block;
+    width: rem(150px);
+  }
+
+  .comment-content {
+    display: inline-block;
+    width: rem(200px);
+  }
+
+  .comment-date {
+    display: inline-block;
+    width: rem(300px);
+  }
+}
+
+#comment {
+  width: 85%;
+  height: rem(30px);
+  margin: 0 rem(20px);
+}
+
+.comment-buttons {
+  position: absolute;
+  right: 0;
 }
