@@ -151,38 +151,37 @@ const makeDetailCardNode = dateCards => {
     .join('');
 };
 
-
 //detail page
-const detailPost = async (cardcontainer, id, userid) => {
-  if(window.localStorage.getItem('jwt') != null){
+const detailPostRender = async (cardcontainer, id, userid) => {
+  if (window.localStorage.getItem('jwt') != null) {
     const { data } = await axios.get(`/api/post/detail/${id}`, {
       headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
     });
-    forDetailPost(data, cardcontainer, id, userid)
-  }else{
+    makeDetailPost(data, cardcontainer, id, userid);
+  } else {
     const { data } = await axios.get(`/api/post/detail/${id}`);
-    forDetailPost(data, cardcontainer, id, userid)
-  } 
+    makeDetailPost(data, cardcontainer, id, userid);
+  }
 };
 
-function forDetailPost(data, cardcontainer, id, userid){
-  let isPushHeart = '';
+function makeDetailPost(data, cardcontainer, id, userid) {
+  let isLiked = '';
   $.ajax({
     type: 'get',
-    url: '/api/heart/get?postNo='+ id,
+    url: '/api/heart/get?postNo=' + id,
     headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
     dataType: 'json',
     async: false,
     processData: false,
     success: function (data) {
-      isPushHeart = data.result;
+      isLiked = data.result;
     },
   });
 
   if (data.memberId == userid) {
     document.querySelector('.detail-buttons').classList.remove('hidden');
   }
-  if (isPushHeart) {
+  if (isLiked) {
     document.querySelector('.fas.fa-heart').classList.add('liked');
   }
 
@@ -204,30 +203,35 @@ function forDetailPost(data, cardcontainer, id, userid){
   }
 }
 
-const commentRender = async (container, id) => {
+const makecomment = (commentData, commentWriter, userId) => {
+  let $buttons = '';
+  if (userId === commentWriter) {
+    $buttons = `    <div class="comment-buttons">
+    <button class = "comment-editBtn">수정</button>
+    <button class = "comment-editingBtn hidden">수정완료</button>
+    <button class = "comment-deleteBtn">삭제</button>
+    </div>`;
+  }
+  const comment = `<div class="post-comment" data-id=${commentData.commentNo}>
+    <span class="comment-writer">${commentData.memberNickname}(${commentData.memberId})</span>
+    <input class="comment-content" value=${commentData.commentContent} disabled>
+    <span class="comment-date">${commentData.createdTime.substring(0, 10)}</span>
+    ${$buttons}
+    </div>`;
+  return comment;
+};
+
+const commentRender = async (container, id, userId) => {
   const { data } = await axios.get(`/api/comment/${id}`);
-  console.log('d', data);
-  const comments = data
-    .map(
-      comment =>
-        `<div data-id=${comment.commentNo}>
-      <div>댓글 번호 : ${comment.commentNo}</div>
-      <div>등록 날짜 : ${comment.createdTime.substring(0, 10)}</div>
-      <div>아이디 : ${comment.memberId}</div>
-      <div>닉네임 : ${comment.memberNickname}</div>
-      <div>내용 : ${comment.commentContent}</div>
-      <hr>
-    </div>`
-    )
-    .join('');
-  container.innerHTML = comments;
+  const comments = data.map(comment => makecomment(comment, comment.memberId, userId));
+  container.innerHTML = comments.join('');
 };
 
 export default {
   renderTop3posts,
   addDataCard,
   addScheduleCard,
-  detailPost,
+  detailPostRender,
   renderPosts,
   commentRender,
 };
