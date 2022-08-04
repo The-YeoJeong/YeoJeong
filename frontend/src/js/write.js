@@ -190,6 +190,7 @@ const writeNode = () => {
         ['help', ['help']],
       ],
     });
+    
     $('#plan-period-startdate').datepicker({
       dateFormat: 'yy-mm-dd',
       // 날짜의 형식

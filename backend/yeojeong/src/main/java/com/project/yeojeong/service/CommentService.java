@@ -23,12 +23,21 @@ public class CommentService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
 
-    public int commentnew(CommentFormDto commentFormDto, Principal principal) {
+    public CommentFormDto commentnew(CommentFormDto commentFormDto, Principal principal) {
         Member member = memberRepository.getByMemberId(principal.getName());
         Post post = postRepository.getReferenceById(commentFormDto.getPostNo());
         Comment comment = Comment.createComment(commentFormDto, member, post);
-        int commentNo = commentRepository.save(comment).getCommentNo();
-        return commentNo;
+
+        Comment comment1  = commentRepository.save(comment);
+        CommentFormDto commentFormDto1 = new CommentFormDto();
+        commentFormDto1.setCommentNo(comment1.getCommentNo());
+        commentFormDto1.setCommentContent(comment1.getCommentContent());
+        commentFormDto1.setCreatedTime(comment1.getCreatedTime());
+        commentFormDto1.setMemberNickname(member.getMemberNickname());
+        commentFormDto1.setPostNo(comment1.getPost().getPostNo());
+        commentFormDto1.setMemberId(member.getMemberId());
+
+        return commentFormDto1;
     }
 
     public void commentEdit(int commentNo, CommentFormDto commentFormDto) {

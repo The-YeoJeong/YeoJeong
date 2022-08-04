@@ -10,6 +10,7 @@ const detailNode = () => {
 
   let user = '';
 
+
   $.ajax({
     type: 'GET',
     url: '/api/member/get/me',
@@ -59,18 +60,20 @@ const detailNode = () => {
   };
 
   node.querySelector('.fas.fa-heart').addEventListener('click', e => {
-    if (e.target.classList.contains('liked')) {
-      e.target.classList.remove('liked');
-      let postLikedNum = Number(document.querySelector('.post__likenum').textContent);
-      postLikedNum -= 1;
-      document.querySelector('.post__likenum').textContent = postLikedNum;
-      dislike();
-    } else {
-      e.target.classList.add('liked');
-      let postLikedNum = Number(document.querySelector('.post__likenum').textContent);
-      postLikedNum += 1;
-      document.querySelector('.post__likenum').textContent = postLikedNum;
-      like();
+    if (window.localStorage.getItem('jwt') != null) {
+      if (e.target.classList.contains('liked')) {
+        e.target.classList.remove('liked');
+        let postLikedNum = Number(document.querySelector('.post__likenum').textContent);
+        postLikedNum -= 1;
+        document.querySelector('.post__likenum').textContent = postLikedNum;
+        dislike();
+      } else {
+        e.target.classList.add('liked');
+        let postLikedNum = Number(document.querySelector('.post__likenum').textContent);
+        postLikedNum += 1;
+        document.querySelector('.post__likenum').textContent = postLikedNum;
+        like();
+      }
     }
   });
 
@@ -115,6 +118,30 @@ const detailNode = () => {
     };
 
   // map.makedetailMap(detailMapContainer, detailMapOption);//dkd
+
+  node.querySelector('.delete').addEventListener('click', () => {
+    if (confirm("정말 삭제하시겠습니까 ?") == true) {
+
+      console.log('postNo :@@@@ ' + postId)
+        $.ajax({
+          type: 'delete',
+          url: '/api/post/' + postId,
+          headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+          timeout: 5000,
+          dataType: 'json',
+          async: false,
+          cache: false,
+          success: function () {
+          }
+        });
+        alert("삭제되었습니다");
+        window.history.pushState(null, null, '/');
+      
+    } else {
+      return;
+    }
+  });
+
 
   return node.children;
 };

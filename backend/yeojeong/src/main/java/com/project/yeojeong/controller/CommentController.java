@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,9 +32,11 @@ public class CommentController {
 
     @PostMapping(value = "/new")
     public @ResponseBody ResponseEntity commentNew(@Valid @RequestBody CommentFormDto commentFormDto, Principal principal) {
-        int commentNo = commentService.commentnew(commentFormDto, principal);
-        System.out.println("댓글 번호" + commentNo);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("comment", commentService.commentnew(commentFormDto, principal));
+
+        return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
     @PatchMapping(value = "/edit/{commentNo}")
