@@ -2,14 +2,14 @@ import axios from 'axios';
 
 let user = '';
 
-(async () => {
-  const { data } = await axios.get('/api/member/get/me', {
-    headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
-  });
-  user = data;
-  console.log(user);
-  console.log(user.memberNickname);
-})();
+// (async () => {
+//   const { data } = await axios.get('/api/member/get/me', {
+//     headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+//   });
+//   user = data;
+//   console.log(user);
+//   console.log(user.memberNickname);
+// })();
 
 //main page
 const top3posts = async container => {
@@ -136,17 +136,39 @@ const makeDetailCardNode = dateCards => {
     .join('');
 };
 
-//detail page
-const detailPost = async (cardcontainer, id, nickName) => {
-  const { data } = await axios.get(`/api/post/detail/${id}`);
 
-  console.log('?', user.memberNickname, data.memberNickname);
-  console.log(nickName, data.memberNickname);
-  if (data.memberNickname === nickName) {
+//detail page
+const detailPost = async (cardcontainer, id, userid) => {
+  if(window.localStorage.getItem('jwt') != null){
+    const { data } = await axios.get(`/api/post/detail/${id}`, {
+      headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+    });
+    forDetailPost(data, cardcontainer, id, userid)
+  }else{
+    const { data } = await axios.get(`/api/post/detail/${id}`);
+    forDetailPost(data, cardcontainer, id, userid)
+  } 
+};
+
+function forDetailPost(data, cardcontainer, id, userid){
+  let isPushHeart = '';
+  $.ajax({
+    type: 'get',
+    url: '/api/heart/get?postNo='+ id,
+    headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+    dataType: 'json',
+    async: false,
+    processData: false,
+    success: function (data) {
+      isPushHeart = data.result;
+    },
+  });
+
+  if (data.memberNickname == userid) {
     document.querySelector('.detail-buttons').classList.remove('hidden');
-    if (data.liked) {
-      document.querySelector('.fas.fa-heart').classList.add('liked');
-    }
+  }
+  if (isPushHeart) {
+    document.querySelector('.fas.fa-heart').classList.add('liked');
   }
 
   document.querySelector('.detailpost').dataset.id = data.postNo;
@@ -165,7 +187,7 @@ const detailPost = async (cardcontainer, id, nickName) => {
   if (data.postContent !== null) {
     document.querySelector('.review').innerHTML = data.postContent;
   }
-};
+}
 
 // const commentList = async (container, id) => {
 //   const { data } = await axios.get(`/api/comment/${id}`);

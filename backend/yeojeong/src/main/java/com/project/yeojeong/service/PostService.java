@@ -158,11 +158,11 @@ public class PostService {
         postFormDto.setPostDateCard(postDateCardDtoList);
 
         //하트 확인
-        //로그인 됐을 때
+        //로그인 안 됐을 때
         if (principal == null) {
             postFormDto.setLiked(false);
         }
-        //로그인 안 했을 때
+        //로그인 했을 때
         else {
             Member member = memberRepository.getByMemberId(principal.getName());
             Heart heart = heartRepository.getByPostAndMember(post, member);
