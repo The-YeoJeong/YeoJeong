@@ -72,6 +72,18 @@ const addDataCard = container => {
   );
 };
 
+let positions = [];
+
+const makePositions = dateCards => {
+  dateCards.forEach(dateCard => {
+    dateCard.postScheduleCard.forEach(schedule => {
+      positions.push({no: schedule.postSchedulecardNo, addr: schedule.placeAddress, addr_name: schedule.placeName})
+    })
+  });
+  console.log(positions);
+}
+
+
 const addScheduleCard = container => {
   container.insertAdjacentHTML(
     'beforeend',
@@ -123,6 +135,7 @@ const makeScheduleCardNode = scheduleCards => {
 };
 
 const makeDetailCardNode = dateCards => {
+  console.log(makePositions(dateCards));
   return dateCards
     .map(
       dateCard =>
@@ -139,10 +152,10 @@ const makeDetailCardNode = dateCards => {
 //detail page
 const detailPost = async (cardcontainer, id, nickName) => {
   const { data } = await axios.get(`/api/post/detail/${id}`);
-
   console.log('?', user.memberNickname, data.memberNickname);
   console.log(nickName, data.memberNickname);
   if (data.memberNickname === nickName) {
+
     document.querySelector('.detail-buttons').classList.remove('hidden');
     if (data.liked) {
       document.querySelector('.fas.fa-heart').classList.add('liked');
