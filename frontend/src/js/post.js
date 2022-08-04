@@ -89,12 +89,11 @@ let positions = [];
 const makePositions = dateCards => {
   dateCards.forEach(dateCard => {
     dateCard.postScheduleCard.forEach(schedule => {
-      positions.push({no: schedule.postSchedulecardNo, addr: schedule.placeAddress, addr_name: schedule.placeName})
-    })
+      positions.push({ no: schedule.postSchedulecardNo, addr: schedule.placeAddress, addr_name: schedule.placeName });
+    });
   });
   console.log(positions);
-}
-
+};
 
 const addScheduleCard = container => {
   container.insertAdjacentHTML(
@@ -168,7 +167,6 @@ const detailPost = async (cardcontainer, id, nickName) => {
   console.log('?', user.memberNickname, data.memberNickname);
   console.log(nickName, data.memberNickname);
   if (data.memberNickname === nickName) {
-
     document.querySelector('.detail-buttons').classList.remove('hidden');
     if (data.liked) {
       document.querySelector('.fas.fa-heart').classList.add('liked');
@@ -189,27 +187,28 @@ const detailPost = async (cardcontainer, id, nickName) => {
   cardcontainer.innerHTML += makeDetailCardNode(data.postDateCard);
 
   if (data.postContent !== null) {
-    document.querySelector('.review').innerHTML = data.postContent;
+    document.querySelector('.review').innerHTML = `<span>후기</span>${data.postContent}`;
   }
 };
 
-// const commentList = async (container, id) => {
-//   const { data } = await axios.get(`/api/comment/${id}`);
-//   const comments = data
-//     .map(
-//       comment =>
-//         `<div data-id=${comment.commentNo}>
-//       <div>댓글 번호 : ${comment.commentNo}</div>
-//       <div>등록 날짜 : ${comment.createdTime.substring(0, 10)}</div>
-//       <div>아이디 : ${comment.memberId}</div>
-//       <div>닉네임 : ${comment.memberNickname}</div>
-//       <div>내용 : ${comment.commentContent}</div>
-//       <hr>
-//     </div>`
-//     )
-//     .join('');
-//   container.innerHTML = comments;
-// };
+const commentRender = async (container, id) => {
+  const { data } = await axios.get(`/api/comment/${id}`);
+  console.log('d', data);
+  const comments = data
+    .map(
+      comment =>
+        `<div data-id=${comment.commentNo}>
+      <div>댓글 번호 : ${comment.commentNo}</div>
+      <div>등록 날짜 : ${comment.createdTime.substring(0, 10)}</div>
+      <div>아이디 : ${comment.memberId}</div>
+      <div>닉네임 : ${comment.memberNickname}</div>
+      <div>내용 : ${comment.commentContent}</div>
+      <hr>
+    </div>`
+    )
+    .join('');
+  container.innerHTML = comments;
+};
 
 export default {
   renderTop3posts,
@@ -217,5 +216,5 @@ export default {
   addScheduleCard,
   detailPost,
   renderPosts,
-  // commentList,
+  commentRender,
 };

@@ -127,7 +127,6 @@ const mainNode = () => {
 
   // console.log(postFunc.mainPost());
   node.querySelector('.plan-city').addEventListener('click', e => {
-    // e.target.style.backgroundColor = '#60B2FF';
     if (e.target.tagName === 'INPUT') {
       console.log(e.target.value);
       regionName = e.target.value;
@@ -144,7 +143,6 @@ const mainNode = () => {
   node.querySelector('.top3-container').addEventListener('click', e => {
     if (e.target.className.split('__')[0].includes('top-post')) {
       postFunc.detailPost(document.querySelector('.container'), e.target.dataset.id);
-      // postFunc.commentList(document.querySelector('.comment_container'), e.target.dataset.id);
       window.history.pushState(null, null, `detail/${e.target.closest('div').dataset.id}`);
     }
   });
