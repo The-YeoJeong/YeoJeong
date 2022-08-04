@@ -136,6 +136,30 @@ const makeScheduleCardNode = scheduleCards => {
     .join('');
 };
 
+const makeEditScheduleCardNode = scheduleCards => {
+  return scheduleCards
+    .map(
+      scheduleCard =>
+        `<fieldset class="schedule-card">
+     <div class="schedule-card__location">
+     <i class="fa-solid fa-xmark"></i>
+       <label class="location__name" for="location__name">장소명:</label>
+       <input id="location__name" value="${scheduleCard.placeName}" type="text" />
+       <label class="location__addr" for="location__addr" >주소:</label>
+       <input id="location__addr" value="${scheduleCard.placeAddress}" type="text"  />
+       </div>
+     <label class="memo" for="memo">메모</label>
+     <textarea
+       id="memo"
+       name="story"
+       rows="5"
+       cols="33"
+       >${scheduleCard.placeContent}</textarea>
+   </fieldset>`
+    )
+    .join('');
+};
+
 const makeDetailCardNode = dateCards => {
   console.log(makePositions(dateCards));
   return dateCards
@@ -149,6 +173,43 @@ const makeDetailCardNode = dateCards => {
        </details>`
     )
     .join('');
+};
+
+const makeEditCardNode = dateCards => {
+  console.log(makePositions(dateCards));
+  return dateCards
+    .map(
+      dateCard =>
+        `<details class="date-card">
+      <summary>${dateCard.postDateCardTitle}<i class="fa-solid fa-xmark"></i></summary>
+      <div class="schedule-card-container">
+      ${makeEditScheduleCardNode(dateCard.postScheduleCard)}
+        </div>
+       </details>`
+    )
+    .join('');
+};
+
+const editPostRender = async (cardcontainer, id) => {
+  if (window.localStorage.getItem('jwt') != null) {
+    const { data } = await axios.get(`/api/post/detail/${id}`, {
+      headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+    });
+    makeEditPost(data, cardcontainer);
+    console.log('dsfa', data);
+  }
+};
+
+const makeEditPost = (data, cardcontainer) => {
+  console.log('dddd', data);
+  document.querySelector('#editpost-title').value = data.postTitle;
+  document.querySelector('#editpostplan-period-startdate').value = data.postStartDate.substring(0, 10);
+
+  cardcontainer.innerHTML += makeEditCardNode(data.postDateCard);
+
+  // if (data.postContent !== null) {
+  //   document.querySelector('.review').innerHTML = `<span>후기</span>${data.postContent}`;
+  // }
 };
 
 //detail page
@@ -234,4 +295,5 @@ export default {
   detailPostRender,
   renderPosts,
   commentRender,
+  editPostRender,
 };
