@@ -25,7 +25,9 @@ const detailNode = () => {
       level: 1, // 지도의 확대 레벨
     };
 
+
   // map.makedetailMap(detailMapContainer, detailMapOption);//dkd
+
   return node.children;
 };
 
