@@ -23,12 +23,16 @@ public class HeartService {
     public String heartNew(HeartFormDto heartFormDto, Principal principal) {
         Post post = postRepository.getReferenceById(heartFormDto.getPostNo());
         Member member = memberRepository.getByMemberId(principal.getName());
+        System.out.println("@@@@@@@@@@@@@@@@@@@#####" + member.getMemberId());
         String result = "";
         if (heartRepository.getByPostAndMember(post, member)!=null){
             result="이미 좋아요를 클릭하셨습니다.";
         } else {
+            System.out.println("@@@@@@@@@@@@@@@@@@@#####1" + member.getMemberId());
             Heart heart = Heart.createHeart(post, member);
+            System.out.println("@@@@@@@@@@@@@@@@@@@#####1" + member.getMemberId());
             heartRepository.save(heart);
+
             post.setPostHeartCnt(post.getPostHeartCnt()+1);
             result="성공";
         }

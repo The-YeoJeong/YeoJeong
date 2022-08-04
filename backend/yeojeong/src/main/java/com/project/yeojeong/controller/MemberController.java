@@ -82,6 +82,7 @@ public class MemberController {
     // 자신의 정보 가져오기
     @GetMapping("/get/me")
     public ResponseEntity<MemberDto> getMyUserInfo(HttpServletRequest request, Principal principal) {
+
         return ResponseEntity.ok(memberService.getMyUserWithAuthorities());
     }
 

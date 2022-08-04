@@ -11,19 +11,25 @@ const detailNode = () => {
 
   let user = '';
 
-  (async () => {
-    const { data } = await axios.get('/api/member/get/me', {
-      headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
-    });
-    user = data;
-    console.log(user);
-    console.log(user.memberNickname);
-  })();
+  $.ajax({
+    type: 'GET',
+    url: '/api/member/get/me',
+    headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
+    timeout: 5000,
+    dataType: 'json',
+    async: false,
+    cache: false,
+    success: function (data) {
+      user = data;
+    },
+    error: function (request, status, error) {
+      console.log('code:' + request.status + '\n' + 'message:' + request.responseText + '\n' + 'error:' + error);
+    },
+  });
 
-  console.log(user.memberNickname);
   node.innerHTML = detail;
 
-  postFunc.detailPost(node.querySelector('.card-container'), postId, user.memberNickname);
+  postFunc.detailPost(node.querySelector('.card-container'), postId, user.memberId);
 
   postFunc.commentRender(node.querySelector('.comment_container'), postId);
 
@@ -39,7 +45,7 @@ const detailNode = () => {
 
   const dislike = async () => {
     const { status } = await axios({
-      method: 'post',
+      method: 'delete',
       url: '/api/heart/delete',
       headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
       data: { postNo: postId },

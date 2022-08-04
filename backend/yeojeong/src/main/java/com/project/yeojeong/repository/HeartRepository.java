@@ -15,4 +15,7 @@ public interface HeartRepository extends JpaRepository<Heart, Integer> {
     @Query(value = "SELECT h.post_no FROM heart h WHERE h.member_no = :memberNo", nativeQuery = true )
     Integer[] findPostNoByMemberNo(@Param("memberNo") int memberNo);
 
+    @Query(value = "SELECT * FROM heart h WHERE h.member_no = :memberNo and h.post_no = :postNo", nativeQuery = true )
+    Heart findPostNoByMemberNotest(@Param("memberNo") int memberNo, @Param("postNo") int postNo);
+
 }
