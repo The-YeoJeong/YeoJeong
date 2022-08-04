@@ -53,9 +53,15 @@
 
 .review {
   margin-top: rem(20px);
+  margin-bottom: rem(50px);
 }
 .review > div {
   margin-top: rem(10px);
   border: 1px solid black;
   padding: rem(30px);
+}
+
+.comment_container {
+  background: #f6f6f6;
+  height: rem(100px);
 }

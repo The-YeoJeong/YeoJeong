@@ -34,7 +34,8 @@
     }
   }
   .myposts {
-    height: rem(400px);
+    height: rem(700px);
+    padding: rem(20px);
     width: rem(600px);
     border: 1px solid black;
   }
@@ -98,6 +99,8 @@
   color: white;
 }
 
-.page-prev, .page-next, .page-idx {
+.page-prev,
+.page-next,
+.page-idx {
   cursor: pointer;
 }

@@ -4,7 +4,6 @@ import postFunc from '../js/post';
 import map from '../js/map';
 
 const detailNode = () => {
-  console.log('하하하하ㅏㅎ');
   const uri = window.location.pathname.split('/');
   const postId = uri[uri.length - 1];
   const node = document.createElement('div');
@@ -22,14 +21,17 @@ const detailNode = () => {
     cache: false,
     success: function (data) {
       user = data;
-    }, error: function (request, status, error) {
-      console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-    }
+    },
+    error: function (request, status, error) {
+      console.log('code:' + request.status + '\n' + 'message:' + request.responseText + '\n' + 'error:' + error);
+    },
   });
 
   node.innerHTML = detail;
 
   postFunc.detailPost(node.querySelector('.card-container'), postId, user.memberId);
+
+  postFunc.commentRender(node.querySelector('.comment_container'), postId);
 
   const like = async () => {
     const { status } = await axios({
@@ -40,7 +42,6 @@ const detailNode = () => {
     });
     console.log(status);
   };
-
 
   const dislike = async () => {
     const { status } = await axios({
@@ -74,7 +75,6 @@ const detailNode = () => {
       center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
       level: 1, // 지도의 확대 레벨
     };
-
 
   // map.makedetailMap(detailMapContainer, detailMapOption);//dkd
 

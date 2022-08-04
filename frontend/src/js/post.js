@@ -1,18 +1,7 @@
 import axios from 'axios';
 
-let user = '';
-
-// (async () => {
-//   const { data } = await axios.get('/api/member/get/me', {
-//     headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
-//   });
-//   user = data;
-//   console.log(user);
-//   console.log(user.memberNickname);
-// })();
-
 //main page
-const top3posts = async container => {
+const renderTop3posts = async container => {
   const { data } = await axios.get('/api/main/post/top');
   const top3post = data
     .map(
@@ -30,10 +19,24 @@ const top3posts = async container => {
   container.innerHTML = top3post;
 };
 
-const mainPost = async () => {
-  const { data } = await axios.post('/api/main/post', { regionName: [''] });
-  console.log(data);
-  return data;
+const renderPosts = (data, container) => {
+  const posts = data
+    .map(
+      post => `<div class="mainpost" data-id="${post.postNo}">
+      <div class="mainpost__left">
+        <span class="mainpost__user">${post.memberNickname}(${post.memberId})</span>
+        <span class="mainpost__title">${post.postTitle}</span>
+        <div class="mainpost-wrapper">
+          <i class="fas fa-heart main" style="color: orangered"></i><span class="mainpost__heartnum">${
+            post.postHeartCnt
+          }</span
+          ><span class="mainpost__date">${post.createdTime.substring(0, 10)}</span>
+        </div>
+      </div>
+      <img class="mainpost__img" scr="" /></div>`
+    )
+    .join('');
+  container.innerHTML = posts;
 };
 
 //write page
@@ -77,12 +80,11 @@ let positions = [];
 const makePositions = dateCards => {
   dateCards.forEach(dateCard => {
     dateCard.postScheduleCard.forEach(schedule => {
-      positions.push({no: schedule.postSchedulecardNo, addr: schedule.placeAddress, addr_name: schedule.placeName})
-    })
+      positions.push({ no: schedule.postSchedulecardNo, addr: schedule.placeAddress, addr_name: schedule.placeName });
+    });
   });
   console.log(positions);
-}
-
+};
 
 const addScheduleCard = container => {
   container.insertAdjacentHTML(
@@ -198,33 +200,34 @@ function forDetailPost(data, cardcontainer, id, userid){
   cardcontainer.innerHTML += makeDetailCardNode(data.postDateCard);
 
   if (data.postContent !== null) {
-    document.querySelector('.review').innerHTML = data.postContent;
+    document.querySelector('.review').innerHTML = `<span>후기</span>${data.postContent}`;
   }
 }
 
-// const commentList = async (container, id) => {
-//   const { data } = await axios.get(`/api/comment/${id}`);
-//   const comments = data
-//     .map(
-//       comment =>
-//         `<div data-id=${comment.commentNo}>
-//       <div>댓글 번호 : ${comment.commentNo}</div>
-//       <div>등록 날짜 : ${comment.createdTime.substring(0, 10)}</div>
-//       <div>아이디 : ${comment.memberId}</div>
-//       <div>닉네임 : ${comment.memberNickname}</div>
-//       <div>내용 : ${comment.commentContent}</div>
-//       <hr>
-//     </div>`
-//     )
-//     .join('');
-//   container.innerHTML = comments;
-// };
+const commentRender = async (container, id) => {
+  const { data } = await axios.get(`/api/comment/${id}`);
+  console.log('d', data);
+  const comments = data
+    .map(
+      comment =>
+        `<div data-id=${comment.commentNo}>
+      <div>댓글 번호 : ${comment.commentNo}</div>
+      <div>등록 날짜 : ${comment.createdTime.substring(0, 10)}</div>
+      <div>아이디 : ${comment.memberId}</div>
+      <div>닉네임 : ${comment.memberNickname}</div>
+      <div>내용 : ${comment.commentContent}</div>
+      <hr>
+    </div>`
+    )
+    .join('');
+  container.innerHTML = comments;
+};
 
 export default {
-  top3posts,
+  renderTop3posts,
   addDataCard,
   addScheduleCard,
   detailPost,
-  // commentList,
-  mainPost,
+  renderPosts,
+  commentRender,
 };
