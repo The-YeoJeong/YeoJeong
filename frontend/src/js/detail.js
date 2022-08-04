@@ -85,10 +85,11 @@ const detailNode = () => {
     });
     const newComment = `<div class="post-comment">
     <span class="comment-writer">${data.comment.memberNickname}(${data.comment.memberId})</span>
-    <span class="comment-content">${data.comment.commentContent}</span>
+    <input class="comment-content" value=${data.comment.commentContent} disabled>
     <span class="comment-date">${data.comment.createdTime.substring(0, 10)}</span>
     <div class="comment-buttons">
     <button class = "comment-editBtn">수정</button>
+    <button class = "comment-editingBtn hidden">수정완료</button>
     <button class = "comment-deleteBtn">삭제</button>
     </div>
     </div>`;
@@ -127,14 +128,15 @@ const detailNode = () => {
       e.target.parentNode.parentNode.remove();
       deleteComment(e.target.parentNode.parentNode.dataset.id);
     }
-    if (e.target.className === 'comment-editBtn') {
-      e.target.classList.add('hidden');
+    if (e.target.classList.contains('comment-editBtn')) {
       e.target.parentNode.querySelector('.comment-editingBtn').classList.remove('hidden');
+      e.target.classList.add('hidden');
+      console.log('aaaaa', e.target.parentNode.parentNode.querySelector('.comment-content'));
       e.target.parentNode.parentNode.querySelector('.comment-content').disabled = false;
     }
-    if (e.target.className === 'comment-editingBtn') {
-      e.target.classList.add('hidden');
+    if (e.target.classList.contains('comment-editingBtn')) {
       e.target.parentNode.querySelector('.comment-editBtn').classList.remove('hidden');
+      e.target.classList.add('hidden');
       e.target.parentNode.parentNode.querySelector('.comment-content').disabled = true;
       updateComment(
         e.target.parentNode.parentNode.dataset.id,

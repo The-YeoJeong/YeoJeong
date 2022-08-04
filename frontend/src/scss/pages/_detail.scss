@@ -88,20 +88,20 @@
   border-bottom: 2px solid lightgrey;
 
   .comment-writer {
-    display: inline-block;
+    display: block;
     width: rem(150px);
   }
 
   .comment-content {
-    display: inline-block;
-    width: rem(200px);
+    display: block;
+    width: rem(700px);
     font-size: rem(18px);
     padding: rem(5px);
   }
 
   .comment-content:disabled {
-    display: inline-block;
-    width: rem(200px);
+    display: block;
+    width: rem(800px);
     color: black;
     border: 0;
     font-size: rem(18px);
@@ -109,8 +109,9 @@
   }
 
   .comment-date {
-    display: inline-block;
+    display: block;
     width: rem(300px);
+    margin-left: rem(50px);
   }
 }
 
