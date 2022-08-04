@@ -7,12 +7,10 @@ let user = '';
     headers: { Authorization: `Bearer ` + window.localStorage.getItem('jwt') },
   });
   user = data;
-  console.log(user);
-  console.log(user.memberNickname);
 })();
 
 //main page
-const top3posts = async container => {
+const renderTop3posts = async container => {
   const { data } = await axios.get('/api/main/post/top');
   const top3post = data
     .map(
@@ -30,10 +28,24 @@ const top3posts = async container => {
   container.innerHTML = top3post;
 };
 
-const mainPost = async () => {
-  const { data } = await axios.post('/api/main/post', { regionName: [''] });
-  console.log(data);
-  return data;
+const renderPosts = (data, container) => {
+  const posts = data
+    .map(
+      post => `<div class="mainpost" data-id="${post.postNo}">
+      <div class="mainpost__left">
+        <span class="mainpost__user">${post.memberNickname}(${post.memberId})</span>
+        <span class="mainpost__title">${post.postTitle}</span>
+        <div class="mainpost-wrapper">
+          <i class="fas fa-heart main" style="color: orangered"></i><span class="mainpost__heartnum">${
+            post.postHeartCnt
+          }</span
+          ><span class="mainpost__date">${post.createdTime.substring(0, 10)}</span>
+        </div>
+      </div>
+      <img class="mainpost__img" scr="" /></div>`
+    )
+    .join('');
+  container.innerHTML = posts;
 };
 
 //write page
@@ -139,7 +151,7 @@ const makeDetailCardNode = dateCards => {
 //detail page
 const detailPost = async (cardcontainer, id, nickName) => {
   const { data } = await axios.get(`/api/post/detail/${id}`);
-
+  console.log('tetete', data);
   console.log('?', user.memberNickname, data.memberNickname);
   console.log(nickName, data.memberNickname);
   if (data.memberNickname === nickName) {
@@ -186,10 +198,10 @@ const detailPost = async (cardcontainer, id, nickName) => {
 // };
 
 export default {
-  top3posts,
+  renderTop3posts,
   addDataCard,
   addScheduleCard,
   detailPost,
+  renderPosts,
   // commentList,
-  mainPost,
 };
