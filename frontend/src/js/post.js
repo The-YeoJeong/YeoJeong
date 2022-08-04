@@ -179,7 +179,7 @@ function forDetailPost(data, cardcontainer, id, userid){
     },
   });
 
-  if (data.memberNickname == userid) {
+  if (data.memberId == userid) {
     document.querySelector('.detail-buttons').classList.remove('hidden');
   }
   if (isPushHeart) {
