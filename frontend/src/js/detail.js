@@ -119,6 +119,7 @@ const detailNode = () => {
     wirteComment(document.querySelector('#comment').value).then(res => {
       $commentContainer.innerHTML += res;
     });
+    document.querySelector('#comment').value = '';
   });
 
   node.querySelector('.comment_container').addEventListener('click', e => {
@@ -128,12 +129,12 @@ const detailNode = () => {
     }
     if (e.target.className === 'comment-editBtn') {
       e.target.classList.add('hidden');
-      document.querySelector('.comment-editingBtn').classList.remove('hidden');
+      e.target.parentNode.querySelector('.comment-editingBtn').classList.remove('hidden');
       e.target.parentNode.parentNode.querySelector('.comment-content').disabled = false;
     }
     if (e.target.className === 'comment-editingBtn') {
       e.target.classList.add('hidden');
-      document.querySelector('.comment-editBtn').classList.remove('hidden');
+      e.target.parentNode.querySelector('.comment-editBtn').classList.remove('hidden');
       e.target.parentNode.parentNode.querySelector('.comment-content').disabled = true;
       updateComment(
         e.target.parentNode.parentNode.dataset.id,
