@@ -1,7 +1,7 @@
 import Main from './main';
 import SignIn from './signIn';
 import Mypage from './mypage';
-// import MypageEdit from './mypageEdit';
+import edit from './edit';
 import SignUp from './signUp';
 // import Develog from './develog';
 // import Search from './search';
@@ -10,6 +10,7 @@ import Write from './write';
 import NotFound from './notFound';
 import Oauth from './ouath';
 import OauthSignUp from './oauthSignUp';
+import Update from './update';
 
 const routes = [
   { path: '/', component: Main },
@@ -19,11 +20,12 @@ const routes = [
   { path: '/detail', component: Detail },
   { path: '/write', component: Write },
   { path: '/mypage', component: Mypage },
-  // { path: '/mypageEdit', component: MypageEdit },
+  { path: '/edit', component: edit },
   { path: '/signin', component: SignIn },
   { path: '/signup', component: SignUp },
   { path: '/oauth2', component: Oauth},
-  { path: '/oauthSignUp', component: OauthSignUp }
+  { path: '/oauthSignUp', component: OauthSignUp },
+  { path: '/update', component: Update }
 ];
 
 const router = () => {

@@ -182,7 +182,7 @@ public class PostServiceTest {
         postRepository.save(post);
 
         List<PostRegion> postRegion = postRegionRepository.getAllByPost(post);
-        List<PostDateCard> postDateCard = postDateCardRepository.getAllByPost(post);
+        List<PostDateCard> postDateCard = postDateCardRepository.getAllByPost(post.getPostNo());
         List<String> regionName = new ArrayList<>();
 
         PostFormDto postFormDtoDetail = new PostFormDto();
@@ -211,14 +211,14 @@ public class PostServiceTest {
             postDateCardDto.setPostDateCardTitle(postDateCard.get(i).getPostDatecardTitle());
 
             //해당 일정 카드 가져오기
-            List<PostScheduleCard> postScheduleCard = postScheduleCardRepository.getAllByPostDatecard(postDateCard.get(i));
+            List<PostScheduleCard> postScheduleCard = postScheduleCardRepository.getAllByPostDatecard(postDateCard.get(i).getPostDatecardNo());
             List<PostScheduleCardDto> postScheduleCardDtoList = new ArrayList<>();
             for (int j=0;j<postScheduleCard.size();j++){
                 PostScheduleCardDto postScheduleCardDto = new PostScheduleCardDto();
-                postScheduleCardDto.setPostSchedulecardNo(postScheduleCard.get(i).getPostSchedulecardNo());
-                postScheduleCardDto.setPlaceName(postScheduleCard.get(i).getPostSchedulecardPlaceName());
-                postScheduleCardDto.setPlaceAddress(postScheduleCard.get(i).getPostSchedulecardPlaceAddress());
-                postScheduleCardDto.setPlaceContent(postScheduleCard.get(i).getPostSchedulecardContent());
+                postScheduleCardDto.setPostSchedulecardNo(postScheduleCard.get(j).getPostSchedulecardNo());
+                postScheduleCardDto.setPlaceName(postScheduleCard.get(j).getPostSchedulecardPlaceName());
+                postScheduleCardDto.setPlaceAddress(postScheduleCard.get(j).getPostSchedulecardPlaceAddress());
+                postScheduleCardDto.setPlaceContent(postScheduleCard.get(j).getPostSchedulecardContent());
                 postScheduleCardDtoList.add(postScheduleCardDto);
             }
 

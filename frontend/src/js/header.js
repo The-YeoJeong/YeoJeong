@@ -17,10 +17,10 @@ const createHeaderNode = async () => {
     cache: false,
     success: function (data) {
       nickname = data.memberNickname;
-    },
-    error: function (request, status, error) {
-      console.log('code:' + request.status + '\n' + 'message:' + request.responseText + '\n' + 'error:' + error);
-    },
+      console.log("###########################" + nickname)
+    }, error: function (request, status, error) {
+      console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+    }
   });
 
   if (window.localStorage.getItem('jwt') != null) {

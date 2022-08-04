@@ -9,8 +9,27 @@ import postFunc from './post';
 const mypageNode = () => {
   const node = document.createElement('div');
   node.innerHTML = mypage;
+  
+  let nickname = '';
+  
+  $.ajax({
+    type: "GET",
+    url: '/api/member/get/me',
+    headers: { "Authorization": `Bearer ` + window.localStorage.getItem('jwt') },
+    timeout: 5000,
+    dataType: 'json',
+    async: false,
+    cache: false,
+    success: function (data) {
+      nickname = data.memberNickname;
+    }, error: function (request, status, error) {
+      console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+    }
+  });
+  node.querySelector('.nickname').textContent = nickname;
 
   const $pagenationArea = node.querySelector('#pagination');
+
 
   let posts;
   let sectionValue;
