@@ -3,29 +3,25 @@ import SignIn from './signIn';
 import Mypage from './mypage';
 import edit from './edit';
 import SignUp from './signUp';
-// import Develog from './develog';
-// import Search from './search';
 import Detail from './detail';
 import Write from './write';
 import NotFound from './notFound';
 import Oauth from './ouath';
 import OauthSignUp from './oauthSignUp';
 import Update from './update';
+import Edit from './edit';
 
 const routes = [
   { path: '/', component: Main },
-  // { path: '/callback', component: Main },
-  // { path: '/search', component: Search },
-  // { path: '/develog', component: Develog },
   { path: '/detail', component: Detail },
   { path: '/write', component: Write },
   { path: '/mypage', component: Mypage },
-  { path: '/edit', component: edit },
+  { path: '/edit', component: Edit },
   { path: '/signin', component: SignIn },
   { path: '/signup', component: SignUp },
-  { path: '/oauth2', component: Oauth},
+  { path: '/oauth2', component: Oauth },
   { path: '/oauthSignUp', component: OauthSignUp },
-  { path: '/update', component: Update }
+  { path: '/update', component: Update },
 ];
 
 const router = () => {

@@ -1,0 +1,70 @@
+<section class="container">
+  <legend class="plan-text">-계획-</legend>
+  <article class="plan-container">
+    <fieldset class="plan-title">
+      <label class="post-title" for="post-title">제목</label>
+      <input id="editpost-title" type="text" placeholder="글 제목을 입력해주세요" />
+      <div class="plan-period-wrapper">
+        <label class="plan-period" for="plan-period">기간</label>
+        <input id="editpostplan-period-startdate" type="text" placeholder="년-월-일" />
+        <span>~</span>
+        <input id="editpostplan-period-enddate" type="text" placeholder="년-월-일" />
+      </div>
+      <label id="plan-city" for="plan-city">시,도 선택</label>
+      <div class="plan-city">
+        <button>서울</button>
+        <button>인천</button>
+        <button>대전</button>
+        <button>대구</button>
+        <button>광주</button>
+        <button>부산</button>
+        <button>울산</button>
+        <button>세종</button>
+        <button>경기</button>
+        <button>강원</button>
+        <button>충북</button>
+        <button>충남</button>
+        <button>경북</button>
+        <button>경남</button>
+        <button>전북</button>
+        <button>전남</button>
+        <button>제주</button>
+        <button>전국</button>
+      </div>
+    </fieldset>
+
+    <div class="background">
+      <div class="window">
+        <div class="popup">
+          <div class="map-wrapper">
+            <div class="map">
+              <button id="close">닫기</button>
+            </div>
+            <div class="menu_wrap" class="bg_white">
+              <div id="option">
+                <div>
+                  키워드 : <input type="text" value="" id="keyword" size="15" />
+                  <button class="searchLoca" type="submit">검색하기</button>
+                </div>
+              </div>
+              <ul id="placesList"></ul>
+              <div id="pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="editcard-container"></div>
+
+    <button class="add-date-card-button"><i class="fa-solid fa-plus"></i>일자 카드 추가</button>
+    <button class="review-button">후기 작성 폼 열기</button>
+  </article>
+  <article class="review-container hidden">
+    <textarea id="summernote">후기를 작성해 주세요</textarea>
+  </article>
+  <div class="post-below">
+    <label><input id="only-me" type="checkbox" name="only-me" value="postOnlyMe" />나만 보기</label>
+    <button class="post-button">작성 완료</button>
+  </div>
+</section>

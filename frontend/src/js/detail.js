@@ -155,7 +155,6 @@ const detailNode = () => {
 
   node.querySelector('.delete').addEventListener('click', () => {
     if (confirm('정말 삭제하시겠습니까 ?') == true) {
-      console.log('postNo :@@@@ ' + postId);
       $.ajax({
         type: 'delete',
         url: '/api/post/' + postId,
@@ -171,6 +170,10 @@ const detailNode = () => {
     } else {
       return;
     }
+  });
+
+  node.querySelector('.edit').addEventListener('click', () => {
+    window.history.pushState(null, null, `/edit/${postId}`);
   });
 
   return node.children;
