@@ -10,6 +10,7 @@ import Write from './write';
 import NotFound from './notFound';
 import Oauth from './ouath';
 import OauthSignUp from './oauthSignUp';
+import Update from './update';
 
 const routes = [
   { path: '/', component: Main },
@@ -23,7 +24,8 @@ const routes = [
   { path: '/signin', component: SignIn },
   { path: '/signup', component: SignUp },
   { path: '/oauth2', component: Oauth},
-  { path: '/oauthSignUp', component: OauthSignUp }
+  { path: '/oauthSignUp', component: OauthSignUp },
+  { path: '/update', component: Update }
 ];
 
 const router = () => {
