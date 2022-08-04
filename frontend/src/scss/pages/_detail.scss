@@ -95,6 +95,17 @@
   .comment-content {
     display: inline-block;
     width: rem(200px);
+    font-size: rem(18px);
+    padding: rem(5px);
+  }
+
+  .comment-content:disabled {
+    display: inline-block;
+    width: rem(200px);
+    color: black;
+    border: 0;
+    font-size: rem(18px);
+    padding: rem(5px);
   }
 
   .comment-date {

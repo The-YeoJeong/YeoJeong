@@ -208,12 +208,13 @@ const makecomment = (commentData, commentWriter, userId) => {
   if (userId === commentWriter) {
     $buttons = `    <div class="comment-buttons">
     <button class = "comment-editBtn">수정</button>
+    <button class = "comment-editingBtn hidden">수정완료</button>
     <button class = "comment-deleteBtn">삭제</button>
     </div>`;
   }
-  const comment = `<div class="post-comment">
+  const comment = `<div class="post-comment" data-id=${commentData.commentNo}>
     <span class="comment-writer">${commentData.memberNickname}(${commentData.memberId})</span>
-    <span class="comment-content">${commentData.commentContent}</span>
+    <input class="comment-content" value=${commentData.commentContent} disabled>
     <span class="comment-date">${commentData.createdTime.substring(0, 10)}</span>
     ${$buttons}
     </div>`;
