@@ -1,0 +1,159 @@
+@use '../utils' as *;
+
+.signin-title,
+.signup-title {
+  text-align: center;
+  font-size: rem(30px);
+  margin: rem(10px) 0;
+
+  &__social {
+    font-size: rem(20px);
+    text-align: center;
+  }
+}
+
+.singin-wrapper {
+  padding: rem(30px) rem(50px);
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-form {
+  width: rem(400px);
+  height: rem(450px);
+  border: 2px solid black;
+  margin: auto;
+}
+
+.input-box {
+  margin-bottom: rem(10px);
+  border: 2px solid $main;
+  padding: 5px;
+  width: 100%;
+  height: rem(40px);
+  display: flex;
+  &__input {
+    border-width: 0;
+    height: rem(30px);
+    width: 100%;
+  }
+}
+
+  body {
+  font-size: 16px;
+  text-align: center;
+}
+
+.fa-user,
+.fa-lock,
+i {
+  margin: rem(5px) rem(10px) 0 rem(5px);
+}
+
+.sign-buttons {
+  justify-content: space-between;
+  display: flex;
+  margin-top: rem(20px);
+}
+
+.social {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: space-evenly;
+  width: rem(300px);
+  margin: auto;
+  margin-top: rem(30px);
+
+  &__login {
+    cursor: pointer;
+    border: 0;
+    border-radius: 100%;
+    height: rem(60px);
+    width: rem(60px);
+  }
+
+  .naver {
+    background-image: url('../assets/naver.png');
+    background-size: cover;
+  }
+
+  .kakao {
+    background-image: url('../assets/kakao.png');
+    background-size: cover;
+  }
+
+  .google {
+    background-image: url('../assets/google.png');
+    background-size: cover;
+    border: 1px solid black;
+  }
+}
+
+.signup-form {
+  width: rem(600px);
+  border: 1px solid black;
+  margin: auto;
+}
+
+.signup-wrapper {
+  padding: rem(30px) rem(60px);
+}
+
+.signup-input-form {
+  display: flex;
+  margin-bottom: rem(15px);
+  .input-box {
+    justify-content: center;
+    align-self: center;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+}
+
+.info-title {
+  background: $main;
+  font-size: medium;
+  text-align: center;
+  margin-right: rem(30px);
+  width: rem(130px);
+  height: rem(40px);
+  padding: rem(10px);
+}
+
+.signup-button {
+  display: flex;
+  margin: auto;
+  margin-bottom: rem(15px);
+}
+
+.error-msg,
+.check-msg {
+  color: red;
+}
+
+.error-msg.login {
+  color: red;
+  text-align: center;
+}
+
+.valid-msg {
+  color: blue;
+}
+
+.dupl_id,
+.dupl_nick {
+  font-size: small !important;
+  position: absolute;
+  right: 0;
+  align-self: center;
+  justify-content: center;
+  top: rem(7px);
+  margin-right: 5px;
+  padding: rem(5px) rem(10px) !important;
+}

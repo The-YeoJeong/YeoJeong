@@ -1,0 +1,105 @@
+@use '../utils' as *;
+
+.user-name {
+  margin-top: rem(40px);
+  border-bottom: 3px solid black;
+  padding-bottom: rem(40px);
+  font-size: xx-large;
+  text-align: center;
+}
+
+.mypages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  .options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .category {
+    cursor: pointer;
+    height: rem(100px);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    span {
+      font-size: 20px;
+      margin-bottom: rem(30px);
+      border-bottom: 1px solid black;
+    }
+    span:hover {
+      border-bottom: 3px solid black;
+    }
+  }
+  .myposts {
+    padding: rem(20px);
+    width: rem(600px);
+    border: 1px solid black;
+  }
+  .resign {
+    cursor: pointer;
+    font-size: 13px;
+  }
+}
+
+.control {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: rem(30px) 0;
+
+  &__category {
+    font-size: x-large;
+  }
+
+  .search--form {
+    display: flex;
+    flex-direction: row;
+    margin: 0 rem(40px);
+  }
+  .searchs {
+    input {
+      width: rem(200px);
+    }
+  }
+
+  .search-button {
+    background-color: lightgray;
+    margin-left: 0 !important;
+  }
+
+  &__sort {
+    width: rem(150px);
+  }
+}
+
+.resign-modal {
+  height: rem(150px);
+  width: rem(300px);
+  position: absolute;
+  text-align: center;
+  border: 1px solid black;
+  background: white;
+  bottom: 0;
+  margin-bottom: rem(30px);
+}
+
+.resign-modal > span {
+  margin-top: rem(40px);
+  margin-bottom: rem(40px);
+  display: block;
+}
+
+.resign-confirm {
+  margin-right: rem(50px);
+  background: red;
+  color: white;
+}
+
+.page-prev,
+.page-next,
+.page-idx {
+  cursor: pointer;
+}

@@ -6,17 +6,16 @@ spring:
     name: yeojeong
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         show_sql: true
         format_sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
-
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://cluv-2.cdvey5izwfml.ap-northeast-2.rds.amazonaws.com:3306/it1869??useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
+    url: jdbc:mariadb://cluv-2.cdvey5izwfml.ap-northeast-2.rds.amazonaws.com:3306/traveler??useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul
     username: it1869
     password: it1869
 
@@ -28,3 +27,20 @@ logging:
           descriptor:
             sql: trace
 
+jwt:
+  header: Authorization
+  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64(' '문자열을 base64로 인코딩한 값)
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 36000
+
+oauth2:
+  google:
+    client_id: 950587226040-s9t5g9hpm48nkrr6tn4duovb249ltoee.apps.googleusercontent.com
+    client_secret: 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
+  naver:
+    client_id: KWUoslendQDxZRSrkOFh
+    client_secret: fXcuXgPFjB
+  kakao:
+    client_id: d173137e871d96ad298bf43551057b2a
+
+uploadPath: C://Users//박진석//IdeaProjects//YeoJeong//backend//yeojeong//src//main//resources//file

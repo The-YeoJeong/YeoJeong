@@ -1,5 +1,96 @@
-<section class="top3-container">
-  <span>인기많은 게시글</span>
-  <div>좋아효</div>
-  <button class="testBtn">test</button>
+<section class="container">
+  <h2>오늘의 추천 TOP3</h2>
+  <article class="top3-container"></article>
+  <div class="plan-city">
+    <label class="city"><input name="city" type="radio" value="서울" /><span>서울</span></label>
+    <label class="city"><input name="city" type="radio" value="인천" /><span>인천</span></label>
+    <label class="city"><input name="city" type="radio" value="대전" /><span>대전</span></label>
+    <label class="city"><input name="city" type="radio" value="대구" /><span>대구</span></label>
+    <label class="city"><input name="city" type="radio" value="광주" /><span>광주</span></label>
+    <label class="city"><input name="city" type="radio" value="부산" /><span>부산</span></label>
+    <label class="city"><input name="city" type="radio" value="울산" /><span>울산</span></label>
+    <label class="city"><input name="city" type="radio" value="세종" /><span>세종</span></label>
+    <label class="city"><input name="city" type="radio" value="경기" /><span>경기</span></label>
+    <label class="city"><input name="city" type="radio" value="강원" /><span>강원</span></label>
+    <label class="city"><input name="city" type="radio" value="충북" /><span>충북</span></label>
+    <label class="city"><input name="city" type="radio" value="충남" /><span>충남</span></label>
+    <label class="city"><input name="city" type="radio" value="경북" /><span>경북</span></label>
+    <label class="city"><input name="city" type="radio" value="경남" /><span>경남</span></label>
+    <label class="city"><input name="city" type="radio" value="전북" /><span>전북</span></label>
+    <label class="city"><input name="city" type="radio" value="전남" /><span>전남</span></label>
+    <label class="city"><input name="city" type="radio" value="제주" /><span>제주</span></label>
+    <label class="city"><input name="city" type="radio" value="전국" /><span>전국</span></label>
+  </div>
+
+  <span class="period-explication">*중장기는 3박~2주이고 장기는 2주 이상입니다.</span>
+
+  <div class="period-buttons">
+    <label class="period">
+      <input type="radio" name="period" data-id="0" value="당일치기" />
+      <span class="period-span__oneday" data-id="0">당일치기</span>
+    </label>
+
+    <label class="period">
+      <input type="radio" name="period" data-id="1" value="1박2일" />
+      <span class="period-span__ontd">1박2일</span>
+    </label>
+
+    <label class="period">
+      <input type="radio" value="2박3일" name="period" data-id="2" />
+      <span class="period-span__tbthd">2박3일</span>
+    </label>
+
+    <label class="period">
+      <input type="radio" value="중장기" name="period" data-id="2" />
+      <span class="period-span__middle">중장기</span>
+    </label>
+
+    <label class="period">
+      <input type="radio" value="장기" name="period" data-id="4" />
+      <span class="period-span__long">장기</span>
+    </label>
+  </div>
+
+  <div class="travleSet-container">
+    <label class="city-name" for="city-name"></label>
+    <input id="city-name" type="text" value="전국" disabled />
+    <span>(으)로</span>
+    <label class="travel-period" for="travel-period"></label>
+    <input id="travel-period" type="text" value="여행" disabled />
+    <button class="GO-button">GO!</button>
+  </div>
+  <div class="option">
+    <label class="withreview"><input type="checkbox" name="only-me" value="postOnlyMe" />후기 포함 글만 보기</label>
+    <select name="sort">
+      <option>선택</option>
+      <option value="0">최신순</option>
+      <option value="1">인기순</option>
+    </select>
+  </div>
+
+  <article class="post-container">
+    <div class="mainpost">
+      <div class="mainpost__left">
+        <span class="mainpost__user">쏭</span>
+        <span class="mainpost__title">여기</span>
+        <div class="mainpost-wrapper">
+          <i class="fas fa-heart main" style="color: orangered"></i><span class="mainpost__heartnum">10</span
+          ><span class="mainpost__date">2020-10-10</span>
+        </div>
+      </div>
+      <img class="mainpost__img" scr="" />
+    </div>
+  </article>
+
+  <div id="pagination"></div>
+
+  <form class="search--form" action="">
+    <div class="searchs">
+      <input id="search" class="search" type="text" placeholder="제목 + 내용으로 검색됩니다." />
+      <label for="search"><i class="fas fa-search"></i></label>
+    </div>
+    <button class="search-button">검색</button>
+  </form>
+
+  
 </section>

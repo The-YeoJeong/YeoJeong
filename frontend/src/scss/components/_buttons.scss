@@ -1,0 +1,31 @@
+@use '../utils' as *;
+
+.button {
+  border-radius: 10px;
+  background: $main;
+  color: white;
+  border-width: 0px;
+  font-size: large;
+  padding: rem(7px) rem(35px);
+  cursor: pointer;
+}
+
+.button:hover {
+  background: rgb(0, 187, 100);
+}
+
+.button:disabled {
+  background: lightgrey;
+}
+
+button {
+  cursor: pointer;
+  background: $main;
+  border: none;
+  border-radius: 8px;
+  padding: rem(5px) rem(10px);
+}
+
+.plan-city > button.selected {
+  background-color: $babyblue;
+}
